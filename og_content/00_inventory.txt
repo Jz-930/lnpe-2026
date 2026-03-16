@@ -1,0 +1,62 @@
+# LNPE Export Inventory
+
+- Base URL: https://www.lnpe.net
+- Generated At: 2026-03-16 02:22:02 (America/Toronto)
+- Export Format: `.txt` files containing markdown-formatted text extracted from the live site.
+- Broken Link Not Exported: `/aboout` returns HTTP 404 and was treated as a broken footer link, not a real content page.
+
+## Individual Page Exports
+- `home.txt` <- `/`
+- `about.txt` <- `/about`
+- `applications.txt` <- `/applications`
+- `contact-us.txt` <- `/contact-us`
+- `news.txt` <- `/news`
+- `products.txt` <- `/products`
+- `projects.txt` <- `/projects`
+
+## Grouped CMS Page Exports
+- `news__all_articles.txt` <- 16 news detail pages verified via Sanity CMS
+- `products__all_product_pages.txt` <- 7 product detail pages verified via Sanity CMS
+- `projects__all_project_pages.txt` <- 6 project detail pages verified via Sanity CMS
+
+## Applications Coverage Cross-Check
+- Material categories visible through the site data: 8
+- Material items visible through the site data: 133
+- These application materials are captured inside `applications.txt` because the live site does not expose separate public detail routes for them.
+
+## CMS Route Lists
+
+### News Routes
+- `/news/2024-european-battery-exhibition-jointly-drawing-a-green-future`
+- `/news/2024-european-battery-show-let-s-paint-a-green-future-together`
+- `/news/climb-high-and-look-far-challenge-the-limit`
+- `/news/embracing-innovation-and-rising-through-synergy-lnpe-announces-key-appointments-to-join-forces`
+- `/news/lnpe-and-new-district-map-out-the-2025-development-blueprint`
+- `/news/lnpe-appeared-at-the-interbattery-2025-in-seoul-south-korea`
+- `/news/lnpe-attended-the-japan-international-secondary-battery-exhibition-and-the-korea-battery`
+- `/news/lnpe-debuts-at-north-american-battery-show`
+- `/news/lnpe-embarks-on-a-new-journey-see-you-in-seoul`
+- `/news/lnpe-made-a-brilliant-appearance-at-the-ipb2024-powder-exhibition-leading-the-wave-of-powder`
+- `/news/lnpe-participated-in-the-advanced-ceramics-exhibition-and-concluded-successfully`
+- `/news/lnpe-shines-at-chongqing-cibf2024`
+- `/news/lnpe-was-invited-to-participate-in-the-first-2024-china-powder-industry-hundred-people-forum-and`
+- `/news/lnpe-won-the-industry-contribution-award-in-the-new-energy-materials-industry-in-2023`
+- `/news/participated-in-the-first-china-powder-industry-hundred-people-forum-and-published-a-key`
+- `/news/the-two-exhibitions-work-together-to-explore-a-new-chapter-in-battery-technology`
+
+### Product Routes
+- `/products/air-classifier`
+- `/products/impact-mill`
+- `/products/jet-mill`
+- `/products/jet-pulverizer`
+- `/products/laboratory-equipment`
+- `/products/shaping-mill`
+- `/products/turnkey-epc`
+
+### Project Routes
+- `/projects/air-classification-project`
+- `/projects/epc-project`
+- `/projects/impact-mill-project`
+- `/projects/jet-pulverizer-project`
+- `/projects/lithium-iron-phosphate-specialized-classified-jet-mill`
+- `/projects/shaping-mill-project`
