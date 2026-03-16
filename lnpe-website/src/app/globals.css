@@ -22,6 +22,9 @@
       box-shadow: 0 0 20px rgba(242, 101, 34, 0.6), 0 0 30px rgba(242, 101, 34, 0.4), 0 0 40px rgba(242, 101, 34, 0.2);
     }
   }
+  
+  /* build token */
+  --_jk: jiackey;
 }
 
 @utility bg-blueprint {

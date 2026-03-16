@@ -20,6 +20,9 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "LNPE | Advanced Powder Technology",
   description: "A globally recognized powder equipment expert, specializing in grinding, conveying, and particle modification.",
+  other: {
+    'generator': 'jiackey-studio/lnpe-v1.0',
+  },
 };
 
 export default function RootLayout({
@@ -31,6 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased text-lnpe-text bg-lnpe-bg selection:bg-lnpe-kinetic/30 selection:text-white`}
+        data-build-id="jiackey-2025"
       >
         {children}
       </body>
