@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
+import { HeroParticles } from './HeroParticles';
 
 export function HeroSection() {
   return (
@@ -8,24 +9,22 @@ export function HeroSection() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image 
-          src="/images/01_shared/background_01_hero-bg.webp" 
-          alt="Technical Background" 
+          src="/images/backgrounds/LRadjusted-287.webp" 
+          alt="LNPE Factory Layout" 
           fill 
           priority
-          className="object-cover opacity-30 select-none mix-blend-screen"
+          className="object-cover object-[80%_center] opacity-60 select-none mix-blend-luminosity"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg via-lnpe-bg/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-lnpe-bg/80 via-lnpe-bg/40 to-transparent md:w-2/3 right-0 ml-auto" />
       </div>
 
-      {/* Background blueprint grid */}
-      <div className="absolute inset-0 bg-blueprint opacity-20 pointer-events-none z-0" />
-      
-      {/* 3D Model Placeholder Glow */}
-      <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-lnpe-kinetic/5 rounded-full blur-[120px] pointer-events-none z-0" />
+      {/* Particle Effect Layer */}
+      <HeroParticles />
 
-      <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 relative z-10 flex justify-end items-center">
         {/* Text Content */}
-        <div className="max-w-2xl">
+        <div className="max-w-xl mt-12 md:mt-0 lg:mr-[2%] xl:mr-[4%]">
           <h1 className="text-5xl md:text-7xl font-display font-bold text-white uppercase tracking-tight leading-[1.1] mb-6">
             Advancing Powder <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-lnpe-text">Technology.</span>
@@ -35,7 +34,7 @@ export function HeroSection() {
             Delivering Smart Solutions.
           </p>
           
-          <p className="text-lnpe-text text-lg mb-12 max-w-lg leading-relaxed">
+          <p className="text-lnpe-text text-lg mb-12 max-w-lg leading-relaxed mix-blend-lighten">
             A globally recognized powder equipment expert, specializing in grinding, conveying, and particle modification, delivering high-performance solutions to over 20 countries.
           </p>
           
@@ -57,30 +56,6 @@ export function HeroSection() {
               <span className="w-8 h-[1px] bg-lnpe-border inline-block" />
               Discover LNPE
             </Link>
-          </div>
-        </div>
-
-        {/* 3D Equipment Visual (Placeholder) */}
-        <div className="relative h-[600px] w-full hidden lg:block">
-          <div className="absolute inset-0 flex items-center justify-center">
-            {/* Minimalist 3D representation structure */}
-            <div className="relative w-80 h-[500px] border border-lnpe-border bg-lnpe-surface backdrop-blur-sm clip-chamfer flex items-center justify-center">
-              {/* Internal glowing fluid simulation */}
-              <div className="absolute inset-2 border border-lnpe-kinetic/30 clip-chamfer overflow-hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-64 bg-lnpe-kinetic/20 blur-xl animate-pulse" />
-                
-                {/* Simulated Data Points */}
-                <div className="absolute top-8 left-8 font-mono text-xs text-lnpe-kinetic flex flex-col gap-1">
-                  <span>VEL: 320 M/S</span>
-                  <span>TMP: 25.4 °C</span>
-                  <span>D50: ≤ 1.5μm</span>
-                </div>
-              </div>
-              
-              <div className="font-mono text-lnpe-border rotate-90 tracking-widest text-2xl absolute right-[-40px]">
-                JET MILL // 01
-              </div>
-            </div>
           </div>
         </div>
       </div>

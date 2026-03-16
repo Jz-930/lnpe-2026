@@ -7,11 +7,11 @@ export default function AboutPage() {
     <main className="min-h-screen flex flex-col pt-[88px] relative bg-lnpe-bg">
       <div className="absolute inset-0 z-[-1]">
         <Image 
-          src="/images/01_shared/background_01_hero-bg.webp" 
-          alt="Technical Background" 
+          src="/images/backgrounds/LRadjusted-138.webp" 
+          alt="LNPE Factory" 
           fill 
           priority
-          className="object-cover opacity-20 mix-blend-screen"
+          className="object-cover opacity-30 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-blueprint opacity-20 pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg via-transparent to-lnpe-bg" />

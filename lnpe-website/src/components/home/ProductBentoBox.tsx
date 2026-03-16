@@ -8,7 +8,7 @@ const PRODUCTS = [
     title: 'Turnkey EPC',
     desc: 'As a supplier of cathode and anode materials, we have successfully delivered over a hundred EPC projects in the battery materials sector.',
     href: '/products/turnkey-epc',
-    image: '/images/04_products/product_04_turnkey-epc/product_04_listing.webp',
+    image: '/images/backgrounds/LRadjusted-22.webp',
     className: 'col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 min-h-[400px]',
     variant: 'tl-br' as const,
     isHero: true,

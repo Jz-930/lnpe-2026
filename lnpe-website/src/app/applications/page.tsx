@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ChamferCard } from "@/components/ui/ChamferCard";
+import Image from "next/image";
 
 const MATERIALS = {
   "Battery Materials": [
@@ -37,8 +38,19 @@ export default function ApplicationsPage() {
 
       <div className="flex-1 pb-24">
         {/* Header */}
-        <section className="py-20 border-b border-lnpe-border bg-lnpe-bg/80 backdrop-blur-sm">
-          <div className="container mx-auto px-6 max-w-5xl">
+        <section className="py-20 border-b border-lnpe-border bg-lnpe-bg/80 backdrop-blur-sm relative overflow-hidden">
+          <div className="absolute inset-0 z-[-1]">
+            <Image 
+              src="/images/backgrounds/LRadjusted-193.webp" 
+              alt="Material Applications" 
+              fill 
+              priority
+              className="object-cover opacity-30 mix-blend-luminosity"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg via-transparent to-lnpe-bg" />
+            <div className="absolute inset-0 bg-gradient-to-r from-lnpe-bg via-lnpe-bg/60 to-transparent" />
+          </div>
+          <div className="container mx-auto px-6 max-w-5xl relative z-10">
             <h1 className="text-4xl md:text-6xl font-display font-bold text-white uppercase tracking-tight mb-8">
               Material Applications<span className="text-lnpe-kinetic">.</span>
             </h1>

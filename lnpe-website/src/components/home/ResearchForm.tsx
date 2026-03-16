@@ -10,7 +10,7 @@ export function ResearchForm() {
       {/* Background decoration & Image */}
       <div className="absolute top-0 right-0 w-1/2 h-full z-0 opacity-20 hidden lg:block">
         <Image 
-          src="/images/02_home/home_01_research.webp" 
+          src="/images/backgrounds/LRadjusted-1.webp" 
           alt="Research Institute" 
           fill
           className="object-cover object-right mix-blend-screen"

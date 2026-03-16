@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ResearchForm } from "@/components/home/ResearchForm";
+import Image from "next/image";
 
 export default function ContactUsPage() {
   return (
@@ -9,8 +10,18 @@ export default function ContactUsPage() {
 
       <div className="flex-1">
         {/* Header */}
-        <section className="py-20 border-b border-lnpe-border bg-lnpe-bg/80 backdrop-blur-sm relative">
-          <div className="absolute inset-0 bg-blueprint opacity-20 pointer-events-none" />
+        <section className="py-20 border-b border-lnpe-border bg-lnpe-bg/80 backdrop-blur-sm relative overflow-hidden">
+          <div className="absolute inset-0 z-[-1]">
+            <Image 
+              src="/images/backgrounds/LRadjusted-250.webp" 
+              alt="LNPE Contact Background" 
+              fill 
+              priority
+              className="object-cover opacity-30 mix-blend-luminosity"
+            />
+            <div className="absolute inset-0 bg-blueprint opacity-20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg via-transparent to-lnpe-bg" />
+          </div>
           <div className="container mx-auto px-6 max-w-5xl relative z-10 text-center">
             <h1 className="text-4xl md:text-6xl font-display font-bold text-white uppercase tracking-tight mb-6">
               Contact Us
