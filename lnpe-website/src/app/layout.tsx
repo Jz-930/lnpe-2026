@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import AiAssistantWidget from "@/components/ai-assistant/AiAssistantWidget";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -37,6 +38,7 @@ export default function RootLayout({
         data-build-id="jiackey-2025"
       >
         {children}
+        <AiAssistantWidget />
       </body>
     </html>
   );

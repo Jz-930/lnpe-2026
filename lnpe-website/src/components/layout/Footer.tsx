@@ -20,8 +20,9 @@ export function Footer() {
           <p className="text-lnpe-text mb-6 max-w-sm">
             Focusing on Ultra-Fine Powder Grinding & Classification. Solving difficulties in the ultra-fine powder industry for customers globally.
           </p>
-          <div className="font-mono text-sm text-lnpe-kinetic">
-            © 2025 LNPE, Inc. All rights reserved.
+          <div className="font-mono text-sm text-lnpe-kinetic mt-6 flex flex-col gap-2">
+            <span>© 2025 LNPE, Inc. All rights reserved.</span>
+            <Link href="/portal/assistant" className="text-xs text-lnpe-kinetic hover:text-white transition-colors w-fit tracking-widest">Internal Portal</Link>
           </div>
         </div>
 
