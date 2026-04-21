@@ -265,7 +265,7 @@ export default function ChatContainer({ isInternalMode = false, lang = 'en' }: {
                 <Mic size={18} />
               </button>
               <button
-                onClick={handleSend}
+                onClick={() => handleSend()}
                 disabled={isInputDisabled || !inputValue.trim()}
                 className="w-9 h-9 rounded-xl flex items-center justify-center bg-[#3b82f6]/20 text-[#3b82f6] hover:bg-[#3b82f6] hover:text-white transition-all disabled:opacity-30 disabled:bg-white/5 disabled:text-gray-500"
               >
