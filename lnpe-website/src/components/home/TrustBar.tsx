@@ -9,9 +9,9 @@ export function TrustBar() {
         {[...Array(6)].map((_, i) => (
           <div key={i} className="flex items-center gap-8 mx-8 font-mono text-sm tracking-widest text-lnpe-text">
             <span className="text-white hover:text-lnpe-kinetic transition-colors cursor-default">TRUSTED BY <span className="text-lnpe-kinetic font-bold">5,000+</span> USERS</span>
-            <span className="text-lnpe-border/50">///</span>
+            <span className="text-lnpe-border/50">{'///'}</span>
             <span className="text-white hover:text-lnpe-kinetic transition-colors cursor-default"><span className="text-lnpe-kinetic font-bold">20+</span> COUNTRIES</span>
-            <span className="text-lnpe-border/50">///</span>
+            <span className="text-lnpe-border/50">{'///'}</span>
           </div>
         ))}
       </div>

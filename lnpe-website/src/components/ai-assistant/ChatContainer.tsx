@@ -26,11 +26,10 @@ export default function ChatContainer({ isInternalMode = false, lang = 'en' }: {
   const [isInputDisabled, setIsInputDisabled] = useState(false);
   const initZh = ["有没有做过类似磷酸铁的项目？", "超微粉碎机型对比展示", "有没有最新设备运行视频？"];
   const initEn = ["Any projects similar to Iron Phosphate?", "Ultrafine mill comparison", "Show recent machinery videos"];
-  const [suggestions, setSuggestions] = useState<string[]>(lang === 'en' ? initEn : initZh);
+  const [suggestions, setSuggestions] = useState<string[] | null>(null);
   
-  useEffect(() => {
-    if (turn === 0) setSuggestions(lang === 'en' ? initEn : initZh);
-  }, [lang, turn]);
+  const activeSuggestions = suggestions !== null ? suggestions : (lang === 'en' ? initEn : initZh);
+  
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -213,7 +212,7 @@ export default function ChatContainer({ isInternalMode = false, lang = 'en' }: {
       <div className="p-4 bg-gradient-to-t from-[#111111] to-transparent sticky bottom-0 z-20 flex flex-col gap-3">
         {/* Suggestion Buttons */}
         <AnimatePresence>
-          {suggestions.length > 0 && (
+          {activeSuggestions.length > 0 && (
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -224,7 +223,7 @@ export default function ChatContainer({ isInternalMode = false, lang = 'en' }: {
                  <img src="/images/00_brand/favicon_01.ico" alt="AI Icon" className="w-3 h-3 grayscale contrast-150 brightness-150" /> 
                  {turn === 0 ? (lang === 'en' ? "👉 Try clicking these examples:" : "👉 点击下方标签，体验全自动演示：") : (lang === 'en' ? "👉 You can explore further:" : "👉 您可以继续深度追问：")}
               </div>
-              {suggestions.map((suggestion, idx) => (
+              {activeSuggestions.map((suggestion, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSend(suggestion)}

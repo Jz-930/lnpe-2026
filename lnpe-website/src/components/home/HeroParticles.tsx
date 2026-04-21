@@ -140,7 +140,7 @@ export function HeroParticles() {
     const particles: Particle[] = [];
     let streamSpawnAcc = 0;
     let ambientSpawnAcc = 0;
-    let startTime = performance.now();
+    const startTime = performance.now();
 
     function resize() {
       const parent = canvas!.parentElement;
@@ -287,7 +287,7 @@ export function HeroParticles() {
         alpha *= p.type === 'ambient' ? 0.22 : 0.40;
         if (alpha < 0.006) continue;
 
-        let r = p.type === 'stream' && p.detached
+        const r = p.type === 'stream' && p.detached
           ? p.radius * Math.max(0.15, 1 - (prog - 0.5) * 0.9)
           : p.radius;
         if (r < 0.25) continue;

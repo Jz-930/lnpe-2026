@@ -55,7 +55,7 @@ export default function ApplicationsPage() {
               Material Applications<span className="text-lnpe-kinetic">.</span>
             </h1>
             <p className="text-lnpe-text text-lg max-w-3xl leading-relaxed border-l-2 border-lnpe-kinetic pl-6">
-              Enhanced precision in grinding and classification processes enables the full realization of advanced materials' industrial potential, paving the way for high-performance applications across diverse sectors.
+              Enhanced precision in grinding and classification processes enables the full realization of advanced materials&apos; industrial potential, paving the way for high-performance applications across diverse sectors.
             </p>
           </div>
         </section>

@@ -41,7 +41,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         
         <div className="border border-lnpe-border bg-lnpe-surface backdrop-blur-md clip-chamfer p-8 md:p-16">
           <div className="font-mono text-lnpe-kinetic tracking-widest text-sm mb-6 border-l border-lnpe-kinetic pl-4">
-            DEPLOYMENT LOG // {project.date} // {slug.toUpperCase()}
+            DEPLOYMENT LOG {'//'} {project.date} {'//'} {slug.toUpperCase()}
           </div>
           <h1 className="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-12">
             {project.title}
