@@ -31,13 +31,13 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b',
+        'fixed top-0 left-0 right-0 z-50 border-b transition-all duration-200',
         isScrolled
-          ? 'bg-lnpe-bg/80 backdrop-blur-md border-lnpe-border py-4'
-          : 'bg-transparent border-transparent py-6'
+          ? 'bg-white/95 backdrop-blur-md border-lnpe-border shadow-[0_10px_28px_rgba(17,24,39,0.07)] py-3'
+          : 'bg-white/90 backdrop-blur-sm border-white/70 py-5'
       )}
     >
-      <div className="container mx-auto px-6 h-full flex items-center justify-between">
+      <div className="mx-auto flex h-full w-full max-w-[1240px] items-center justify-between px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
           <Image 
@@ -45,7 +45,7 @@ export function Navbar() {
             alt="LNPE Logo" 
             width={120} 
             height={40} 
-            className="w-auto h-8 brightness-0 invert opacity-90 transition-opacity hover:opacity-100" 
+            className="w-auto h-8 opacity-95 transition-opacity duration-200 hover:opacity-100"
             priority
           />
         </Link>
@@ -59,11 +59,17 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  'text-sm tracking-wide font-medium transition-colors hover:text-white',
-                  isActive ? 'text-white' : 'text-lnpe-text'
+                  'relative text-sm font-semibold tracking-wide transition-colors duration-200 hover:text-lnpe-dark focus-visible:outline-offset-6',
+                  isActive ? 'text-lnpe-dark' : 'text-lnpe-steel'
                 )}
               >
                 {link.name}
+                <span
+                  className={cn(
+                    'absolute -bottom-2 left-0 h-[2px] bg-lnpe-kinetic transition-all duration-200',
+                    isActive ? 'w-full' : 'w-0'
+                  )}
+                />
               </Link>
             );
           })}
@@ -73,14 +79,16 @@ export function Navbar() {
         <div className="flex items-center gap-4">
           <Link
             href="/contact-us"
-            className="hidden md:flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-lnpe-bg light border border-lnpe-border clip-chamfer transition-all hover:border-lnpe-kinetic hover:text-lnpe-kinetic group relative overflow-hidden"
+            className="group relative hidden items-center justify-center overflow-hidden rounded-[6px] border border-lnpe-dark bg-lnpe-dark px-5 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:-translate-y-0.5 hover:border-lnpe-kinetic hover:bg-lnpe-kinetic focus-visible:outline-offset-4 md:flex"
           >
-            <span className="relative z-10 transition-colors">Contact Us</span>
-            <div className="absolute inset-0 bg-lnpe-kinetic/10 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300" />
+            <span className="relative z-10">Contact Us</span>
           </Link>
           
           <button
-            className="md:hidden text-white"
+            type="button"
+            aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={mobileMenuOpen}
+            className="absolute right-6 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-[6px] border border-lnpe-border bg-white text-lnpe-dark transition-colors duration-200 hover:border-lnpe-kinetic hover:text-lnpe-kinetic md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -90,12 +98,15 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-lnpe-bg/95 backdrop-blur-xl border-b border-lnpe-border py-4 px-6 flex flex-col gap-4">
+        <div className="absolute left-0 right-0 top-full flex flex-col gap-2 border-b border-lnpe-border bg-white/95 px-6 py-4 shadow-[0_18px_32px_rgba(17,24,39,0.09)] backdrop-blur-xl md:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.name}
               href={link.href}
-              className="text-lg font-medium text-white py-2 border-b border-lnpe-border/50"
+              className={cn(
+                'border-b border-lnpe-border/70 py-3 text-base font-semibold transition-colors duration-200',
+                pathname.startsWith(link.href) ? 'text-lnpe-dark' : 'text-lnpe-steel hover:text-lnpe-kinetic'
+              )}
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
@@ -103,7 +114,7 @@ export function Navbar() {
           ))}
           <Link
             href="/contact-us"
-            className="inline-flex items-center justify-center px-6 py-3 mt-4 text-sm font-semibold text-lnpe-bg bg-white clip-chamfer"
+            className="mt-3 inline-flex items-center justify-center rounded-[6px] bg-lnpe-dark px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-lnpe-kinetic"
             onClick={() => setMobileMenuOpen(false)}
           >
             Contact Us

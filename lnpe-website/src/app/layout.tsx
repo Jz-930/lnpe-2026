@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import AiAssistantWidget from "@/components/ai-assistant/AiAssistantWidget";
@@ -26,6 +26,11 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -34,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased text-lnpe-text bg-lnpe-bg selection:bg-lnpe-kinetic/30 selection:text-white`}
+        className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} font-sans antialiased text-lnpe-text bg-lnpe-bg selection:bg-lnpe-kinetic/20 selection:text-lnpe-dark`}
         data-build-id="jiackey-2025"
       >
         {children}

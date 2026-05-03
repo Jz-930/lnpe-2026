@@ -11,6 +11,11 @@ const eslintConfig = defineConfig([
     ".next/**",
     "out/**",
     "build/**",
+    ".chrome-preview/**",
+    ".edge-preview/**",
+    ".edge-preview-*/**",
+    ".edge-qa-profile/**",
+    ".qa*/**",
     "next-env.d.ts",
   ]),
 ]);

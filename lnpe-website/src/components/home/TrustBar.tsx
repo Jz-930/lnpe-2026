@@ -1,28 +1,34 @@
+const TRUST_ITEMS = [
+  { value: '5,000+', label: 'Industrial users' },
+  { value: '30+', label: 'Patents' },
+  { value: '20+', label: 'PhDs & professors' },
+  { value: '20+', label: 'Countries served' },
+];
+
 export function TrustBar() {
   return (
-    <div className="w-full border-y border-lnpe-border bg-lnpe-bg-light/50 backdrop-blur-md overflow-hidden relative group">
-      {/* Decorative side gradients */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-lnpe-bg to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-lnpe-bg to-transparent z-10 pointer-events-none" />
-      
-      <div className="flex whitespace-nowrap py-4 animate-[marquee_20s_linear_infinite] group-hover:[animation-play-state:paused]">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="flex items-center gap-8 mx-8 font-mono text-sm tracking-widest text-lnpe-text">
-            <span className="text-white hover:text-lnpe-kinetic transition-colors cursor-default">TRUSTED BY <span className="text-lnpe-kinetic font-bold">5,000+</span> USERS</span>
-            <span className="text-lnpe-border/50">{'///'}</span>
-            <span className="text-white hover:text-lnpe-kinetic transition-colors cursor-default"><span className="text-lnpe-kinetic font-bold">20+</span> COUNTRIES</span>
-            <span className="text-lnpe-border/50">{'///'}</span>
-          </div>
-        ))}
+    <section className="relative overflow-hidden border-y border-[#d5dee7] bg-[#f2f5f7] text-[#111827]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.72),transparent)] [animation:trust-sweep_7.5s_linear_infinite] motion-reduce:animate-none" />
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4">
+          {TRUST_ITEMS.map((item, index) => (
+            <div key={item.label} className="relative py-6 md:py-7">
+              {index > 0 && <div className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-[#cfd8e1] md:block" />}
+              <div className="flex items-baseline gap-3 px-3 md:px-6">
+                <span className="font-display text-3xl font-bold tracking-tight text-[#0f172a] md:text-4xl">{item.value}</span>
+                <span
+                  className="hidden h-2 w-2 bg-[#F26522] [animation:trust-dot-pulse_2.6s_ease-in-out_infinite] motion-reduce:animate-none md:inline-block"
+                  style={{ animationDelay: `${index * 0.18}s` }}
+                  aria-hidden="true"
+                />
+              </div>
+              <div className="mt-2 px-3 font-mono text-[10px] uppercase tracking-[0.2em] text-[#64748b] md:px-6">
+                {item.label}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-      
-      {/* Inline style for the marquee keyframes since Tailwind arbitrary value animation can be tricky for keyframes */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}} />
-    </div>
+    </section>
   );
 }

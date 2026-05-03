@@ -1,69 +1,159 @@
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
-
-// Define the static project data
-const PROJECTS_DATA: Record<string, { title: string; date: string; image?: string }> = {
-  "shaping-mill-project": { title: "Shaping Mill Project", date: "8/1/2022", image: "/images/06_projects/project_01_shaping-mill-project/project_01_cover.png" },
-  "jet-pulverizer-project": { title: "Jet Pulverizer Project", date: "5/1/2022", image: "/images/06_projects/project_02_jet-pulverizer-project/project_02_cover.png" },
-  "epc-project": { title: "EPC Project", date: "12/1/2021", image: "/images/06_projects/project_03_epc-project/project_03_cover.webp" },
-  "lithium-iron-phosphate-specialized-classified-jet-mill": { title: "Lithium Iron Phosphate Specialized Classified Jet Mill", date: "11/1/2021", image: "/images/06_projects/project_04_lithium-iron-phosphate-specialized-classified-jet-mill/project_04_cover.png" },
-  "air-classification-project": { title: "Air Classification Project", date: "7/1/2021", image: "/images/06_projects/project_05_air-classification-project/project_05_cover.png" },
-  "impact-mill-project": { title: "Impact Mill Project", date: "10/1/2022", image: "/images/06_projects/project_06_impact-mill-project/project_06_cover.png" }
-};
+import { PROJECT_CASES, getProjectBySlug } from "../project-data";
 
 export function generateStaticParams() {
-  return Object.keys(PROJECTS_DATA).map((slug) => ({ slug }));
+  return PROJECT_CASES.map((project) => ({ slug: project.slug }));
 }
 
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = PROJECTS_DATA[slug];
+  const project = getProjectBySlug(slug);
 
   if (!project) notFound();
 
+  const relatedProjects = PROJECT_CASES.filter((item) => item.slug !== project.slug).slice(0, 3);
+
   return (
-    <main className="min-h-screen flex flex-col pt-[88px] bg-lnpe-bg relative overflow-hidden">
-      <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
+    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
+      <div className="absolute left-0 right-0 top-0 h-[88px] bg-[#0b1220]" aria-hidden="true" />
       <Navbar />
 
-      <div className="flex-1 container mx-auto px-6 py-24 relative z-10 max-w-4xl">
-        <Link 
-          href="/projects" 
-          className="inline-flex items-center gap-2 text-lnpe-text hover:text-white font-mono text-sm tracking-widest uppercase mb-12 transition-colors group"
-        >
-          <ArrowLeft size={16} className="transform transition-transform group-hover:-translate-x-1" />
-          Back to Projects
-        </Link>
-        
-        <div className="border border-lnpe-border bg-lnpe-surface backdrop-blur-md clip-chamfer p-8 md:p-16">
-          <div className="font-mono text-lnpe-kinetic tracking-widest text-sm mb-6 border-l border-lnpe-kinetic pl-4">
-            DEPLOYMENT LOG {'//'} {project.date} {'//'} {slug.toUpperCase()}
-          </div>
-          <h1 className="text-4xl md:text-5xl font-display font-bold text-white uppercase tracking-tight mb-12">
-            {project.title}
-          </h1>
+      <div className="flex-1">
+        <section className="border-b border-[#dbe3ee] bg-[#eef3f8]">
+          <div className="container mx-auto px-6 py-10 md:py-16">
+            <Link
+              href="/projects"
+              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#536276] transition-colors hover:text-[#174a7c]"
+            >
+              <ChevronLeft size={17} />
+              Back to Projects
+            </Link>
 
-          {project.image && (
-            <div className="relative w-full aspect-[21/9] mb-12 border border-lnpe-border bg-lnpe-bg-light clip-chamfer overflow-hidden">
-              <Image 
-                src={project.image}
-                alt={`${project.title} cover`}
-                fill
-                className="object-cover opacity-80 mix-blend-lighten"
-              />
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div className="min-w-0">
+                <div className="mb-5 flex flex-wrap gap-2">
+                  <span className="border border-[#dbe3ee] bg-white px-2.5 py-1 text-xs font-semibold text-[#536276]">
+                    {project.date}
+                  </span>
+                  <span className="border border-[#f26522]/30 bg-[#fff4ee] px-2.5 py-1 text-xs font-semibold text-[#f26522]">
+                    {project.focus}
+                  </span>
+                  <span className="border border-[#dbe3ee] bg-white px-2.5 py-1 text-xs font-semibold text-[#536276]">
+                    {project.system}
+                  </span>
+                </div>
+                <h1 className="font-display text-4xl font-semibold tracking-tight text-[#142033] md:text-6xl">
+                  {project.title}
+                </h1>
+                <p className="mt-6 text-base leading-7 text-[#536276] md:text-lg md:leading-8">{project.description}</p>
+              </div>
+
+              <div className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_22px_60px_rgba(15,23,42,0.1)]">
+                <div className="relative aspect-[16/11] bg-[#edf3f9]">
+                  <Image
+                    src={project.image}
+                    alt={`${project.title} cover`}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 45vw, 90vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
             </div>
-          )}
-          
-          <div className="prose prose-invert prose-lg max-w-none text-lnpe-text leading-relaxed">
-            <p>
-              Detailed deployment metrics and operations log for {project.title} are restricted to authorized personnel. Please contact LNPE engineering for complete architectural blueprints and performance data.
-            </p>
           </div>
-        </div>
+        </section>
+
+        <section className="border-b border-[#dbe3ee] bg-white">
+          <div className="container mx-auto grid gap-4 px-6 py-8 md:grid-cols-3">
+            {project.evidence.map((item) => (
+              <div key={item} className="border-l-2 border-[#f26522] bg-[#f8fafc] p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6b7b8f]">Evidence marker</p>
+                <p className="mt-2 text-sm font-semibold leading-5 text-[#142033]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-[#f6f8fb] py-14 md:py-20">
+          <div className="container mx-auto px-6">
+            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="font-display text-3xl font-semibold tracking-tight text-[#142033]">Project image record</h2>
+                <p className="mt-2 text-sm leading-6 text-[#62748a]">
+                  Existing project media is presented with a consistent technical case-study crop.
+                </p>
+              </div>
+              <Link href="/contact-us" className="inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
+                Discuss a Similar System
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {project.gallery.map((image, index) => (
+                <div key={image} className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_12px_34px_rgba(15,23,42,0.05)]">
+                  <div className="relative aspect-[4/3] bg-[#edf3f9]">
+                    <Image
+                      src={image}
+                      alt={`${project.title} content image ${index + 1}`}
+                      fill
+                      sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 90vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="border-t border-[#e5eaf2] px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#536276]">
+                    Case image {String(index + 1).padStart(2, "0")}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-14 md:py-18">
+          <div className="container mx-auto px-6">
+            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="font-display text-3xl font-semibold tracking-tight text-[#142033]">Related cases</h2>
+                <p className="mt-2 text-sm text-[#62748a]">Compare other LNPE projects by process role and application focus.</p>
+              </div>
+              <Link href="/projects" className="inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
+                All Projects
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {relatedProjects.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/projects/${related.slug}`}
+                  className="group overflow-hidden border border-[#dbe3ee] bg-white transition hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_20px_44px_rgba(15,23,42,0.1)]"
+                >
+                  <div className="relative aspect-[16/10] bg-[#edf3f9]">
+                    <Image
+                      src={related.image}
+                      alt={`${related.title} related project`}
+                      fill
+                      sizes="(min-width: 768px) 30vw, 90vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">{related.focus}</p>
+                    <h3 className="font-display text-xl font-semibold text-[#142033]">{related.title}</h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

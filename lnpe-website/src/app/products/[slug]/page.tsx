@@ -1,189 +1,192 @@
+import Link from "next/link";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { ChamferCard } from "@/components/ui/ChamferCard";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-
-// Explicit mapping: slug -> { folder, prefix, galleryCount }
-const PRODUCT_IMAGES: Record<string, { folder: string; prefix: string; galleryCount: number }> = {
-  "jet-mill":              { folder: "product_01_jet-mill",              prefix: "product_01", galleryCount: 4 },
-  "impact-mill":           { folder: "product_02_impact-mill",           prefix: "product_02", galleryCount: 3 },
-  "jet-pulverizer":        { folder: "product_03_jet-pulverizer",        prefix: "product_03", galleryCount: 4 },
-  "turnkey-epc":           { folder: "product_04_turnkey-epc",           prefix: "product_04", galleryCount: 4 },
-  "shaping-mill":          { folder: "product_05_shaping-mill",          prefix: "product_05", galleryCount: 0 },
-  "air-classifier":        { folder: "product_06_air-classifier",        prefix: "product_06", galleryCount: 4 },
-  "laboratory-equipment":  { folder: "product_07_laboratory-equipment",  prefix: "product_07", galleryCount: 4 },
-};
-
-// Define the static product data based on the content master file
-const PRODUCT_DATA: Record<string, { title: string; principle?: string; features: string[]; applications?: string[] }> = {
-  "jet-mill": {
-    title: "Jet Mill",
-    principle: "The LNJ Jet Mill utilizes multiple nozzles to generate high-velocity, sonic-speed airflow, enabling ultrafine pulverization of materials through particle-on-particle collisions. The finely ground particles are then carried into a high-efficiency turbine classifier, where oversized particles are separated and returned to the grinding chamber for further processing.",
-    features: [
-      "Low energy consumption",
-      "Materials collision each other without contamination, effective for Mohs 1-10 hard Material",
-      "Fully automatic control, easy to operate",
-      "Omniseal negative pressure operation, no contamination."
-    ]
-  },
-  "impact-mill": {
-    title: "Impact Mill",
-    principle: "The LNPE Impact Mill combines two size-reduction mechanisms—high-speed hammer impact and hammer-to-liner compression—to achieve ultrafine grinding in a single continuous process. After comminution, material enters the built-in turbine classifier.",
-    features: [
-      "High-capacity throughput with exceptionally low specific energy consumption",
-      "Optional full-ceramic process lining to virtually eliminate ferromagnetic contamination"
-    ]
-  },
-  "jet-pulverizer": {
-    title: "Jet Pulverizer",
-    principle: "The Jet Pulverizer is a patented, next-generation grinding-and-classification system designed for processes that demand narrow particle-size distributions at high throughput with minimal energy draw. Immediate Classification, Single-Collision Milling, and Ultra-Short Residence Time.",
-    features: [
-      "Controlled grinding, high yield, stable particle size, low energy consumption, and large output",
-      "The milling strength is easy to control, high yield, low fine powder content",
-      "Minimal impact on particle surface morphology, with little damage to the shape of particles"
-    ]
-  },
-  "turnkey-epc": {
-    title: "Turnkey EPC",
-    principle: "Turn-key Powder-Processing Solutions: Leveraging decades of process-engineering expertise, we deliver turnkey EPC solutions for a broad spectrum of powders. Our one-stop approach covers Process Design, Equipment Manufacturing & Supply, Installation & Commissioning, and Training & Lifecycle Service.",
-    features: [
-      "Custom-built powder-processing lines tuned to each client’s material and throughput targets",
-      "Full in-house equipment suite—crushers, mills, classifiers, mixers, conveyors, and more",
-      "Rapid on-site install & commissioning by dedicated field engineers",
-      "End-to-end technical support with operator training and 24 / 7 service",
-      "Proven EPC track record spanning hundreds of projects worldwide"
-    ]
-  },
-  "shaping-mill": {
-    title: "Shaping Mill",
-    principle: "The LNPE Shaping Mill employs a high-speed rotor–stator assembly inside a precisely engineered airflow field. Feed powder is accelerated into the shaping zone, where controlled particle–particle and particle–wall collisions round sharp edges, smooth surfaces, or accentuate aspect ratios as required.",
-    features: [
-      "Morphology on demand – spheroidal, prismatic, or high-aspect shapes",
-      "One-pass shaping + sizing",
-      "Modular rotor for diverse powders",
-      "High yield, near-zero contamination",
-      "Low energy, minimal OPEX"
-    ]
-  },
-  "air-classifier": {
-    title: "Air Classifier",
-    principle: "LNPE air classifier separates powder exclusively by particle size and density. The high-speed rotation of the classifying wheel generates a strong centrifugal field, while the carrier airflow supplies an opposing drag force.",
-    features: [
-      "Precision separation by particle size, density, and morphology",
-      "CFD-optimised airflow, solids concentration, and pressure profile for each design",
-      "High cut accuracy with classification efficiency of 70 – 93 %",
-      "Multiple interchangeable classifier-wheel geometries for efficient handling of diverse powders"
-    ]
-  },
-  "laboratory-equipment": {
-    title: "Laboratory Equipment",
-    principle: "Drawing on years of industry experience and technical expertise, we supply a full suite of high-performance laboratory systems purpose-built for powder-processing R&D. Because every project has its own nuances, each unit features a modular design that can be customised to meet precise experimental requirements.",
-    features: [
-      "Custom-engineered lab mills deliver rapid, energy-efficient powder processing with tight size control.",
-      "Modular, user-friendly design streamlines setup, operation, and maintenance for any R&D workflow.",
-      "Proven worldwide—deployed in the U.S., France, Russia, and beyond for consistently reliable results."
-    ]
-  }
-};
+import {
+  PRODUCT_CATALOG,
+  getProductBySlug,
+  getProductCoverImage,
+  getProductGalleryImages,
+  getProductListingImage,
+} from "../product-catalog";
+import { ProductImageGallery } from "./ProductImageGallery";
 
 export function generateStaticParams() {
-  return Object.keys(PRODUCT_DATA).map((slug) => ({ slug }));
+  return PRODUCT_CATALOG.map((product) => ({ slug: product.slug }));
 }
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = PRODUCT_DATA[slug];
+  const product = getProductBySlug(slug);
 
   if (!product) {
     notFound();
   }
 
+  const relatedProducts = PRODUCT_CATALOG.filter((item) => item.slug !== product.slug).slice(0, 3);
+  const galleryImages = getProductGalleryImages(product);
+
   return (
-    <main className="min-h-screen flex flex-col pt-[88px] relative bg-lnpe-bg">
+    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
+      <div className="absolute left-0 right-0 top-0 h-[88px] bg-[#0b1220]" aria-hidden="true" />
       <Navbar />
 
       <div className="flex-1">
-        {/* Product Hero */}
-        <section className="relative py-24 border-b border-lnpe-border overflow-hidden">
-          <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none" />
-          <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-            <div>
-              <div className="font-mono text-lnpe-kinetic tracking-widest text-sm mb-4">
-                SYS // {slug.toUpperCase()}
-              </div>
-              <h1 className="text-4xl md:text-6xl font-display font-bold text-white uppercase tracking-tight mb-8 leading-tight">
-                {product.title}
-              </h1>
-              {product.principle && (
-                <div className="prose prose-invert prose-p:text-lnpe-text max-w-none">
-                  <h3 className="font-mono text-white text-lg tracking-widest uppercase mb-4 border-l-2 border-lnpe-kinetic pl-4">
-                    Working Principle
-                  </h3>
-                  <p className="text-lnpe-text leading-relaxed text-lg">
-                    {product.principle}
-                  </p>
-                </div>
-              )}
-            </div>
+        <section className="border-b border-[#dbe3ee] bg-[#eef3f8]">
+          <div className="container mx-auto px-6 py-10 md:py-16">
+            <Link
+              href="/products"
+              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#536276] transition-colors hover:text-[#174a7c]"
+            >
+              <ChevronLeft size={17} />
+              Back to Products
+            </Link>
 
-            {/* Real Product Cover Image */}
-            <div className="relative aspect-[4/3] w-full border border-lnpe-border bg-lnpe-bg-light clip-chamfer overflow-hidden group">
-              <div className="absolute inset-0 bg-gradient-to-t from-lnpe-bg to-transparent z-10 opacity-60" />
-              <Image 
-                src={`/images/04_products/${PRODUCT_IMAGES[slug]?.folder}/${PRODUCT_IMAGES[slug]?.prefix}_cover.webp`}
-                alt={`${product.title} cover`}
-                fill
-                className="object-cover mix-blend-lighten transition-transform duration-700 group-hover:scale-105"
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+              <div className="min-w-0">
+                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-[#f26522]">
+                  {product.series} / {product.category}
+                </p>
+                <h1 className="font-display text-4xl font-semibold tracking-tight text-[#142033] md:text-6xl">
+                  {product.title}
+                </h1>
+                <p className="mt-6 text-base leading-7 text-[#536276] md:text-lg md:leading-8">{product.principle}</p>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Link
+                    href="/contact-us"
+                    className="inline-flex min-w-max shrink-0 items-center justify-center gap-2 whitespace-nowrap bg-[#142033] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f26522]"
+                  >
+                    <span className="whitespace-nowrap">Contact Us</span>
+                    <ArrowRight size={17} />
+                  </Link>
+                  <Link
+                    href="/contact-us"
+                    className="inline-flex min-w-max shrink-0 items-center justify-center gap-2 whitespace-nowrap border border-[#cbd7e6] bg-white px-5 py-3 text-sm font-semibold text-[#142033] transition-colors hover:border-[#174a7c] hover:text-[#174a7c]"
+                  >
+                    <span className="whitespace-nowrap">Request Solution</span>
+                    <ArrowRight size={17} />
+                  </Link>
+                  <Link
+                    href="/applications"
+                    className="inline-flex min-w-max shrink-0 items-center justify-center gap-2 whitespace-nowrap border border-[#cbd7e6] bg-white px-5 py-3 text-sm font-semibold text-[#142033] transition-colors hover:border-[#174a7c] hover:text-[#174a7c]"
+                  >
+                    <span className="whitespace-nowrap">View Applications</span>
+                    <ArrowRight size={17} />
+                  </Link>
+                </div>
+              </div>
+
+              <ProductImageGallery
+                title={product.title}
+                coverImage={getProductCoverImage(product)}
+                galleryImages={galleryImages}
               />
-              {/* Simulated edge lighting */}
-              <div className="absolute -left-full top-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-45 group-hover:translate-x-full transition-transform duration-1000 z-20 pointer-events-none" />
             </div>
           </div>
         </section>
 
-        {/* Gallery Section */}
-        {(PRODUCT_IMAGES[slug]?.galleryCount ?? 0) > 0 && (
-        <section className="py-16 bg-lnpe-bg">
-          <div className="container mx-auto px-6">
-            <h3 className="font-mono text-lnpe-kinetic tracking-widest text-sm mb-8">
-              VISUAL ASSETS // GALLERY
-            </h3>
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {Array.from({ length: PRODUCT_IMAGES[slug]!.galleryCount }, (_, i) => i + 1).map((num) => (
-                <div key={num} className="relative aspect-square border border-lnpe-border bg-lnpe-surface overflow-hidden group">
-                  <Image
-                    src={`/images/04_products/${PRODUCT_IMAGES[slug]!.folder}/${PRODUCT_IMAGES[slug]!.prefix}_gallery_0${num}.webp`}
-                    alt={`${product.title} detail ${num}`}
-                    fill
-                    className="object-cover opacity-60 mix-blend-screen group-hover:opacity-100 transition-opacity duration-300"
-                  />
+        <section className="border-b border-[#dbe3ee] bg-white">
+          <div className="container mx-auto px-6 py-8">
+            <div className="grid gap-4 md:grid-cols-4">
+              {product.specs.map((spec) => (
+                <div key={spec.label} className="border-l-2 border-[#f26522] bg-[#f8fafc] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6b7b8f]">{spec.label}</p>
+                  <p className="mt-2 text-sm font-semibold leading-5 text-[#142033]">{spec.value}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
-        )}
 
-        {/* Features Section */}
-        <section className="py-24 bg-lnpe-bg-light">
-          <div className="container mx-auto px-6">
-            <h2 className="text-3xl font-display font-bold text-white uppercase tracking-wide mb-12 text-center">
-              Core Specifications & Features
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              {product.features.map((feature, idx) => (
-                <ChamferCard key={idx} variant="br" className="p-8">
-                  <div className="flex gap-4 items-start">
-                    <div className="font-mono text-lnpe-border font-bold">
-                      {String(idx + 1).padStart(2, '0')}
+        <section className="bg-[#f6f8fb] py-14 md:py-20">
+          <div className="container mx-auto grid gap-8 px-6 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <h2 className="font-display text-3xl font-semibold tracking-tight text-[#142033]">Technical overview</h2>
+              <div className="mt-6 space-y-4 text-base leading-7 text-[#536276]">
+                {product.overview.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2">
+              <div className="border border-[#dbe3ee] bg-white p-6 shadow-[0_12px_34px_rgba(15,23,42,0.05)]">
+                <h3 className="font-display text-xl font-semibold text-[#142033]">Key Features</h3>
+                <div className="mt-5 space-y-4">
+                  {product.features.map((feature, index) => (
+                    <div key={feature} className="flex gap-3">
+                      <span className="mt-1 text-xs font-bold text-[#f26522]">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <p className="text-sm leading-6 text-[#536276]">{feature}</p>
                     </div>
-                    <p className="text-sm text-white font-medium leading-relaxed">
-                      {feature}
-                    </p>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border border-[#dbe3ee] bg-white p-6 shadow-[0_12px_34px_rgba(15,23,42,0.05)]">
+                <h3 className="font-display text-xl font-semibold text-[#142033]">Applications</h3>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {product.applications.map((application) => (
+                    <span key={application} className="border border-[#dbe3ee] bg-[#f8fafc] px-3 py-2 text-sm text-[#536276]">
+                      {application}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="border border-[#dbe3ee] bg-[#142033] p-6 text-white md:col-span-2">
+                <h3 className="font-display text-xl font-semibold">Technical Highlights</h3>
+                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  {product.technicalHighlights.map((highlight) => (
+                    <div key={highlight} className="flex items-center gap-3 border border-white/10 bg-white/5 px-4 py-3">
+                      <span className="h-2 w-2 bg-[#f26522]" aria-hidden="true" />
+                      <span className="text-sm text-[#dbe3ee]">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-14 md:py-18">
+          <div className="container mx-auto px-6">
+            <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="font-display text-3xl font-semibold tracking-tight text-[#142033]">Related systems</h2>
+                <p className="mt-2 text-sm text-[#62748a]">Continue comparing LNPE process equipment and solution paths.</p>
+              </div>
+              <Link href="/products" className="inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
+                All Products
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-3">
+              {relatedProducts.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/products/${related.slug}`}
+                  className="group overflow-hidden border border-[#dbe3ee] bg-white transition hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_20px_44px_rgba(15,23,42,0.1)]"
+                >
+                  <div className="relative aspect-[16/10] bg-[#f2f6fa]">
+                    <Image
+                      src={getProductListingImage(related)}
+                      alt={`${related.title} listing`}
+                      fill
+                      sizes="(min-width: 768px) 30vw, 90vw"
+                      className="object-contain p-5 transition duration-500 group-hover:scale-[1.04]"
+                    />
                   </div>
-                </ChamferCard>
+                  <div className="p-5">
+                    <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">{related.category}</p>
+                    <h3 className="font-display text-xl font-semibold text-[#142033]">{related.title}</h3>
+                  </div>
+                </Link>
               ))}
             </div>
           </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 import ChatContainer from "./ChatContainer";
 
 interface ChatDrawerProps {
@@ -15,54 +16,61 @@ export default function ChatDrawer({ isOpen, onClose, lang, setLang }: ChatDrawe
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Backdrop Blur Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.24 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/40 backdrop-blur-[2px] z-40"
+            className="fixed inset-0 z-40 bg-lnpe-dark/20 backdrop-blur-[2px]"
           />
 
-          {/* Drawer Panel */}
           <motion.div
             initial={{ x: "100%", opacity: 0.5 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: "100%", opacity: 0.5 }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            transition={{ type: "spring", damping: 25, stiffness: 210 }}
             data-signature="jiackey-ai-module"
-            className="fixed top-0 right-0 h-[100dvh] w-full max-w-[420px] bg-[#111111]/90 backdrop-blur-2xl border-l border-white/10 z-50 flex flex-col shadow-2xl"
+            className="fixed inset-y-3 right-3 z-50 flex w-[calc(100vw-24px)] max-w-[430px] flex-col overflow-hidden border border-lnpe-border bg-lnpe-paper shadow-[0_26px_80px_rgba(17,24,39,0.24)] md:inset-y-6 md:right-6 md:w-full clip-chamfer"
           >
-            {/* Drawer Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-white/10 shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#3b82f6] animate-pulse shadow-[0_0_8px_#3b82f6]" />
-                <h3 className="text-white font-medium tracking-wide">
-                  {lang === 'en' ? 'LNPE Smart Engineer' : 'LNPE 智能工程师'}
-                </h3>
+            <div className="flex shrink-0 items-start justify-between gap-4 border-b border-lnpe-border bg-lnpe-bg-light px-5 py-4">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="h-2.5 w-2.5 bg-lnpe-kinetic" />
+                  <h3 className="font-display text-base font-bold uppercase tracking-wide text-lnpe-dark">
+                    {lang === "en" ? "LNPE Smart Engineer" : "LNPE 智能工程师"}
+                  </h3>
+                </div>
+                <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-lnpe-steel">
+                  {lang === "en" ? "Powder process consultation" : "粉体工艺咨询"}
+                </p>
               </div>
-              <div className="flex items-center gap-3">
-                <button 
-                  onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-                  className="text-[10px] font-mono tracking-widest text-gray-400 hover:text-white transition-colors border border-white/10 px-2 py-0.5 rounded bg-black/50"
+
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setLang(lang === "en" ? "zh" : "en")}
+                  className="border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-blue transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic"
                   title="Toggle Language"
                 >
-                  {lang === 'en' ? '中' : 'EN'}
+                  {lang === "en" ? "中" : "EN"}
                 </button>
-                <span className="text-[10px] uppercase tracking-widest text-[#3b82f6]/70 border border-[#3b82f6]/30 px-2 py-0.5 rounded-full bg-[#3b82f6]/10">T1 Access</span>
+                <span className="border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-steel">
+                  T1 Access
+                </span>
+                <button
+                  onClick={onClose}
+                  className="grid h-8 w-8 place-items-center border border-lnpe-border bg-lnpe-paper text-lnpe-steel transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic"
+                  aria-label="Close assistant"
+                >
+                  <X size={16} />
+                </button>
               </div>
             </div>
 
-            {/* Main Chat Container Area */}
-            <div className="flex-1 overflow-hidden flex flex-col relative">
-                {/* Decorative background gradients */}
-                <div className="absolute top-0 left-0 w-full h-[200px] bg-gradient-to-b from-[#3b82f6]/5 to-transparent pointer-events-none" />
-                
-                {/* Embedded component contains its own scrolling logic */}
-                <ChatContainer isInternalMode={false} lang={lang} />
+            <div className="relative flex min-h-0 flex-1 flex-col overflow-hidden bg-lnpe-bg">
+              <div className="absolute inset-0 bg-technical-grid opacity-45" />
+              <ChatContainer isInternalMode={false} lang={lang} />
             </div>
-            
           </motion.div>
         </>
       )}
