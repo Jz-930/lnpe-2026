@@ -1,0 +1,17 @@
+# Keep the GitHub repository scoped to the deliverable application.
+# Root-level working files, source captures, reports, private notes, and raw
+# assets stay local by default.
+/*
+
+# Repository metadata that may be committed.
+!/.gitignore
+!/.gitattributes
+
+# The website app, including the LLM assistant/customer-service tool.
+!/lnpe-website/
+
+# Local preview and diagnostic artifacts created while supervising the app.
+/lnpe-website/.chrome-preview/
+/lnpe-website/.edge-preview*/
+/lnpe-website/.next-dev*.log
+/lnpe-website/current-home.png
