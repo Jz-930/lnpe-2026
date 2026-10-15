@@ -2,50 +2,20 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
+import { useLocale } from '@/i18n/LocaleProvider';
+import { homeMessages } from '@/i18n/messages/home';
 import { ArrowRight, Beaker, Factory, PackageCheck } from 'lucide-react';
 
 const CAPABILITIES = [
-  {
-    name: 'Manufacturing',
-    icon: Factory,
-    image: '/images/backgrounds/LRadjusted-1.webp',
-    headline: 'Factory floor capacity for complete powder processing systems.',
-    body: 'LNPE combines welding, assembly, mechanical finishing and system integration inside the same industrial workflow, reducing the gap between process design and delivery.',
-    metrics: [
-      { label: 'Core build', value: 'Mills / classifiers' },
-      { label: 'Workshop mode', value: 'System assembly' },
-      { label: 'Scale signal', value: 'Production lines' },
-    ],
-  },
-  {
-    name: 'R&D Validation',
-    icon: Beaker,
-    image: '/images/backgrounds/LRadjusted-59.webp',
-    headline: 'Material trials before production commitments.',
-    body: 'Particle target, material behavior and route selection can be validated through testing and analysis before the production route is locked.',
-    metrics: [
-      { label: 'Test focus', value: 'Particle size' },
-      { label: 'Route logic', value: 'Trial to pilot' },
-      { label: 'Analysis', value: 'SEM / laser' },
-    ],
-  },
-  {
-    name: 'Delivery',
-    icon: PackageCheck,
-    image: '/images/backgrounds/LRadjusted-193.webp',
-    headline: 'Project delivery built around integrated routes, not loose machines.',
-    body: 'A configured system can connect dosing, grinding, classification, collection and controls into a line that matches the material and throughput requirement.',
-    metrics: [
-      { label: 'Scope', value: 'Turnkey EPC' },
-      { label: 'Controls', value: 'Closed route' },
-      { label: 'Coverage', value: '20+ countries' },
-    ],
-  },
+  { name: 'Manufacturing', icon: Factory, image: '/images/backgrounds/LRadjusted-1.webp' },
+  { name: 'R&D Validation', icon: Beaker, image: '/images/backgrounds/LRadjusted-59.webp' },
+  { name: 'Delivery', icon: PackageCheck, image: '/images/backgrounds/LRadjusted-193.webp' },
 ] as const;
 
 type CapabilityName = (typeof CAPABILITIES)[number]['name'];
 
 export function FactoryCapability() {
+  const t = homeMessages[useLocale()].factory;
   const [active, setActive] = useState<CapabilityName>('Manufacturing');
 
   useEffect(() => {
@@ -67,6 +37,7 @@ export function FactoryCapability() {
     [active]
   );
   const ActiveIcon = capability.icon;
+  const content = t.capabilities[capability.name];
 
   return (
     <section className="preserve-white relative overflow-hidden bg-[#0b0f14] py-24 text-white">
@@ -76,10 +47,10 @@ export function FactoryCapability() {
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
           <div>
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-white sm:text-4xl md:text-6xl">
-              Factory Capability
+              {t.title}
             </h2>
             <p className="mt-6 max-w-2xl text-base leading-8 text-white/68">
-              A darker factory band gives the homepage industrial weight between the clean catalog and the technical route diagram.
+              {t.description}
             </p>
           </div>
 
@@ -99,7 +70,7 @@ export function FactoryCapability() {
                   }`}
                   aria-pressed={isActive}
                 >
-                  <span className="relative z-10 font-mono text-[10px] uppercase tracking-[0.18em]">{item.name}</span>
+                  <span className="relative z-10 font-mono text-[10px] uppercase tracking-[0.18em]">{t.capabilities[item.name].name}</span>
                   <Icon size={16} className="relative z-10" />
                   {isActive && (
                     <span className="absolute inset-x-0 bottom-0 h-1 bg-white/45 [animation:route-step-pulse_6.2s_ease-in-out_infinite] motion-reduce:animate-none" />
@@ -125,14 +96,14 @@ export function FactoryCapability() {
               <span className="absolute inset-y-0 left-0 w-1/3 bg-[linear-gradient(90deg,transparent,rgba(242,101,34,0.18),transparent)] [animation:factory-scan_6.4s_linear_infinite] motion-reduce:animate-none" />
             </div>
             <div className="absolute left-6 top-6 border border-white/20 bg-black/28 px-4 py-3 backdrop-blur-md">
-              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/58">Active view</div>
+              <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/58">{t.activeView}</div>
               <div className="mt-2 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.08em] text-white">
                 <ActiveIcon size={17} className="text-[#F26522]" />
-                {capability.name}
+                {content.name}
               </div>
             </div>
             <div className="absolute bottom-6 left-6 right-6 grid gap-3 sm:grid-cols-3">
-              {capability.metrics.map((metric) => (
+              {content.metrics.map((metric) => (
                 <div key={metric.label} className="border border-white/16 bg-black/34 px-4 py-3 backdrop-blur-md">
                   <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/46">{metric.label}</div>
                   <div className="mt-2 text-sm font-bold uppercase tracking-[0.05em] text-white">{metric.value}</div>
@@ -145,23 +116,23 @@ export function FactoryCapability() {
             <div>
               <div className="mb-6 h-px w-20 bg-[#F26522]" />
               <h3 className="font-display text-3xl font-bold uppercase tracking-normal text-white md:text-5xl">
-                {capability.headline}
+                {content.headline}
               </h3>
               <p className="mt-6 text-sm leading-7 text-white/68 md:text-base md:leading-8">
-                {capability.body}
+                {content.body}
               </p>
             </div>
 
             <div className="mt-10 border-t border-white/12 pt-6">
               <div className="mb-4 font-mono text-[10px] uppercase tracking-[0.24em] text-white/44">
-                Capability route
+                {t.capabilityRoute}
               </div>
               <div className="flex flex-wrap items-center gap-2 text-sm font-semibold text-white/72">
-                <span className="border border-white/12 bg-white/8 px-3 py-2">Trial</span>
+                <span className="border border-white/12 bg-white/8 px-3 py-2">{t.routeStages[0]}</span>
                 <ArrowRight size={15} className="text-[#F26522]" />
-                <span className="border border-white/12 bg-white/8 px-3 py-2">Process Design</span>
+                <span className="border border-white/12 bg-white/8 px-3 py-2">{t.routeStages[1]}</span>
                 <ArrowRight size={15} className="text-[#F26522]" />
-                <span className="border border-white/12 bg-white/8 px-3 py-2">Production System</span>
+                <span className="border border-white/12 bg-white/8 px-3 py-2">{t.routeStages[2]}</span>
               </div>
             </div>
           </div>

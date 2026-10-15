@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2, Database, BrainCircuit, Search } from "lucide-react";
+import { assistantMessages } from '@/i18n/messages/assistant';
 
 interface ThinkingTimelineProps {
   onComplete: () => void;
@@ -12,19 +13,14 @@ interface ThinkingTimelineProps {
 export default function ThinkingTimeline({ onComplete, lang = "en" }: ThinkingTimelineProps) {
   const [step, setStep] = useState(0);
 
-  const steps = lang === "en" ? [
-    { text: "Parsing semantics & extracting keywords", icon: <Search className="h-3.5 w-3.5 text-lnpe-steel" /> },
-    { text: "Matched standard library: Lithium Iron Phosphate (LFP)", icon: <BrainCircuit className="h-3.5 w-3.5 text-lnpe-blue" /> },
-    { text: "Connecting to internal specs & image DB", icon: <Database className="h-3.5 w-3.5 text-lnpe-blue" /> },
-    { text: "Extracted [Project DB_P12] core data", icon: <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> },
-    { text: "AI formatting and security screening", icon: <Loader2 className="h-3.5 w-3.5 animate-spin text-lnpe-kinetic" /> },
-  ] : [
-    { text: "解析语义与提炼工业术语", icon: <Search className="h-3.5 w-3.5 text-lnpe-steel" /> },
-    { text: "匹配至标准字典库: 磷酸铁锂 (LFP)", icon: <BrainCircuit className="h-3.5 w-3.5 text-lnpe-blue" /> },
-    { text: "链接内部技术大表与图库", icon: <Database className="h-3.5 w-3.5 text-lnpe-blue" /> },
-    { text: "提取 [项目库_P12] 核心数据", icon: <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" /> },
-    { text: "AI 统合排版与安全过滤", icon: <Loader2 className="h-3.5 w-3.5 animate-spin text-lnpe-kinetic" /> },
+  const icons = [
+    <Search key="search" className="h-3.5 w-3.5 text-lnpe-steel" />,
+    <BrainCircuit key="match" className="h-3.5 w-3.5 text-lnpe-blue" />,
+    <Database key="database" className="h-3.5 w-3.5 text-lnpe-blue" />,
+    <CheckCircle2 key="data" className="h-3.5 w-3.5 text-emerald-600" />,
+    <Loader2 key="format" className="h-3.5 w-3.5 animate-spin text-lnpe-kinetic" />,
   ];
+  const steps = assistantMessages[lang].steps.map((text, index) => ({ text, icon: icons[index] }));
 
   useEffect(() => {
     if (step < steps.length) {

@@ -1,20 +1,19 @@
-import Link from 'next/link';
+'use client';
+
+import Link from '@/components/i18n/LocalizedLink';
+import { useLocale } from '@/i18n/LocaleProvider';
+import { homeMessages } from '@/i18n/messages/home';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight, MoveDown, RadioTower } from 'lucide-react';
 
-const SPEC_RAIL = [
-  { label: 'Lab Trial', value: 'Material testing' },
-  { label: 'Scale Up', value: 'Pilot to line' },
-  { label: 'Core Routes', value: 'Grind / Classify' },
-  { label: 'Delivery', value: '20+ countries' },
-];
-
 export function HeroSection() {
+  const locale = useLocale();
+  const t = homeMessages[locale].hero;
   return (
     <section className="preserve-white relative isolate min-h-[calc(100svh-88px)] overflow-hidden bg-[#0b0f14] text-white">
       <Image
         src="/images/backgrounds/LRadjusted-287.webp"
-        alt="LNPE factory exterior and company signage"
+        alt={t.imageAlt}
         fill
         priority
         sizes="100vw"
@@ -145,15 +144,12 @@ export function HeroSection() {
         <div className="ml-auto min-w-0 w-full max-w-full pt-4 text-right sm:max-w-[860px] sm:pt-8 lg:w-[660px] lg:max-w-[660px] lg:pt-10">
           <div className="mb-6 ml-auto h-px w-20 bg-[#F26522]" aria-hidden="true" />
 
-          <h1 className="ml-auto max-w-[11ch] font-display text-5xl font-bold uppercase leading-[0.96] tracking-normal text-white drop-shadow-[0_10px_34px_rgba(0,0,0,0.42)] sm:text-6xl md:text-7xl">
-            <span className="block">Powder</span>
-            <span className="block">Systems</span>
-            <span className="block">Engineered</span>
-            <span className="block">for Scale</span>
+          <h1 className={`ml-auto ${locale === 'zh' ? 'max-w-full' : 'max-w-[11ch]'} font-display text-5xl font-bold uppercase leading-[0.96] tracking-normal text-white drop-shadow-[0_10px_34px_rgba(0,0,0,0.42)] sm:text-6xl md:text-7xl`}>
+            {t.titleLines.map((line) => <span key={line} className="block">{line}</span>)}
           </h1>
 
           <p className="ml-auto mt-7 max-w-full break-words text-base leading-7 text-white/78 sm:max-w-[690px] sm:text-lg md:text-xl md:leading-9">
-            From lab trial to production line, LNPE builds grinding, classifying and particle modification systems for demanding powder materials.
+            {t.description}
           </p>
 
           <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
@@ -163,7 +159,7 @@ export function HeroSection() {
             >
               <span className="absolute inset-y-0 left-0 w-12 -skew-x-12 bg-white/18 [animation:trust-sweep_4.2s_linear_infinite] motion-reduce:animate-none" />
               <span className="relative z-10 inline-flex items-center gap-3">
-                Configure a Route
+                {t.configureRoute}
                 <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
               </span>
             </Link>
@@ -172,14 +168,14 @@ export function HeroSection() {
               href="/products"
               className="group inline-flex w-full max-w-full items-center justify-center gap-3 border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur transition-colors hover:border-white hover:bg-white hover:text-[#111827] sm:w-auto"
             >
-              View Systems
+              {t.viewSystems}
               <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
 
         <div className="ml-auto mt-10 grid w-full max-w-[980px] grid-cols-2 border border-white/18 bg-[#0d1218]/72 text-right shadow-[0_28px_80px_rgba(0,0,0,0.28)] backdrop-blur-md sm:grid-cols-4 lg:w-[980px]">
-          {SPEC_RAIL.map((item, index) => (
+          {t.specRail.map((item, index) => (
             <div key={item.label} className="relative overflow-hidden px-4 py-4 sm:px-5 sm:py-5">
               {index > 0 && <div className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-white/14 sm:block" />}
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/48">{item.label}</div>
@@ -197,7 +193,7 @@ export function HeroSection() {
 
       <div className="pointer-events-none absolute bottom-7 right-6 z-20 hidden items-center gap-2 text-white/52 md:flex">
         <RadioTower size={15} className="text-[#F26522]" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.22em]">Scroll for system route</span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.22em]">{t.scrollHint}</span>
         <MoveDown size={15} className="animate-bounce motion-reduce:animate-none" />
       </div>
     </section>

@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Locale routing lives in src/proxy.ts so both languages share one page tree.
 };
 
 export default nextConfig;

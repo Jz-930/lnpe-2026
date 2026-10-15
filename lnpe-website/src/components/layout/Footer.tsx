@@ -1,4 +1,8 @@
-import Link from 'next/link';
+'use client';
+
+import Link from '@/components/i18n/LocalizedLink';
+import { useLocale } from '@/i18n/LocaleProvider';
+import { footerMessages } from '@/i18n/messages/footer';
 import Image from 'next/image';
 
 const footerBackgroundImages = [
@@ -42,6 +46,7 @@ function FooterBackgroundSlideshow() {
 }
 
 export function Footer() {
+  const t = footerMessages[useLocale()];
   return (
     <footer className="relative isolate w-full overflow-hidden border-t border-slate-800 bg-[#111a26] py-12 text-slate-300 md:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -58,52 +63,52 @@ export function Footer() {
           <Link href="/" className="relative mb-6 inline-block">
             <Image
               src="/images/00_brand/logo_01_lnpe-logo.webp"
-              alt="LNPE Logo"
+              alt={t.logoAlt}
               width={160}
               height={50}
               className="h-12 w-auto brightness-0 invert opacity-90 transition-opacity duration-200 hover:opacity-100"
             />
           </Link>
           <p className="mb-6 max-w-sm text-sm leading-7 text-slate-300">
-            Focusing on Ultra-Fine Powder Grinding & Classification. Solving difficulties in the ultra-fine powder industry for customers globally.
+            {t.description}
           </p>
           <div className="mt-6 flex flex-col gap-2 font-mono text-sm text-slate-400">
-            <span>2025 LNPE, Inc. All rights reserved.</span>
+            <span>{t.copyright}</span>
             <Link href="/portal/assistant" className="w-fit text-xs tracking-widest text-lnpe-kinetic transition-colors duration-200 hover:text-white">
-              Internal Portal
+              {t.portal}
             </Link>
           </div>
         </div>
 
         {/* Products Links */}
         <div>
-          <h4 className="mb-6 font-display text-sm font-semibold uppercase tracking-wide text-white">Products</h4>
+          <h4 className="mb-6 font-display text-sm font-semibold uppercase tracking-wide text-white">{t.products}</h4>
           <ul className="space-y-4 text-sm font-medium">
-            <li><Link href="/products/jet-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">Jet Mill</Link></li>
-            <li><Link href="/products/impact-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">Impact Mill</Link></li>
-            <li><Link href="/products/jet-pulverizer" className="transition-colors duration-200 hover:text-lnpe-kinetic">Jet Pulverizer</Link></li>
-            <li><Link href="/products/turnkey-epc" className="transition-colors duration-200 hover:text-lnpe-kinetic">Turnkey EPC</Link></li>
-            <li><Link href="/products/shaping-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">Shaping Mill</Link></li>
-            <li><Link href="/products/air-classifier" className="transition-colors duration-200 hover:text-lnpe-kinetic">Air Classifier</Link></li>
-            <li><Link href="/products/laboratory-equipment" className="transition-colors duration-200 hover:text-lnpe-kinetic">Laboratory Equip.</Link></li>
+            <li><Link href="/products/jet-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.jetMill}</Link></li>
+            <li><Link href="/products/impact-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.impactMill}</Link></li>
+            <li><Link href="/products/jet-pulverizer" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.jetPulverizer}</Link></li>
+            <li><Link href="/products/turnkey-epc" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.turnkeyEpc}</Link></li>
+            <li><Link href="/products/shaping-mill" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.shapingMill}</Link></li>
+            <li><Link href="/products/air-classifier" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.airClassifier}</Link></li>
+            <li><Link href="/products/laboratory-equipment" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.laboratory}</Link></li>
           </ul>
         </div>
 
         {/* Company Links & Contact */}
         <div>
-          <h4 className="mb-6 font-display text-sm font-semibold uppercase tracking-wide text-white">Company</h4>
+          <h4 className="mb-6 font-display text-sm font-semibold uppercase tracking-wide text-white">{t.company}</h4>
           <ul className="mb-8 space-y-4 text-sm font-medium">
-            <li><Link href="/about" className="transition-colors duration-200 hover:text-lnpe-kinetic">About Us</Link></li>
-            <li><Link href="/news" className="transition-colors duration-200 hover:text-lnpe-kinetic">News</Link></li>
-            <li><Link href="/projects" className="transition-colors duration-200 hover:text-lnpe-kinetic">Projects</Link></li>
-            <li><Link href="/contact-us" className="transition-colors duration-200 hover:text-lnpe-kinetic">Contact Us</Link></li>
+            <li><Link href="/about" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.about}</Link></li>
+            <li><Link href="/news" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.news}</Link></li>
+            <li><Link href="/projects" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.projects}</Link></li>
+            <li><Link href="/contact-us" className="transition-colors duration-200 hover:text-lnpe-kinetic">{t.contact}</Link></li>
           </ul>
 
           <Link
             href="/contact-us"
             className="inline-flex items-center justify-center rounded-[6px] bg-white px-6 py-3 text-sm font-semibold text-lnpe-dark transition-colors duration-200 hover:bg-lnpe-kinetic hover:text-white"
           >
-            Get a Quote
+            {t.quote}
           </Link>
         </div>
       </div>

@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/i18n/LocalizedLink';
+import { useLocale } from '@/i18n/LocaleProvider';
+import { homeMessages } from '@/i18n/messages/home';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight } from 'lucide-react';
 
@@ -10,74 +12,17 @@ const CATEGORIES = ['All', 'Grinding', 'Classifying', 'Modification', 'Turnkey L
 type Category = (typeof CATEGORIES)[number];
 
 const PRODUCTS = [
-  {
-    title: 'Turnkey EPC',
-    desc: 'Battery material production lines from process design to site delivery.',
-    href: '/products/turnkey-epc',
-    image: '/images/04_products/product_04_turnkey-epc/product_04_gallery_03.webp',
-    category: 'Turnkey Line',
-    specs: ['Cathode / Anode', 'Whole-line EPC', 'Lab to Production'],
-    module: 'Integrated line',
-    fit: 'cover',
-  },
-  {
-    title: 'Jet Pulverizer',
-    desc: 'Closed-loop grinding and classification for strict particle targets.',
-    href: '/products/jet-pulverizer',
-    image: '/images/04_products/product_03_jet-pulverizer/product_03_listing.webp',
-    category: 'Grinding',
-    specs: ['D50 1-5 um', 'High Yield', 'Integrated Classifier'],
-    module: 'Grinding route',
-    fit: 'contain',
-  },
-  {
-    title: 'Jet Mill',
-    desc: 'Fluidized bed jet grinding with optimized energy efficiency.',
-    href: '/products/jet-mill',
-    image: '/images/04_products/product_01_jet-mill/product_01_listing.webp',
-    category: 'Grinding',
-    specs: ['Dry Grinding', 'Low Wear', 'Energy Saving'],
-    module: 'Micronization',
-    fit: 'contain',
-  },
-  {
-    title: 'Impact Mill',
-    desc: 'Mechanical impact grinding for robust mineral and chemical routes.',
-    href: '/products/impact-mill',
-    image: '/images/04_products/product_02_impact-mill/product_02_listing.webp',
-    category: 'Grinding',
-    specs: ['Hammer Impact', 'Compression', 'High Throughput'],
-    module: 'Mechanical route',
-    fit: 'contain',
-  },
-  {
-    title: 'Shaping Mill',
-    desc: 'Particle morphology control for surface and flowability requirements.',
-    href: '/products/shaping-mill',
-    image: '/images/04_products/product_05_shaping-mill/product_05_listing.webp',
-    category: 'Modification',
-    specs: ['Morphology', 'Surface Tuning', 'Particle Control'],
-    module: 'Surface tuning',
-    fit: 'contain',
-  },
-  {
-    title: 'Air Classifier',
-    desc: 'Dry classification by particle size and density differences.',
-    href: '/products/air-classifier',
-    image: '/images/04_products/product_06_air-classifier/product_06_listing.webp',
-    category: 'Classifying',
-    specs: ['Cut Point', 'Dry Separation', 'Density Split'],
-    module: 'Separation',
-    fit: 'contain',
-  },
+  { id: 'turnkey-epc', href: '/products/turnkey-epc', image: '/images/04_products/product_04_turnkey-epc/product_04_gallery_03.webp', category: 'Turnkey Line', fit: 'cover' },
+  { id: 'jet-pulverizer', href: '/products/jet-pulverizer', image: '/images/04_products/product_03_jet-pulverizer/product_03_listing.webp', category: 'Grinding', fit: 'contain' },
+  { id: 'jet-mill', href: '/products/jet-mill', image: '/images/04_products/product_01_jet-mill/product_01_listing.webp', category: 'Grinding', fit: 'contain' },
+  { id: 'impact-mill', href: '/products/impact-mill', image: '/images/04_products/product_02_impact-mill/product_02_listing.webp', category: 'Grinding', fit: 'contain' },
+  { id: 'shaping-mill', href: '/products/shaping-mill', image: '/images/04_products/product_05_shaping-mill/product_05_listing.webp', category: 'Modification', fit: 'contain' },
+  { id: 'air-classifier', href: '/products/air-classifier', image: '/images/04_products/product_06_air-classifier/product_06_listing.webp', category: 'Classifying', fit: 'contain' },
 ] satisfies {
-  title: string;
-  desc: string;
+  id: keyof typeof homeMessages.en.products.items;
   href: string;
   image: string;
   category: Exclude<Category, 'All'>;
-  specs: string[];
-  module: string;
   fit: 'cover' | 'contain';
 }[];
 
@@ -95,6 +40,7 @@ function SpecDrawer({ specs }: { specs: string[] }) {
 }
 
 export function ProductBentoBox() {
+  const t = homeMessages[useLocale()].products;
   const [category, setCategory] = useState<Category>('All');
 
   useEffect(() => {
@@ -112,10 +58,11 @@ export function ProductBentoBox() {
   }, []);
 
   const visibleProducts = useMemo(
-    () => (category === 'All' ? PRODUCTS : PRODUCTS.filter((product) => product.category === category)),
-    [category]
+    () => (category === 'All' ? PRODUCTS : PRODUCTS.filter((product) => product.category === category))
+      .map((product) => ({ ...product, ...t.items[product.id] })),
+    [category, t]
   );
-  const featured = visibleProducts[0] ?? PRODUCTS[0];
+  const featured = visibleProducts[0] ?? { ...PRODUCTS[0], ...t.items[PRODUCTS[0].id] };
   const supportingProducts = visibleProducts.slice(1, 5);
 
   return (
@@ -129,17 +76,17 @@ export function ProductBentoBox() {
         <div className="relative isolate mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="relative z-10">
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] sm:text-4xl md:text-6xl">
-              Equipment Discovery
+              {t.title}
             </h2>
             <p className="mt-5 max-w-2xl text-base leading-8 text-[#5b6673]">
-              A clean product catalog surface with stronger equipment imagery, hard specs and a lighter conversion path.
+              {t.description}
             </p>
           </div>
           <Link
             href="/products"
             className="group relative z-10 inline-flex items-center gap-3 self-start border border-[#c4ced8] bg-white/86 px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#111827] shadow-[inset_0_1px_0_rgba(255,255,255,0.72)] transition-colors hover:border-[#F26522] hover:text-[#F26522] md:self-auto"
           >
-            View All Systems
+            {t.viewAll}
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -158,7 +105,7 @@ export function ProductBentoBox() {
                     : 'border-[#cbd5df] bg-white/78 text-[#5f6b78] hover:border-[#F26522] hover:text-[#F26522]'
                 }`}
               >
-                <span className="relative z-10">{item}</span>
+                <span className="relative z-10">{t.categories[item]}</span>
                 {active && (
                   <span className="absolute inset-x-0 bottom-0 h-1 origin-right bg-[#F26522] [animation:route-step-pulse_5.4s_ease-in-out_infinite] motion-reduce:animate-none" />
                 )}
@@ -175,13 +122,13 @@ export function ProductBentoBox() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(232,238,243,0.96))]" />
             <div className="absolute left-6 right-6 top-6 z-10 flex items-center justify-between border-b border-[#d7e0e8] pb-4">
               <div>
-                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#64748b]">Featured equipment</div>
+                <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#64748b]">{t.featured}</div>
                 <h3 className="mt-3 font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] md:text-5xl">
                   {featured.title}
                 </h3>
               </div>
               <span className="hidden border border-[#c8d2dc] bg-white px-3 py-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#52606f] sm:block">
-                {featured.category}
+                {t.categories[featured.category]}
               </span>
             </div>
 
@@ -213,7 +160,7 @@ export function ProductBentoBox() {
                 <div className="mt-4 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.2em] text-[#8b96a3]">
                   <span>{featured.module}</span>
                   <span className="flex items-center gap-2 text-[#111827] group-hover:text-[#F26522]">
-                    System Detail <ChevronRight size={14} />
+                    {t.detail} <ChevronRight size={14} />
                   </span>
                 </div>
               </div>
@@ -223,12 +170,12 @@ export function ProductBentoBox() {
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-1">
             {supportingProducts.length === 0 ? (
               <div className="flex min-h-[260px] items-center border border-[#d1dae3] bg-white/72 p-6 text-sm leading-7 text-[#5f6b78]">
-                The selected category has one primary system. Use All to compare related equipment routes.
+                {t.emptyRelated}
               </div>
             ) : (
               supportingProducts.map((product, index) => (
                 <Link
-                  key={product.title}
+                  key={product.id}
                   href={product.href}
                   className="group grid min-h-[220px] overflow-hidden border border-[#d1dae3] bg-white/78 shadow-[0_14px_38px_rgba(15,23,42,0.06)] transition-colors hover:border-[#aebbc7] hover:bg-white sm:grid-cols-[0.92fr_1.08fr]"
                 >
@@ -250,7 +197,7 @@ export function ProductBentoBox() {
                   <div className="flex flex-col p-5">
                     <div className="mb-3 flex items-start justify-between gap-4">
                       <div>
-                        <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7b8794]">{product.category}</div>
+                        <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7b8794]">{t.categories[product.category]}</div>
                         <h3 className="font-display text-xl font-bold uppercase tracking-normal text-[#0f172a] transition-colors group-hover:text-[#F26522]">
                           {product.title}
                         </h3>

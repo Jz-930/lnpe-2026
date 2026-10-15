@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import ChatContainer from "./ChatContainer";
+import { assistantMessages } from "@/i18n/messages/assistant";
 
 interface ChatDrawerProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface ChatDrawerProps {
 }
 
 export default function ChatDrawer({ isOpen, onClose, lang, setLang }: ChatDrawerProps) {
+  const copy = assistantMessages[lang];
   return (
     <AnimatePresence>
       {isOpen && (
@@ -38,11 +40,11 @@ export default function ChatDrawer({ isOpen, onClose, lang, setLang }: ChatDrawe
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 bg-lnpe-kinetic" />
                   <h3 className="font-display text-base font-bold uppercase tracking-wide text-lnpe-dark">
-                    {lang === "en" ? "LNPE Smart Engineer" : "LNPE 智能工程师"}
+                    {copy.name}
                   </h3>
                 </div>
                 <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-lnpe-steel">
-                  {lang === "en" ? "Powder process consultation" : "粉体工艺咨询"}
+                  {copy.subtitle}
                 </p>
               </div>
 
@@ -50,17 +52,17 @@ export default function ChatDrawer({ isOpen, onClose, lang, setLang }: ChatDrawe
                 <button
                   onClick={() => setLang(lang === "en" ? "zh" : "en")}
                   className="border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-blue transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic"
-                  title="Toggle Language"
+                  title={copy.toggle}
                 >
                   {lang === "en" ? "中" : "EN"}
                 </button>
                 <span className="border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-steel">
-                  T1 Access
+                  {copy.access}
                 </span>
                 <button
                   onClick={onClose}
                   className="grid h-8 w-8 place-items-center border border-lnpe-border bg-lnpe-paper text-lnpe-steel transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic"
-                  aria-label="Close assistant"
+                  aria-label={copy.closeDrawer}
                 >
                   <X size={16} />
                 </button>

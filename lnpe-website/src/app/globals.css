@@ -1,5 +1,56 @@
 @import "tailwindcss";
 
+/* Chinese typography is scoped to the locale; English keeps its existing type scale. */
+html[lang="zh-CN"] body {
+  --font-sans: var(--font-chinese), "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-jetbrains-mono), var(--font-chinese), sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  letter-spacing: -0.005em;
+  line-height: 1.8;
+}
+
+html[lang="zh-CN"] :where(.font-sans, .font-display) {
+  font-family: var(--font-sans);
+}
+
+html[lang="zh-CN"] [class*="tracking-"] {
+  letter-spacing: 0;
+}
+
+html[lang="zh-CN"] :where(h1, h2, h3, h4, h5, h6) {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  text-wrap: balance;
+  word-break: normal;
+}
+
+html[lang="zh-CN"] :where(p, li) {
+  line-height: 1.85;
+  overflow-wrap: break-word;
+}
+
+html[lang="zh-CN"] :where(p, li):not([class*="font-"]):not(.spec-label) {
+  font-weight: 300;
+}
+
+html[lang="zh-CN"] :where(strong, b, label, .spec-label) {
+  font-weight: 600;
+}
+
+html[lang="zh-CN"] .spec-label {
+  font-family: var(--font-mono);
+  letter-spacing: 0;
+}
+
+/* Compact app headers must not inherit the landing-page mobile hero scale. */
+.assistant-workbench-title {
+  font-size: clamp(0.875rem, 3.6vw, 1.125rem);
+  line-height: 1.4;
+}
+
 @theme {
   --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);

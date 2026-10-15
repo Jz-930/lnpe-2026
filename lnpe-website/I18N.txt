@@ -1,0 +1,27 @@
+双语维护说明
+
+公开地址：英文沿用 /、/products 等原地址；中文为 /zh、/zh/products。
+src/proxy.ts 将英文地址内部映射到 /en。/en 也可直接访问，canonical 始终指向无前缀英文地址。
+所有业务页面只维护 src/app/[locale] 这一套，禁止为中文复制另一套页面。
+
+文案：src/i18n/messages 按首页、导航、产品/案例、应用、新闻、助手等功能分组。
+服务端从 params 读取 locale；客户端用 useLocale()。
+新增页面结构、功能、图片、产品链接、技术参数时，共用一次；需要翻译的文字在字典补齐 en / zh。
+产品/案例的 slug、分类 ID、图片及日期保持共享；筛选逻辑使用 ID，不使用翻译后的标签。
+新闻列表和详情共用 messages/news.ts 中的条目，避免两处维护同一篇文章。
+
+内链：统一使用 @/components/i18n/LocalizedLink。不要给业务页面写死 /zh 或 /en。
+非组件代码用 localizeHref(href, locale)。外部链接、邮件、电话、图片和锚点保持原值。
+页面 metadata 使用 createPageMetadata，为同一内容生成 canonical 与中英文 alternates。
+导航语言切换保留详情路径、查询参数和锚点。
+
+排版：globals.css 的 html[lang="zh-CN"] 规则仅作用于中文。
+中文使用 Noto Sans SC 可变无衬线字体，默认正文 300、标签 600、标题 700，紧字距与较宽松行距。
+next/font 在构建时获取字体并随站点托管，访客无需连接 Google Fonts；中文字体不做整包预加载。
+
+开发：npm run dev -- --hostname 127.0.0.1 --port 3000
+预览：http://127.0.0.1:3000/zh
+验证：npm run lint；npm run build；npm run test:i18n（测试脚本使用当前 Node 24 的原生 TypeScript 支持）。
+大幅移动 App Router 目录后，如热更新仍显示旧 SSR 内容，重启开发服务再验证。
+
+表单提交和工程助手维持现有演示行为；本次仅增加双语支持，没有新增 CMS、真实认证或后端接口。
