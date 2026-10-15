@@ -16,7 +16,7 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const pathname = usePathname();
+  const pathname = usePathname() ?? '';
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
