@@ -7,7 +7,9 @@ import { Footer } from "@/components/layout/Footer";
 import { PROJECT_CASES, getProjectBySlug, getProjectCases } from "../project-data";
 import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
-import { catalogMetadata, catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { projectEngineering, projectDetailLabels } from "@/content/projects";
+import { ContentDisclosure } from "@/components/content/ContentDisclosure";
 
 export function generateStaticParams() {
   return PROJECT_CASES.map((project) => ({ slug: project.slug }));
@@ -18,9 +20,10 @@ type ProjectDetailPageProps = { params: Promise<{ locale: Locale; slug: string }
 export async function generateMetadata({ params }: ProjectDetailPageProps) {
   const { locale, slug } = await params;
   const project = getProjectBySlug(slug, "zh");
-  if (!project) notFound();
+  const english = getProjectBySlug(slug, "en");
+  if (!project || !english) notFound();
   return createPageMetadata(locale, `/projects/${slug}`, {
-    en: catalogMetadata.en,
+    en: { title: english.title + " | LNPE", description: english.description },
     zh: { title: project.title + " | LNPE", description: project.description },
   });
 }
@@ -31,6 +34,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const project = getProjectBySlug(slug, locale);
 
   if (!project) notFound();
+  const engineering = projectEngineering[project.slug];
+  const content = engineering.copy[locale];
+  const labels = projectDetailLabels[locale];
 
   const relatedProjects = getProjectCases(locale).filter((item) => item.slug !== project.slug).slice(0, 3);
 
@@ -54,7 +60,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               <div className="min-w-0">
                 <div className="mb-5 flex flex-wrap gap-2">
                   <span className="border border-[#dbe3ee] bg-white px-2.5 py-1 text-xs font-semibold text-[#536276]">
-                    {project.date}
+                    {locale === "zh" ? "发布于 " : "Published "}{project.date}
                   </span>
                   <span className="border border-[#f26522]/30 bg-[#fff4ee] px-2.5 py-1 text-xs font-semibold text-[#f26522]">
                     {project.focus}
@@ -96,6 +102,16 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           </div>
         </section>
 
+        <section className="border-b border-[#dbe3ee] bg-white">
+          <div className="container mx-auto px-6 py-8">
+            <p className="mb-4 max-w-4xl text-xs leading-6 text-[#62748a]">{labels.note}</p>
+            <ContentDisclosure title={labels.scope} id="engineering-scope"><div className="max-w-4xl space-y-3">{content.scope.map((text) => <p key={text}>{text}</p>)}</div></ContentDisclosure>
+            <ContentDisclosure title={labels.process} id="process"><ol className="grid list-inside list-decimal gap-4 md:grid-cols-2">{content.process.map((text) => <li key={text} className="border-l border-[#dbe3ee] pl-4">{text}</li>)}</ol></ContentDisclosure>
+            <ContentDisclosure title={labels.inputs} id="selection-inputs"><ul className="grid list-inside list-disc gap-2 md:grid-cols-2">{content.inputs.map((text) => <li key={text}>{text}</li>)}</ul><Link href={`/contact-us?project=${project.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm text-[#174a7c] hover:underline">{labels.enquiry}<ArrowRight size={15} /></Link></ContentDisclosure>
+            <ContentDisclosure title={labels.validation} id="validation"><div className="max-w-4xl space-y-3">{content.validation.map((text) => <p key={text}>{text}</p>)}</div><Link className="mt-5 inline-flex text-sm text-[#174a7c] hover:underline" href={`/products/${engineering.product}`}>{labels.product}<ArrowRight size={15} className="ml-2" /></Link></ContentDisclosure>
+          </div>
+        </section>
+
         <section className="bg-[#f6f8fb] py-14 md:py-20">
           <div className="container mx-auto px-6">
             <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
@@ -105,7 +121,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   {ui.projectImageIntro}
                 </p>
               </div>
-              <Link href="/contact-us" className="inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
+              <Link href={`/contact-us?project=${project.slug}`} className="inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
                 {ui.discussSystem}
                 <ArrowRight size={16} />
               </Link>
@@ -117,14 +133,14 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
                   <div className="relative aspect-[4/3] bg-[#edf3f9]">
                     <Image
                       src={image}
-                      alt={formatCatalogMessage(ui.projectContentAlt, { title: project.title, number: index + 1 })}
+                      alt={content.captions[index] ?? formatCatalogMessage(ui.projectContentAlt, { title: project.title, number: index + 1 })}
                       fill
                       sizes="(min-width: 1280px) 30vw, (min-width: 768px) 45vw, 90vw"
                       className="object-cover"
                     />
                   </div>
                   <div className="border-t border-[#e5eaf2] px-4 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-[#536276]">
-                    {ui.caseImage} {String(index + 1).padStart(2, "0")}
+                    {content.captions[index] ?? `${ui.caseImage} ${String(index + 1).padStart(2, "0")}`}
                   </div>
                 </div>
               ))}

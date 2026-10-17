@@ -46,7 +46,8 @@ function FooterBackgroundSlideshow() {
 }
 
 export function Footer() {
-  const t = footerMessages[useLocale()];
+  const locale = useLocale();
+  const t = footerMessages[locale];
   return (
     <footer className="relative isolate w-full overflow-hidden border-t border-slate-800 bg-[#111a26] py-12 text-slate-300 md:py-20">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -112,6 +113,16 @@ export function Footer() {
           </Link>
         </div>
       </div>
+      <nav aria-label={locale === 'zh' ? '更多资料与服务' : 'Resources and services'} className="container relative z-10 mx-auto mt-10 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/15 px-6 pt-6 text-xs text-slate-300">
+        {[
+          ['/research', locale === 'zh' ? '研究与实验中心' : 'Research & testing'],
+          ['/support', locale === 'zh' ? '服务与支持' : 'Service & support'],
+          ['/resources', locale === 'zh' ? '资料与常见问题' : 'Resources & FAQ'],
+          ['/applications/materials', locale === 'zh' ? '物料目录' : 'Material directory'],
+          ['/about#purpose', locale === 'zh' ? '人才与发展' : 'Careers & development'],
+          ['/privacy', locale === 'zh' ? '网站与联系说明' : 'Website & contact information'],
+        ].map(([href, label]) => <Link key={href} href={href} className="transition-colors hover:text-white">{label}</Link>)}
+      </nav>
     </footer>
   );
 }

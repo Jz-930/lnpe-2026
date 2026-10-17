@@ -8,6 +8,7 @@ import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
 import { catalogMetadata, catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
 import { ProjectsWallClient } from "./ProjectsWallClient";
+import { TechnicalNotes } from "./TechnicalNotes";
 
 type ProjectsPageProps = { params: Promise<{ locale: Locale }> };
 
@@ -93,6 +94,7 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
         </section>
 
         <ProjectsWallClient />
+        <TechnicalNotes locale={locale} />
       </div>
 
       <Footer />

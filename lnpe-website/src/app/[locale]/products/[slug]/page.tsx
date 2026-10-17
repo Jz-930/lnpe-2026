@@ -13,9 +13,10 @@ import {
   getProductListingImage,
 } from "../product-catalog";
 import { ProductImageGallery } from "./ProductImageGallery";
+import { ProductTechnicalContent } from "@/components/products/ProductTechnicalContent";
 import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
-import { catalogMetadata, catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
 
 export function generateStaticParams() {
   return PRODUCT_CATALOG.map((product) => ({ slug: product.slug }));
@@ -26,9 +27,10 @@ type ProductDetailPageProps = { params: Promise<{ locale: Locale; slug: string }
 export async function generateMetadata({ params }: ProductDetailPageProps) {
   const { locale, slug } = await params;
   const product = getProductBySlug(slug, "zh");
-  if (!product) notFound();
+  const englishProduct = getProductBySlug(slug, "en");
+  if (!product || !englishProduct) notFound();
   return createPageMetadata(locale, `/products/${slug}`, {
-    en: catalogMetadata.en,
+    en: { title: englishProduct.title + " | LNPE", description: englishProduct.summary },
     zh: { title: product.title + " | LNPE", description: product.summary },
   });
 }
@@ -73,14 +75,14 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <Link
-                    href="/contact-us"
+                    href={`/contact-us?equipment=${slug}&service=selection`}
                     className="inline-flex min-w-max shrink-0 items-center justify-center gap-2 whitespace-nowrap bg-[#142033] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f26522]"
                   >
                     <span className="whitespace-nowrap">{ui.contactUs}</span>
                     <ArrowRight size={17} />
                   </Link>
                   <Link
-                    href="/contact-us"
+                    href={`/contact-us?equipment=${slug}&service=selection`}
                     className="inline-flex min-w-max shrink-0 items-center justify-center gap-2 whitespace-nowrap border border-[#cbd7e6] bg-white px-5 py-3 text-sm font-semibold text-[#142033] transition-colors hover:border-[#174a7c] hover:text-[#174a7c]"
                   >
                     <span className="whitespace-nowrap">{ui.requestSolution}</span>
@@ -169,6 +171,8 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             </div>
           </div>
         </section>
+
+        <ProductTechnicalContent locale={locale} slug={product.slug} />
 
         <section className="bg-white py-14 md:py-18">
           <div className="container mx-auto px-6">

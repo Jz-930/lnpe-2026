@@ -6,6 +6,9 @@ import { Factory, FlaskConical, Globe2, Settings2, ArrowRight } from "lucide-rea
 import type { Locale } from "@/i18n/config";
 import { aboutMessages } from "@/i18n/messages/pages";
 import { createPageMetadata } from "@/i18n/metadata";
+import { companyDetails } from "@/content/company";
+import EditorialSections from "@/components/content/EditorialSections";
+import Link from "@/components/i18n/LocalizedLink";
 
 const capabilityIcons = [FlaskConical, Factory, Settings2, Globe2];
 type PageProps = { params: Promise<{ locale: Locale }> };
@@ -157,6 +160,17 @@ export default async function AboutPage({ params }: PageProps) {
                   <p className="mt-2 text-lg font-semibold text-lnpe-dark">{milestone}</p>
                 </div>
               ))}
+            </div>
+          </div>
+        </section>
+        <section className="border-t border-lnpe-border pb-16 pt-10">
+          <div className="container mx-auto max-w-6xl px-6">
+            <p className="mb-6 text-xs tracking-wide text-lnpe-steel">{locale === "zh" ? "进一步了解流能" : "MORE ABOUT LNPE"}</p>
+            <EditorialSections sections={companyDetails[locale]} />
+            <div className="mt-7 flex flex-wrap gap-x-8 gap-y-3 text-sm text-lnpe-muted">
+              <Link href="/research" className="hover:text-lnpe-blue">{locale === "zh" ? "研究与实验中心 →" : "Research & testing →"}</Link>
+              <Link href="/support#oem" className="hover:text-lnpe-blue">{locale === "zh" ? "OEM粉体加工 →" : "Powder OEM processing →"}</Link>
+              <Link href="/contact-us?service=careers" className="hover:text-lnpe-blue">{locale === "zh" ? "人才与合作咨询 →" : "Careers & collaboration →"}</Link>
             </div>
           </div>
         </section>

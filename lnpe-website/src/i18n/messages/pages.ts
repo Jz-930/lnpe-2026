@@ -36,7 +36,7 @@ const aboutEn = {
   ],
   "capabilityLabel": "CAPABILITY MATRIX",
   "capabilityTitle": "Four capabilities behind one equipment solution.",
-  "capabilityIntro": "The page now presents LNPE as an engineering manufacturer, with capability modules tied to production, laboratory verification and global project service.",
+  "capabilityIntro": "Research, manufacturing, laboratory validation and project services connect material requirements with practical equipment solutions.",
   "capabilities": [
     {
       "title": "R&D",
@@ -183,7 +183,7 @@ const contactEn = {
   "serviceTitle": "Material trial, line selection and global response.",
   "serviceIntro": "Share your material, target particle size and capacity target. LNPE will use the inquiry as an engineering brief rather than a generic contact form.",
   "formLabel": "PROJECT REQUIREMENTS",
-  "formTitle": "Send inquiry",
+  "formTitle": "Enquiry brief",
   "required": "Fields marked with * are required.",
   "fields": {
     "firstName": [
@@ -262,7 +262,7 @@ export const contactMessages: Record<Locale, typeof contactEn> = { en: contactEn
       "title": "绵阳工厂",
       "lines": [
         "中国四川省绵阳市科创园区",
-        "Caiyuan Road 5 号"
+        "财元路5号"
       ],
       "tel": "+86 134 5808 3506",
       "email": "pengwei@lnpe.com.cn"
@@ -281,7 +281,7 @@ export const contactMessages: Record<Locale, typeof contactEn> = { en: contactEn
   "serviceTitle": "物料试验、整线选型与全球响应。",
   "serviceIntro": "请提供物料、目标粒径与产能需求，帮助 LNPE 了解项目的具体工程要求。",
   "formLabel": "项目需求",
-  "formTitle": "发送询盘",
+  "formTitle": "咨询需求",
   "required": "带 * 的字段为必填项。",
   "fields": {
     "firstName": [

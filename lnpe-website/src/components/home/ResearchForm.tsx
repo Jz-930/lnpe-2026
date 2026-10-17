@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import Image from 'next/image';
+import Link from '@/components/i18n/LocalizedLink';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { HOME_PARTICLE_OPTIONS, homeMessages } from '@/i18n/messages/home';
 import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Gauge, Layers3, Route as RouteIcon, SlidersHorizontal } from 'lucide-react';
@@ -30,6 +31,7 @@ export function ResearchForm() {
   const [capacity, setCapacity] = useState('');
   const [industry, setIndustry] = useState<Industry>(INDUSTRIES[0]);
   const [submitted, setSubmitted] = useState(false);
+  const [notes, setNotes] = useState('');
 
   const selectedRoute = useMemo(() => t.routes[route], [route, t]);
 
@@ -215,6 +217,8 @@ export function ResearchForm() {
                   <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.22em] text-[#64748b]">{t.contactInformation}</span>
                   <textarea
                     required
+                    value={notes}
+                    onChange={(event) => { setNotes(event.target.value); setSubmitted(false); }}
                     rows={3}
                     placeholder={t.contactPlaceholder}
                     className="w-full resize-none border border-[#cfd8e1] bg-[#f7f9fb] px-4 py-3 text-sm text-[#111827] outline-none transition-colors placeholder:text-[#94a3b8] focus:border-[#F26522] focus:bg-white"
@@ -264,6 +268,11 @@ export function ResearchForm() {
                         recommendation: selectedRoute.recommendation,
                       })}
                     </p>
+                    <div className="mt-4 flex flex-wrap gap-x-6 gap-y-3 text-sm">
+                      <Link href={`/contact-us?${new URLSearchParams({service:'selection', material, capacity, particleSize:t.particleOptions[particleSize], application:t.industries[industry], message:`${selectedRoute.name}\n${notes}`}).toString()}`} className="text-lnpe-blue underline underline-offset-4">{locale === 'zh' ? '带入需求，联系工程师 →' : 'Continue with this brief →'}</Link>
+                      <Link href={`/applications/materials?q=${encodeURIComponent(material)}`} className="text-lnpe-muted underline underline-offset-4">{locale === 'zh' ? '查阅相关物料' : 'Look up this material'}</Link>
+                    </div>
+                    <p className="mt-3 text-xs leading-6 text-lnpe-muted">{locale === 'zh' ? '此处为工艺规划参考；具体设备、产能和粒度需结合物性与试验确认。' : 'This is a process planning reference. Equipment, throughput and particle size require material review and trial confirmation.'}</p>
                   </div>
                 )}
 

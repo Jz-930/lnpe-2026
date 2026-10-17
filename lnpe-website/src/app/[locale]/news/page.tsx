@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
 import { getNews, newsMessages, newsTags } from "@/i18n/messages/news";
 import { createPageMetadata } from "@/i18n/metadata";
+import { NewsArchive } from "./NewsArchive";
 
 type PageProps = { params: Promise<{ locale: Locale }> };
 
@@ -21,7 +22,8 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function NewsPage({ params }: PageProps) {
   const { locale } = await params;
   const t = newsMessages[locale];
-  const news = getNews(locale);
+  const allNews = getNews(locale);
+  const news = allNews.filter((article) => article.featured);
   const tags = Object.values(newsTags[locale]);
 
   const featured = news[0];
@@ -103,6 +105,9 @@ export default async function NewsPage({ params }: PageProps) {
             </div>
           </div>
         </section>
+        <div className="container mx-auto max-w-6xl px-6">
+          <NewsArchive locale={locale} articles={allNews.filter((article) => !article.featured).map(({ slug, title, desc, date, tag, tagId, brief }) => ({ slug, title, desc, date, tag, tagId, brief }))} />
+        </div>
       </div>
 
       <Footer />

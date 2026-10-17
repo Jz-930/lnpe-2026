@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@keyframes content-reveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.content-disclosure[open] > .content-disclosure-body { animation: content-reveal 180ms ease-out; }
+.content-disclosure[open] > summary > .content-disclosure-chevron { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) {
+  .content-disclosure[open] > .content-disclosure-body { animation: none; }
+}
+
 /* Chinese typography is scoped to the locale; English keeps its existing type scale. */
 html[lang="zh-CN"] body {
   --font-sans: var(--font-chinese), "PingFang SC", "Microsoft YaHei", sans-serif;

@@ -4,6 +4,7 @@ import { ArrowRight, Factory, Gauge, ShieldCheck } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ProductsCatalogClient } from "./ProductsCatalogClient";
+import { ProductTechnologyDirectory } from "@/components/products/ProductTechnicalContent";
 import { getProductCatalog, getProductCoverImage } from "./product-catalog";
 import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
@@ -103,6 +104,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
         </section>
 
         <ProductsCatalogClient />
+        <ProductTechnologyDirectory locale={locale} />
       </div>
 
       <Footer />

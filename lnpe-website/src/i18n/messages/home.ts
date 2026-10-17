@@ -31,7 +31,7 @@ const en = {
   trust: { labels: ['Industrial users', 'Patents', 'PhDs & professors', 'Countries served'] },
   products: {
     title: 'Equipment Discovery',
-    description: 'A clean product catalog surface with stronger equipment imagery, hard specs and a lighter conversion path.',
+    description: 'Explore grinding, classification, shaping and integrated systems for different powder materials and production targets.',
     viewAll: 'View All Systems',
     featured: 'Featured equipment',
     detail: 'System Detail',
@@ -80,7 +80,7 @@ const en = {
   },
   factory: {
     title: 'Factory Capability',
-    description: 'A darker factory band gives the homepage industrial weight between the clean catalog and the technical route diagram.',
+    description: 'Research, precision manufacturing and system assembly connect material trials with industrial production.',
     activeView: 'Active view',
     capabilityRoute: 'Capability route',
     routeStages: ['Trial', 'Process Design', 'Production System'],
@@ -119,7 +119,7 @@ const en = {
   },
   process: {
     title: 'Process Route Diagram',
-    description: 'Particle flow is now the core technical module: route tabs, active nodes and a live step panel describe how LNPE connects feeding, grinding, classifying, modification and collection.',
+    description: 'Follow the material through feeding, grinding, classification, modification and collection. Each route connects the operations needed for a different processing objective.',
     routeSelector: 'Route selector',
     activeStep: 'Active Step',
     output: 'Output',
@@ -218,7 +218,7 @@ const zh: typeof en = {
   trust: { labels: ['工业用户', '专利', '博士与教授', '服务国家'] },
   products: {
     title: '探索设备',
-    description: '清晰的产品目录，配合更直观的设备图片、关键参数与简洁的咨询流程。',
+    description: '围绕不同粉体材料与生产目标，查阅粉碎、分级、整形和成套系统的设备方案。',
     viewAll: '查看全部系统', featured: '精选设备', detail: '系统详情',
     emptyRelated: '当前类别包含一款主要系统。选择“全部”，可对比相关设备工艺。',
     categories: { All: '全部', Grinding: '粉碎', Classifying: '分级', Modification: '改性', 'Turnkey Line': '成套产线' },
@@ -233,7 +233,7 @@ const zh: typeof en = {
   },
   factory: {
     title: '工厂能力',
-    description: '深色工厂展示区衔接清晰的产品目录与技术工艺图，为首页增添工业质感。',
+    description: '以研发试验、精密制造与系统装配，衔接材料验证和工业化生产。',
     activeView: '当前视图', capabilityRoute: '能力路径', routeStages: ['物料试验', '工艺设计', '生产系统'],
     capabilities: {
       Manufacturing: {
@@ -255,7 +255,7 @@ const zh: typeof en = {
   },
   process: {
     title: '工艺路线图',
-    description: '颗粒流动是核心技术模块：通过工艺选项卡、活动节点与实时步骤面板，展示 LNPE 如何连接给料、粉碎、分级、改性与收集。',
+    description: '沿着材料流向了解给料、粉碎、分级、改性与收集，按不同加工目标组合所需的工艺单元。',
     routeSelector: '工艺选择', activeStep: '当前步骤', output: '输出', particleLoad: '颗粒负载', route: '工艺路线',
     routes: {
       'Battery Materials': { name: '电池材料', note: '针对正负极材料工艺，严格控制 D50，并采用闭路分级。' },

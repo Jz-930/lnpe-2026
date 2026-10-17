@@ -20,14 +20,14 @@ export const productCopyEn = {
     ],
     "features": [
       "Low energy consumption",
-      "Materials collision each other without contamination, effective for Mohs 1-10 hard Material",
+      "Particle-on-particle collisions with contact materials selected for purity and wear",
       "Fully automatic control, easy to operate",
-      "Omniseal negative pressure operation, no contamination."
+      "Sealed negative-pressure operation helps contain process dust"
     ],
     "applications": [
       "Industrial powders",
       "Advanced materials",
-      "Mohs 1-10 materials"
+      "Hard and abrasive powders"
     ],
     "technicalHighlights": [
       "High-velocity sonic airflow",
@@ -51,7 +51,7 @@ export const productCopyEn = {
       },
       {
         "label": "Material Range",
-        "value": "Mohs 1-10"
+        "value": "Material-specific wear configuration"
       },
       {
         "label": "System Type",
@@ -70,7 +70,7 @@ export const productCopyEn = {
     ],
     "features": [
       "High-capacity throughput with exceptionally low specific energy consumption",
-      "Optional full-ceramic process lining to virtually eliminate ferromagnetic contamination"
+      "Optional ceramic process lining to reduce metallic contact"
     ],
     "applications": [
       "Adhesive feeds",
@@ -109,13 +109,13 @@ export const productCopyEn = {
   },
   "jet-pulverizer": {
     "title": productNames.en['jet-pulverizer'],
-    "series": "Patented System",
+    "series": "Controlled Pulverization",
     "summary": "A newly developed grinding and classification system designed for materials with strict particle size requirements and high yield demands.",
-    "principle": "The Jet Pulverizer is a patented, next-generation grinding-and-classification system designed for processes that demand narrow particle-size distributions at high throughput with minimal energy draw.",
+    "principle": "The Jet Pulverizer combines pre-classification, controlled particle impact and prompt separation to target a defined particle-size window while limiting unnecessary fines.",
     "overview": [
       "Immediate classification removes material already within specification as feed stock enters the unit.",
-      "Oversized particles are channeled into the jet-milling chamber, where supersonic nozzles generate a single, high-energy impact before material returns to the classifier.",
-      "Because each particle remains in the milling zone for mere milliseconds, secondary grinding is virtually eliminated, yields are maximized, and the generation of unwanted ultrafines is greatly reduced."
+      "Oversized particles enter the milling chamber for controlled impact before returning promptly to the classifier.",
+      "Short residence and prompt removal of acceptable particles help limit repeated milling and unwanted fines. The operating window is established through material trials."
     ],
     "features": [
       "Controlled grinding, high yield, stable particle size, low energy consumption, and large output",
@@ -151,7 +151,7 @@ export const productCopyEn = {
       },
       {
         "label": "Residence Time",
-        "value": "Milliseconds in milling zone"
+        "value": "Short residence with prompt separation"
       },
       {
         "label": "System Type",
@@ -162,18 +162,18 @@ export const productCopyEn = {
   "turnkey-epc": {
     "title": productNames.en['turnkey-epc'],
     "series": "Powder-Processing Line",
-    "summary": "As a supplier of cathode and anode materials, LNPE has successfully delivered over a hundred EPC projects in the battery materials sector.",
+    "summary": "Integrated powder-processing lines for cathode and anode materials, connecting dosing, milling, classification, conveying and packaging.",
     "principle": "Leveraging decades of process-engineering expertise, LNPE delivers turnkey EPC solutions for powders ranging from specialty chemicals and minerals to high-purity electronic and energy materials.",
     "overview": [
       "The one-stop approach covers process design, equipment manufacturing and supply, installation and commissioning, and training and lifecycle service.",
-      "All core components are produced in-house, allowing tight quality control and seamless integration across grinding, classification, mixing, conveying, and packaging stages."
+      "Equipment manufacturing and supply are coordinated across grinding, classification, mixing, conveying and packaging, with interfaces and delivery responsibilities defined for each project."
     ],
     "features": [
       "Custom-built powder-processing lines tuned to each client's material and throughput targets",
-      "Full in-house equipment suite - crushers, mills, classifiers, mixers, conveyors, and more",
-      "Rapid on-site install & commissioning by dedicated field engineers",
-      "End-to-end technical support with operator training and 24 / 7 service",
-      "Proven EPC track record spanning hundreds of projects worldwide"
+      "Integrated equipment scope including mills, classifiers, mixers and conveying systems",
+      "Planned on-site installation and commissioning support",
+      "Technical support, operator training and maintenance coordination",
+      "Project-specific process interfaces and acceptance criteria"
     ],
     "applications": [
       "Cathode materials",
@@ -217,15 +217,15 @@ export const productCopyEn = {
     "summary": "Self-developed device for controlling powder morphology and particle size based on sphericity, angularity, or aspect-ratio requirements.",
     "principle": "The LNPE Shaping Mill employs a high-speed rotor-stator assembly inside a precisely engineered airflow field. Feed powder is accelerated into the shaping zone, where controlled particle-particle and particle-wall collisions round sharp edges, smooth surfaces, or accentuate aspect ratios as required.",
     "overview": [
-      "A built-in dynamic classifier continuously extracts in-spec particles; oversize or under-shaped fractions are recirculated for additional passes.",
+      "A built-in dynamic classifier separates the specified size fraction. Material requiring further shaping is returned according to the process arrangement.",
       "By tuning rotor speed, airflow, and classifier cut-point, the system delivers narrowly distributed particles in the target morphology."
     ],
     "features": [
       "Morphology on demand - spheroidal, prismatic, or high-aspect shapes",
-      "One-pass shaping + sizing",
+      "Coordinated shaping and sizing",
       "Modular rotor for diverse powders",
-      "High yield, near-zero contamination",
-      "Low energy, minimal OPEX"
+      "Contact-material options for purity control",
+      "Process settings balance quality and operating consumption"
     ],
     "applications": [
       "Graphite spheroidisation",
@@ -267,7 +267,7 @@ export const productCopyEn = {
     "title": productNames.en['air-classifier'],
     "series": "Precision Separator",
     "summary": "Dry state classification based on differences in particle size and density.",
-    "principle": "LNPE air classifier separates powder exclusively by particle size and density. The high-speed rotation of the classifying wheel generates a strong centrifugal field, while the carrier airflow supplies an opposing drag force.",
+    "principle": "LNPE air classifiers separate powder according to particle size, density and morphology. The rotating classifying wheel generates a centrifugal field, while the carrier airflow supplies an opposing drag force.",
     "overview": [
       "Large or heavy particles experience a dominant centrifugal force, are flung outward beyond the wheel, and descend along the chamber wall to the coarse-product outlet.",
       "Small or light particles encounter a weaker centrifugal force; the drag of the airflow prevails, steering them through the wheel vanes into the fine-product stream."
@@ -275,7 +275,7 @@ export const productCopyEn = {
     "features": [
       "Precision separation by particle size, density, and morphology",
       "CFD-optimised airflow, solids concentration, and pressure profile for each design",
-      "High cut accuracy with classification efficiency of 70 - 93 %",
+      "Adjustable cut conditions with separate coarse and fine product recovery",
       "Multiple interchangeable classifier-wheel geometries for efficient handling of diverse powders"
     ],
     "applications": [
@@ -292,7 +292,7 @@ export const productCopyEn = {
     ],
     "tags": [
       "Dry classification",
-      "70-93% efficiency",
+      "Adjustable classification",
       "Battery powders"
     ],
     "specs": [
@@ -305,8 +305,8 @@ export const productCopyEn = {
         "value": "Particle size and density"
       },
       {
-        "label": "Cut Accuracy",
-        "value": "70 - 93% efficiency"
+        "label": "Cut Control",
+        "value": "Wheel speed and airflow"
       },
       {
         "label": "System Type",
@@ -439,40 +439,40 @@ const productCopyZh = {
     summary: "优化设备结构与流场设计，显著提升能源利用效率。",
     principle: "LNJ 气流磨通过多个喷嘴产生高速音速气流，使物料颗粒相互碰撞，实现超细粉碎。粉碎后的颗粒随气流进入高效涡轮分级机，超大颗粒被分离并返回粉碎腔继续处理。",
     overview: ["LNJ 气流磨以理论建模和先进数值模拟为基础，融合国内外技术，是新一代精密粉碎设备。", "LNPE 可根据物料特性提供多种解决方案，包括低温气流磨、高温机型和惰性气体保护的闭路系统。"],
-    features: ["能耗低", "物料相互碰撞，无污染，适用于莫氏硬度 1-10 的物料", "全自动控制，操作便捷", "全密封负压运行，无污染。"],
-    applications: ["工业粉体", "先进材料", "莫氏硬度 1-10 的物料"],
+    features: ["能耗低", "颗粒间碰撞粉碎，按纯度和磨耗选择接触材质", "全自动控制，操作便捷", "密闭负压运行，控制工艺粉尘外逸"],
+    applications: ["工业粉体", "先进材料", "硬质及磨蚀性粉体"],
     technicalHighlights: ["高速音速气流", "颗粒间碰撞粉碎", "高效涡轮分级机", "粗颗粒回流循环"],
     tags: ["超细粉碎", "低污染", "可选闭路系统"],
-    specs: [{ label: "工艺用途", value: "超细气流粉碎" }, { label: "粒度控制", value: "窄粒径分布" }, { label: "物料范围", value: "莫氏硬度 1-10" }, { label: "系统类型", value: "负压运行" }],
+    specs: [{ label: "工艺用途", value: "超细气流粉碎" }, { label: "粒度控制", value: "窄粒径分布" }, { label: "物料配置", value: "按物性选择耐磨配置" }, { label: "系统类型", value: "负压运行" }],
   },
   "impact-mill": {
     title: productNames.zh['impact-mill'], series: "LNI 系列",
     summary: "结合高速锤击与挤压，实现精准可控的超细粉碎。",
     principle: "LNPE 机械冲击磨结合高速锤击与锤头对衬板挤压两种粉碎机制，在连续工艺中实现超细粉碎。粉碎后的物料进入内置涡轮分级机。",
     overview: ["LNI 系统针对不同进料特性，在精准控制的气流中优化转子锤头、齿形定子环和分级机结构。", "达到目标粒径的颗粒作为成品排出，超大颗粒自动回流，继续粉碎。"],
-    features: ["处理能力高，单位能耗低", "可选全陶瓷工艺内衬，最大限度减少铁磁性污染"],
+    features: ["处理能力高，单位能耗低", "可选陶瓷工艺内衬，减少金属接触"],
     applications: ["黏性物料", "纤维状物料", "热敏性材料"],
     technicalHighlights: ["锤击与衬板挤压", "内置涡轮分级机", "粗颗粒自动回流", "可选陶瓷工艺内衬"],
     tags: ["冲击粉碎", "内置分级机", "可选陶瓷内衬"],
     specs: [{ label: "工艺用途", value: "冲击粉碎" }, { label: "适用进料", value: "黏性和纤维状物料" }, { label: "控制方式", value: "集成分级" }, { label: "系统类型", value: "连续粉碎循环" }],
   },
   "jet-pulverizer": {
-    title: productNames.zh['jet-pulverizer'], series: "专利系统",
+    title: productNames.zh['jet-pulverizer'], series: "控制性粉碎系统",
     summary: "新一代粉碎分级系统，适用于粒度要求严格、收率要求高的物料。",
-    principle: "气流粉碎机是一款新一代专利粉碎分级系统，适用于要求高处理量、窄粒径分布和低能耗的工艺。",
-    overview: ["物料进入设备后立即进行分级，已满足粒度要求的物料直接分离排出。", "超大颗粒进入气流粉碎腔，由超音速喷嘴产生一次高能碰撞，随后返回分级机。", "每个颗粒在粉碎区仅停留数毫秒，基本避免二次粉碎，提高收率，并显著减少不需要的超细粉体。"],
+    principle: "气流粉碎机将预分选、受控碰撞和及时分级结合，围绕指定粒度窗口控制粉碎，并减少不需要的细粉。",
+    overview: ["物料进入设备后立即进行分级，已满足粒度要求的物料直接分离排出。", "超大颗粒进入粉碎腔进行受控碰撞，随后及时返回分级机。", "较短停留和合格颗粒及时排出有助于减少重复粉碎与细粉生成，具体运行窗口通过物料试验确定。"],
     features: ["粉碎可控，收率高，粒度稳定，能耗低，产量大", "粉碎强度易调节，收率高，细粉含量低", "对颗粒表面形貌影响小，颗粒形状损伤少"],
     applications: ["烧结三元正极材料", "硅碳复合材料", "包覆石墨负极材料", "玻璃微珠", "金属硅"],
     technicalHighlights: ["即时分级", "单次碰撞粉碎", "超短停留时间", "减少不需要的超细粉体"],
     tags: ["高收率", "电池材料", "单次碰撞粉碎"],
-    specs: [{ label: "工艺用途", value: "粉碎与分级" }, { label: "粒度控制", value: "满足严格粒度要求" }, { label: "停留时间", value: "粉碎区内数毫秒" }, { label: "系统类型", value: "先分级后粉碎循环" }],
+    specs: [{ label: "工艺用途", value: "粉碎与分级" }, { label: "粒度控制", value: "满足严格粒度要求" }, { label: "停留方式", value: "短停留与及时分离" }, { label: "系统类型", value: "先分级后粉碎循环" }],
   },
   "turnkey-epc": {
     title: productNames.zh['turnkey-epc'], series: "粉体加工生产线",
-    summary: "作为正负极材料领域的供应商，LNPE 已在电池材料行业成功交付百余项 EPC 项目。",
+    summary: "面向电池正负极材料的粉体整线，将投配料、粉碎、分级、输送与包装衔接为完整工艺。",
     principle: "依托数十年的工艺工程经验，LNPE 为特种化学品、矿物、高纯电子材料及能源材料等粉体提供 EPC 总包解决方案。",
-    overview: ["一站式服务涵盖工艺设计、设备制造与供应、安装调试，以及培训和全生命周期服务。", "核心部件均由内部制造，严格控制质量，实现粉碎、分级、混合、输送和包装各环节的顺畅集成。"],
-    features: ["根据客户物料与处理量目标定制粉体加工生产线", "自有完整设备体系，包括破碎机、粉碎机、分级机、混合机、输送设备等", "专业现场工程师快速完成安装与调试", "提供全流程技术支持、操作培训和 24 / 7 服务", "在全球数百项项目中积累了成熟的 EPC 交付经验"],
+    overview: ["一站式服务涵盖工艺设计、设备制造与供应、安装调试，以及培训和全生命周期服务。", "统筹粉碎、分级、混合、输送和包装的设备制造与供应，按项目明确各环节接口和交付责任。"],
+    features: ["根据客户物料与处理量目标定制粉体加工生产线", "集成粉碎机、分级机、混合与输送系统等设备", "按项目计划安排现场安装调试支持", "提供技术支持、操作培训与维护协调", "按项目明确工艺接口与验收指标"],
     applications: ["正极材料", "负极材料", "特种化学品", "矿物"],
     technicalHighlights: ["工艺设计", "设备制造与供应", "安装与调试", "培训与全生命周期服务"],
     tags: ["EPC", "粉体生产线", "全生命周期服务"],
@@ -482,8 +482,8 @@ const productCopyZh = {
     title: productNames.zh['shaping-mill'], series: "形貌控制系统",
     summary: "自主研发的粉体形貌与粒度控制设备，满足球形度、棱角度或长径比要求。",
     principle: "LNPE 整形机在精密设计的流场中采用高速转子—定子组件。进料粉体加速进入整形区，通过可控的颗粒间及颗粒与腔壁间碰撞，按需修圆棱角、平滑表面或提高长径比。",
-    overview: ["内置动态分级机持续提取合格颗粒，粒径过大或整形不足的物料回流进行多次处理。", "通过调节转子转速、气流及分级切割粒径，获得形貌符合目标且粒径分布集中的颗粒。"],
-    features: ["按需控制形貌：球形、棱柱形或高长径比", "单次完成整形与粒度控制", "模块化转子适配多种粉体", "收率高，接近零污染", "低能耗，低运营成本"],
+    overview: ["内置动态分级机分出指定粒级，需继续整形的物料按工艺安排再次处理。", "通过调节转子转速、气流及分级切割粒径，协调颗粒形貌与粒径分布目标。"],
+    features: ["按需控制形貌：球形、棱柱形或高长径比", "整形与粒度控制协同", "模块化转子适配多种粉体", "按纯度要求选择接触材质", "工艺参数兼顾质量与运行消耗"],
     applications: ["石墨球化", "云母片边缘修圆", "硅灰石长径比提升", "特种填料"],
     technicalHighlights: ["高速转子—定子组件", "可控整形区", "内置动态分级机", "回流多次处理"],
     tags: ["形貌控制", "整形与粒度控制", "高收率"],
@@ -494,11 +494,11 @@ const productCopyZh = {
     summary: "根据颗粒粒径和密度差异进行干法分级。",
     principle: "LNPE 气流分级机根据粒径与密度分离粉体。分级轮高速旋转产生强离心场，载气流则提供方向相反的曳力。",
     overview: ["较大或较重的颗粒受到的离心力占主导，被甩向分级轮外侧，并沿腔壁下降至粗粉出口。", "较小或较轻的颗粒受到的离心力较弱，气流曳力占主导，使其穿过分级轮叶片进入细粉流。"],
-    features: ["依据粒径、密度和形貌进行精密分离", "通过 CFD 优化各机型的气流、固相浓度和压力分布", "切割精度高，分级效率为 70 - 93 %", "多种可互换的分级轮结构，高效适配不同粉体"],
+    features: ["依据粒径、密度和形貌进行精密分离", "通过 CFD 优化各机型的气流、固相浓度和压力分布", "切割条件可调，粗细产品分别回收", "多种可互换的分级轮结构，高效适配不同粉体"],
     applications: ["锂电池正极材料", "负极材料", "隔膜材料", "先进粉体材料"],
     technicalHighlights: ["离心力与气动力平衡", "细粉与粗粉分别输出", "可互换分级轮", "单次分级"],
-    tags: ["干法分级", "70-93% 效率", "电池粉体"],
-    specs: [{ label: "工艺用途", value: "颗粒分级" }, { label: "分离依据", value: "粒径与密度" }, { label: "分级精度", value: "70 - 93% 效率" }, { label: "系统类型", value: "气流与分级轮" }],
+    tags: ["干法分级", "可调分级", "电池粉体"],
+    specs: [{ label: "工艺用途", value: "颗粒分级" }, { label: "分离依据", value: "粒径与密度" }, { label: "切割控制", value: "分级轮转速与风量" }, { label: "系统类型", value: "气流与分级轮" }],
   },
   "laboratory-equipment": {
     title: productNames.zh['laboratory-equipment'], series: "研发设备",

@@ -1,0 +1,3078 @@
+[
+  {
+    "slug": "artificial-graphite",
+    "name": {
+      "zh": "人造石墨",
+      "en": "Artificial graphite"
+    },
+    "aliases": [
+      "人造石墨",
+      "Artificial graphite"
+    ],
+    "summary": {
+      "zh": "人造石墨由碳质原料经热处理形成，常用于电池负极及导电配方。",
+      "en": "Artificial graphite is produced by heat treatment of carbon feedstocks and is used in battery anodes and conductive formulations."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "pitch",
+    "name": {
+      "zh": "沥青（碳材料用）",
+      "en": "Pitch / asphalt"
+    },
+    "aliases": [
+      "沥青",
+      "Asphalt",
+      "沥青（碳材料用）",
+      "Pitch / asphalt"
+    ],
+    "summary": {
+      "zh": "沥青是碳质黏结和包覆原料，粉体级材料需按来源与软化点区分，不同于直接使用的道路沥青。",
+      "en": "Pitch is a carbonaceous binder and coating feedstock. Powder grades are distinguished by origin and softening point and should not be confused with road asphalt."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "boehmite",
+    "name": {
+      "zh": "勃姆石",
+      "en": "Boehmite"
+    },
+    "aliases": [
+      "勃姆石",
+      "Boehmite",
+      "AlOOH"
+    ],
+    "summary": {
+      "zh": "勃姆石是氢氧化氧铝粉体，可用于电池隔膜涂层及陶瓷原料；粉体本身并不等同于完整隔膜。",
+      "en": "Boehmite is an aluminium oxyhydroxide powder used in battery-separator coatings and ceramic feedstocks; the powder is not a complete separator."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "hard-carbon",
+    "name": {
+      "zh": "硬碳",
+      "en": "Hard carbon"
+    },
+    "aliases": [
+      "硬碳",
+      "Hard carbon"
+    ],
+    "summary": {
+      "zh": "硬碳是难以石墨化的碳材料，是钠离子电池负极材料的重要研究与应用方向。",
+      "en": "Hard carbon is a non-graphitizing carbon used and investigated as an anode material for sodium-ion batteries."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "iron-phosphate",
+    "name": {
+      "zh": "磷酸铁",
+      "en": "Iron phosphate"
+    },
+    "aliases": [
+      "磷酸铁",
+      "Iron phosphate"
+    ],
+    "summary": {
+      "zh": "磷酸铁是磷酸铁锂等材料的前驱体，干燥后粉体的团聚状态会影响后续混合。",
+      "en": "Iron phosphate is a precursor for materials such as lithium iron phosphate, and agglomeration after drying affects subsequent mixing."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "layered-oxide",
+    "name": {
+      "zh": "层状氧化物",
+      "en": "Layered oxide"
+    },
+    "aliases": [
+      "层状氧化物",
+      "Layered oxide"
+    ],
+    "summary": {
+      "zh": "层状氧化物是一类具有层状晶体结构的正极材料，锂电和钠电体系的成分与环境敏感性各不相同。",
+      "en": "Layered oxides are a family of cathode materials with layered crystal structures; lithium- and sodium-based compositions have different handling requirements."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "lithium-iron-phosphate",
+    "name": {
+      "zh": "磷酸铁锂",
+      "en": "Lithium Iron Phosphate"
+    },
+    "aliases": [
+      "磷酸铁锂",
+      "Lithium Iron Phosphate",
+      "LFP",
+      "LiFePO4"
+    ],
+    "summary": {
+      "zh": "磷酸铁锂（LFP）是锂离子电池正极粉体，烧结及干燥后可能需要解聚和粒径整理。",
+      "en": "Lithium iron phosphate (LFP) is a lithium-ion cathode powder that may require deagglomeration and size control after calcination or drying."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "lithium-carbonate",
+    "name": {
+      "zh": "碳酸锂",
+      "en": "Lithium carbonate"
+    },
+    "aliases": [
+      "碳酸锂",
+      "Lithium carbonate"
+    ],
+    "summary": {
+      "zh": "碳酸锂是制备多种锂电正极材料的锂源，粉体均匀性关系到后续配料和反应。",
+      "en": "Lithium carbonate is a lithium source for several cathode chemistries; powder uniformity matters for subsequent blending and reaction."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "lithium-hydroxide",
+    "name": {
+      "zh": "氢氧化锂",
+      "en": "Lithium hydroxide"
+    },
+    "aliases": [
+      "氢氧化锂",
+      "Lithium hydroxide"
+    ],
+    "summary": {
+      "zh": "氢氧化锂可作为锂电正极的锂源，需明确无水或一水合物等具体商品形态。",
+      "en": "Lithium hydroxide is a lithium source for cathode production; specify the commercial form, including anhydrous or monohydrate grades."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "lithium-manganese-iron-phosphate",
+    "name": {
+      "zh": "磷酸锰铁锂",
+      "en": "Lithium manganese iron phosphate"
+    },
+    "aliases": [
+      "磷酸锰铁锂",
+      "Lithium manganese iron phosphate",
+      "LMFP"
+    ],
+    "summary": {
+      "zh": "磷酸锰铁锂（LMFP）是含锰、铁的磷酸盐正极材料，常以复合或包覆粉体形态进入后续制浆。",
+      "en": "Lithium manganese iron phosphate (LMFP) is a manganese–iron phosphate cathode material often supplied as composite or coated powder."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "nca",
+    "name": {
+      "zh": "镍钴铝酸锂（NCA）",
+      "en": "Lithium nickel cobalt aluminium oxide (NCA)"
+    },
+    "aliases": [
+      "镍钴铝酸锂",
+      "镍钴铝酸锂（NCA）",
+      "Lithium nickel cobalt aluminium oxide (NCA)",
+      "NCA"
+    ],
+    "summary": {
+      "zh": "镍钴铝酸锂（NCA）是含镍、钴、铝的层状锂离子电池正极氧化物，与磷酸铁锂属于不同材料体系。",
+      "en": "Lithium nickel cobalt aluminium oxide (NCA) is a layered lithium-ion cathode oxide containing nickel, cobalt and aluminium; it is a different chemistry from LFP."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "ncm",
+    "name": {
+      "zh": "镍钴锰酸锂（NCM）",
+      "en": "Lithium nickel cobalt manganese oxide (NCM)"
+    },
+    "aliases": [
+      "镍钴锰酸锂",
+      "Lithium nickel cobalt manganese oxide",
+      "镍钴锰酸锂（NCM）",
+      "Lithium nickel cobalt manganese oxide (NCM)",
+      "NCM",
+      "NMC"
+    ],
+    "summary": {
+      "zh": "镍钴锰酸锂（NCM/NMC）是锂离子电池的三元正极材料，牌号和颗粒结构影响粉体加工方式。",
+      "en": "Lithium nickel cobalt manganese oxide (NCM/NMC) is a ternary lithium-ion cathode material whose grade and particle structure affect powder processing."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "natural-graphite",
+    "name": {
+      "zh": "天然石墨",
+      "en": "Natural graphite"
+    },
+    "aliases": [
+      "天然石墨",
+      "Natural graphite"
+    ],
+    "summary": {
+      "zh": "天然石墨来自含石墨矿物，片状原料用于负极时通常需要粒径和形貌整理。",
+      "en": "Natural graphite is derived from graphite-bearing minerals; flake feedstocks used for anodes often require size and morphology control."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "porous-carbon",
+    "name": {
+      "zh": "多孔碳",
+      "en": "Porous carbon"
+    },
+    "aliases": [
+      "多孔碳",
+      "Porous carbon"
+    ],
+    "summary": {
+      "zh": "多孔碳是一类具有孔隙结构的碳材料，可用于吸附、载体及储能相关配方。",
+      "en": "Porous carbons contain a pore network and are used in adsorption, support materials and energy-storage formulations."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "silicon-carbon-composite",
+    "name": {
+      "zh": "硅碳复合（Si/C）",
+      "en": "Silicon–carbon composite (Si/C)"
+    },
+    "aliases": [
+      "硅碳(Si/C)",
+      "硅碳复合（Si/C）",
+      "Silicon–carbon composite (Si/C)",
+      "Si/C"
+    ],
+    "summary": {
+      "zh": "硅碳复合（Si/C）是硅与碳组成的复合负极材料，不能与硬质磨料碳化硅（SiC）混同。",
+      "en": "Silicon–carbon composites (Si/C) combine silicon and carbon for anode use and are distinct from silicon carbide (SiC) abrasives."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "silicon-oxide-carbon-composite",
+    "name": {
+      "zh": "硅氧碳复合（SiO/C）",
+      "en": "Silicon-oxide/carbon composite (SiO/C)"
+    },
+    "aliases": [
+      "硅氧(SiO/C)",
+      "硅氧碳复合（SiO/C）",
+      "Silicon-oxide/carbon composite (SiO/C)",
+      "SiO/C"
+    ],
+    "summary": {
+      "zh": "硅氧碳复合（SiO/C）指含硅氧相与碳的负极复合粉体，具体组成需由牌号说明。",
+      "en": "Silicon-oxide/carbon composites (SiO/C) contain a silicon-oxide phase and carbon for anode use; the grade determines the actual composition."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "sodium-iron-phosphate",
+    "name": {
+      "zh": "磷酸铁钠",
+      "en": "Sodium iron phosphate"
+    },
+    "aliases": [
+      "磷酸铁钠",
+      "Sodium iron phosphate",
+      "NaFePO4"
+    ],
+    "summary": {
+      "zh": "磷酸铁钠是钠基磷酸盐电极材料，具体晶相和组成决定其用途，属于钠电材料讨论范围。",
+      "en": "Sodium iron phosphate is a sodium-based phosphate electrode material; its phase and composition determine its application within sodium-ion systems."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "sodium-vanadium-phosphate",
+    "name": {
+      "zh": "磷酸钒钠",
+      "en": "Sodium vanadium phosphate"
+    },
+    "aliases": [
+      "磷酸钒钠",
+      "Sodium vanadium phosphate",
+      "NVP",
+      "Na3V2(PO4)3"
+    ],
+    "summary": {
+      "zh": "磷酸钒钠通常指Na3V2(PO4)3等钠基磷酸盐材料，用于钠离子电池相关电极体系。",
+      "en": "Sodium vanadium phosphate commonly refers to sodium phosphate materials such as Na3V2(PO4)3 used in sodium-ion electrode systems."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "special-carbon",
+    "name": {
+      "zh": "特种碳",
+      "en": "Special carbon"
+    },
+    "aliases": [
+      "特种碳",
+      "Special carbon",
+      "特种碳素"
+    ],
+    "summary": {
+      "zh": "特种碳是按用途定义的碳材料集合，可能涉及导电、结构或储能配方，并非单一化学牌号。",
+      "en": "Specialty carbon covers application-defined carbon materials for conductive, structural or energy-storage formulations rather than one chemical grade."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "alumina",
+    "name": {
+      "zh": "氧化铝",
+      "en": "Alumina"
+    },
+    "aliases": [
+      "氧化铝",
+      "Alumina",
+      "Al2O3"
+    ],
+    "summary": {
+      "zh": "氧化铝是陶瓷、填料和抛光材料常用的氧化物，晶相及煅烧程度会改变粉碎行为。",
+      "en": "Alumina is an oxide used in ceramics, fillers and polishing materials; phase and calcination history influence its milling behaviour."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "aluminum-hydroxide",
+    "name": {
+      "zh": "氢氧化铝",
+      "en": "Aluminum hydroxide"
+    },
+    "aliases": [
+      "氢氧化铝",
+      "Aluminum hydroxide",
+      "ATH",
+      "Al(OH)3"
+    ],
+    "summary": {
+      "zh": "氢氧化铝可作为阻燃填料和氧化铝原料，粒度影响树脂中的填充与分散。",
+      "en": "Aluminium hydroxide is used as a flame-retardant filler and alumina feedstock, with size affecting filling and dispersion in resins."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "carbon-black",
+    "name": {
+      "zh": "炭黑",
+      "en": "Carbon black"
+    },
+    "aliases": [
+      "炭黑",
+      "Black carbon black",
+      "黑炭黑",
+      "Carbon black"
+    ],
+    "summary": {
+      "zh": "炭黑是细颗粒碳材料，用于补强、着色和导电配方，原生颗粒与聚集体需要区分。",
+      "en": "Carbon black is a fine carbon used for reinforcement, pigmentation and conductivity; primary particles and aggregates must be distinguished."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "calcium-phosphate",
+    "name": {
+      "zh": "磷酸钙",
+      "en": "Calcium phosphate"
+    },
+    "aliases": [
+      "磷酸钙",
+      "Calcium phosphate"
+    ],
+    "summary": {
+      "zh": "磷酸钙包括不同钙磷比与晶相的材料，可作陶瓷、化工及其他配方原料。",
+      "en": "Calcium phosphates comprise several calcium-to-phosphorus ratios and phases used in ceramics, chemicals and other formulations."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "cellulose",
+    "name": {
+      "zh": "纤维素",
+      "en": "Cellulose"
+    },
+    "aliases": [
+      "纤维素",
+      "Cellulose"
+    ],
+    "summary": {
+      "zh": "纤维素是纤维状高分子材料，可用于填料、增稠和复合材料配方。",
+      "en": "Cellulose is a fibrous polymer used in fillers, thickening systems and composites."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "foaming-agent",
+    "name": {
+      "zh": "发泡剂",
+      "en": "Foaming agent"
+    },
+    "aliases": [
+      "发泡剂",
+      "Foaming agent"
+    ],
+    "summary": {
+      "zh": "发泡剂是按功能划分的一类配方原料，不同化学类型的分解温度和粉尘特性差异明显。",
+      "en": "Blowing agents are a functional class of formulation ingredients with chemistry-dependent decomposition temperatures and dust properties."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "low-melting-point-glass-powder",
+    "name": {
+      "zh": "低熔点玻璃粉",
+      "en": "Low melting point glass powder"
+    },
+    "aliases": [
+      "低熔点玻璃粉",
+      "Low melting point glass powder",
+      "低玻粉"
+    ],
+    "summary": {
+      "zh": "低熔点玻璃粉用于封接、粘结及电子配方，其成分决定软化与热膨胀行为。",
+      "en": "Low-melting glass frit is used in sealing, bonding and electronic formulations; composition determines softening and thermal-expansion behaviour."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "magnesium-hydroxide",
+    "name": {
+      "zh": "氢氧化镁",
+      "en": "Magnesium hydroxide"
+    },
+    "aliases": [
+      "氢氧化镁",
+      "Magnesium hydroxide",
+      "MDH",
+      "Mg(OH)2"
+    ],
+    "summary": {
+      "zh": "氢氧化镁可用于阻燃填料与化工配方，颗粒分散影响填充效果和加工流动性。",
+      "en": "Magnesium hydroxide is used in flame-retardant fillers and chemical formulations, where dispersion influences filling and processability."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "magnesium-oxide",
+    "name": {
+      "zh": "氧化镁",
+      "en": "Magnesium oxide"
+    },
+    "aliases": [
+      "氧化镁",
+      "Magnesium oxide",
+      "MgO"
+    ],
+    "summary": {
+      "zh": "氧化镁用于耐火、陶瓷及化工用途，轻烧、重烧和电熔等形态的硬度与活性不同。",
+      "en": "Magnesia is used in refractories, ceramics and chemicals; light-burned, dead-burned and fused grades differ in hardness and reactivity."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "precipitated-barium-sulfate",
+    "name": {
+      "zh": "沉淀硫酸钡",
+      "en": "Precipitated barium sulfate"
+    },
+    "aliases": [
+      "沉淀硫酸钡",
+      "Precipitated barium sulfate"
+    ],
+    "summary": {
+      "zh": "沉淀硫酸钡是通过化学沉淀制得的填料，可用于涂料、塑料和相关精细配方。",
+      "en": "Precipitated barium sulfate is a chemically produced filler used in coatings, plastics and fine formulations."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "silica-gel",
+    "name": {
+      "zh": "硅胶",
+      "en": "Silica gel"
+    },
+    "aliases": [
+      "硅胶",
+      "Silica gel"
+    ],
+    "summary": {
+      "zh": "硅胶是多孔二氧化硅材料，可用于吸附、载体和消光配方，含水与孔结构影响加工。",
+      "en": "Silica gel is a porous silica used in adsorption, supports and matting formulations; moisture and pore structure affect processing."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "strontium-carbonate",
+    "name": {
+      "zh": "碳酸锶",
+      "en": "Strontium carbonate"
+    },
+    "aliases": [
+      "碳酸锶",
+      "Strontium carbonate"
+    ],
+    "summary": {
+      "zh": "碳酸锶可用于陶瓷、玻璃和磁性材料配料，是需要均匀分散的无机粉体。",
+      "en": "Strontium carbonate is an inorganic powder used in ceramic, glass and magnetic-material formulations requiring uniform dispersion."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "white-carbon-black",
+    "name": {
+      "zh": "白炭黑",
+      "en": "White carbon black"
+    },
+    "aliases": [
+      "白炭黑",
+      "White carbon black"
+    ],
+    "summary": {
+      "zh": "白炭黑通常指沉淀法或气相法二氧化硅，用于橡胶、涂料等配方，不能仅凭俗名判断等级。",
+      "en": "White carbon black usually denotes precipitated or fumed silica used in rubber and coatings; the common name alone does not identify the grade."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "yttrium-oxide",
+    "name": {
+      "zh": "氧化钇",
+      "en": "Yttrium oxide"
+    },
+    "aliases": [
+      "氧化钇",
+      "Yttrium oxide"
+    ],
+    "summary": {
+      "zh": "氧化钇是稀土氧化物，可用于陶瓷、荧光及电子材料配方。",
+      "en": "Yttrium oxide is a rare-earth oxide used in ceramic, phosphor and electronic-material formulations."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "zinc-oxide",
+    "name": {
+      "zh": "氧化锌",
+      "en": "Zinc oxide"
+    },
+    "aliases": [
+      "氧化锌",
+      "Zinc oxide",
+      "ZnO"
+    ],
+    "summary": {
+      "zh": "氧化锌用于橡胶、陶瓷、涂料及多种化工配方，不同用途对纯度和分散的要求不同。",
+      "en": "Zinc oxide is used in rubber, ceramics, coatings and chemical formulations with application-specific purity and dispersion requirements."
+    },
+    "categoryIds": [
+      "chemicals",
+      "other"
+    ]
+  },
+  {
+    "slug": "andalusite",
+    "name": {
+      "zh": "红柱石",
+      "en": "Andalusite"
+    },
+    "aliases": [
+      "红柱石",
+      "Andalusite"
+    ],
+    "summary": {
+      "zh": "红柱石是铝硅酸盐矿物，可作为耐火材料原料，其矿物组成和杂质影响后续使用。",
+      "en": "Andalusite is an aluminosilicate mineral used as refractory feedstock; mineral composition and impurities influence its use."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "barite",
+    "name": {
+      "zh": "重晶石",
+      "en": "Barite"
+    },
+    "aliases": [
+      "重晶石",
+      "Barite"
+    ],
+    "summary": {
+      "zh": "重晶石是以硫酸钡为主要成分的天然矿物，可作为加重材料和工业填料。",
+      "en": "Barite is a natural barium-sulfate-rich mineral used as a weighting material and industrial filler."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "bentonite",
+    "name": {
+      "zh": "膨润土",
+      "en": "Bentonite"
+    },
+    "aliases": [
+      "膨润土",
+      "Bentonite"
+    ],
+    "summary": {
+      "zh": "膨润土是以蒙脱石等黏土矿物为主要组分的天然材料，可用于黏结、吸附和流变调节。",
+      "en": "Bentonite is a natural clay rich in montmorillonite-type minerals used for binding, adsorption and rheology control."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "brucite",
+    "name": {
+      "zh": "水镁石",
+      "en": "Brucite"
+    },
+    "aliases": [
+      "水镁石",
+      "Brucite"
+    ],
+    "summary": {
+      "zh": "水镁石是天然氢氧化镁矿物，可作为阻燃、耐火或化工原料。",
+      "en": "Brucite is a natural magnesium hydroxide mineral used in flame-retardant, refractory and chemical feedstocks."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "calcium-oxide",
+    "name": {
+      "zh": "氧化钙",
+      "en": "Calcium oxide"
+    },
+    "aliases": [
+      "氧化钙",
+      "Calcium oxide",
+      "CaO"
+    ],
+    "summary": {
+      "zh": "氧化钙是石灰类材料的主要成分，与水接触会发生明显反应，粉体处理需控制环境湿度。",
+      "en": "Calcium oxide is the main component of quicklime and reacts with water, making humidity control important in powder processing."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "diatomite",
+    "name": {
+      "zh": "硅藻土",
+      "en": "Diatomite"
+    },
+    "aliases": [
+      "硅藻土",
+      "Diatomite"
+    ],
+    "summary": {
+      "zh": "硅藻土是具有多孔结构的硅质沉积材料，可作过滤助剂、吸附剂及填料。",
+      "en": "Diatomite is a porous siliceous sedimentary material used in filter aids, adsorbents and fillers."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "ground-calcium-carbonate",
+    "name": {
+      "zh": "重质碳酸钙（GCC）",
+      "en": "Ground calcium carbonate (GCC)"
+    },
+    "aliases": [
+      "重质碳酸钙",
+      "Heavy calcium",
+      "重钙",
+      "重质碳酸钙（GCC）",
+      "Ground calcium carbonate (GCC)",
+      "GCC"
+    ],
+    "summary": {
+      "zh": "重质碳酸钙由方解石、石灰石等原料机械加工而来，是塑料、涂料和纸用填料。",
+      "en": "Ground calcium carbonate (GCC) is produced by mechanical processing of calcite or limestone and used in plastics, coatings and paper."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "kaolin",
+    "name": {
+      "zh": "高岭土",
+      "en": "Kaolin"
+    },
+    "aliases": [
+      "高岭土",
+      "Kaolin"
+    ],
+    "summary": {
+      "zh": "高岭土是片状铝硅酸盐黏土原料，可用于陶瓷、涂料、纸及填料配方。",
+      "en": "Kaolin is a platy aluminosilicate clay used in ceramics, coatings, paper and filler formulations."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "precipitated-calcium-carbonate",
+    "name": {
+      "zh": "轻质碳酸钙（PCC）",
+      "en": "Precipitated calcium carbonate (PCC)"
+    },
+    "aliases": [
+      "轻质碳酸钙",
+      "Light calcium",
+      "轻钙",
+      "轻质碳酸钙（PCC）",
+      "Precipitated calcium carbonate (PCC)",
+      "PCC"
+    ],
+    "summary": {
+      "zh": "轻质碳酸钙通常指沉淀碳酸钙，其晶体形貌由制备条件决定，可用于多种填充配方。",
+      "en": "Precipitated calcium carbonate (PCC) has crystal morphology established during synthesis and is used in filler formulations."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "mica",
+    "name": {
+      "zh": "云母",
+      "en": "Mica"
+    },
+    "aliases": [
+      "云母",
+      "Mica"
+    ],
+    "summary": {
+      "zh": "云母是片状硅酸盐矿物，可用于绝缘、涂料和复合材料。",
+      "en": "Mica is a platy silicate mineral used in insulation, coatings and composites."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "montmorillonite",
+    "name": {
+      "zh": "蒙脱石",
+      "en": "Montmorillonite"
+    },
+    "aliases": [
+      "蒙脱石",
+      "Montmorillonite"
+    ],
+    "summary": {
+      "zh": "蒙脱石是层状黏土矿物，可用于吸附、流变和复合材料，常见于膨润土中。",
+      "en": "Montmorillonite is a layered clay mineral used in adsorption, rheology and composites and commonly occurs in bentonite."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "garnet",
+    "name": {
+      "zh": "石榴石",
+      "en": "Garnet"
+    },
+    "aliases": [
+      "石榴石",
+      "石榴子石",
+      "Garnet"
+    ],
+    "summary": {
+      "zh": "石榴石是磨料与矿物原料，英文规范名称为Garnet，实际成分因矿种而异。",
+      "en": "Garnet is an abrasive and mineral feedstock whose composition varies by deposit and mineral species."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "potassium-feldspar",
+    "name": {
+      "zh": "钾长石",
+      "en": "Potassium feldspar"
+    },
+    "aliases": [
+      "钾长石",
+      "Potassium feldspar"
+    ],
+    "summary": {
+      "zh": "钾长石是玻璃和陶瓷配料用铝硅酸盐矿物，杂质和粒度影响配方一致性。",
+      "en": "Potassium feldspar is an aluminosilicate mineral used in glass and ceramic batches, where impurities and size affect consistency."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "quartz",
+    "name": {
+      "zh": "石英",
+      "en": "Quartz"
+    },
+    "aliases": [
+      "石英",
+      "Quartz"
+    ],
+    "summary": {
+      "zh": "石英是以二氧化硅为主要成分的硬质矿物，可用于玻璃、陶瓷和电子填料。",
+      "en": "Quartz is a hard silica mineral used in glass, ceramics and electronic fillers."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "talc",
+    "name": {
+      "zh": "滑石",
+      "en": "Talc"
+    },
+    "aliases": [
+      "滑石",
+      "Talc"
+    ],
+    "summary": {
+      "zh": "滑石是具有片状结构的软质矿物，用于塑料、涂料及其他工业填料。",
+      "en": "Talc is a soft, platy mineral used in plastics, coatings and industrial fillers."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "wollastonite",
+    "name": {
+      "zh": "硅灰石",
+      "en": "Wollastonite"
+    },
+    "aliases": [
+      "硅灰石",
+      "Wollastonite"
+    ],
+    "summary": {
+      "zh": "硅灰石是常呈针状形貌的钙硅酸盐矿物，可用于增强填料和陶瓷原料。",
+      "en": "Wollastonite is a calcium silicate mineral often exhibiting acicular morphology and used in reinforcing fillers and ceramics."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "angelica",
+    "name": {
+      "zh": "当归",
+      "en": "Angelica"
+    },
+    "aliases": [
+      "当归",
+      "Angelica"
+    ],
+    "summary": {
+      "zh": "当归是植物根部原料，干燥、切制和批次来源会影响纤维及挥发性组分。",
+      "en": "Angelica is a botanical root material whose drying, cutting and origin influence fibres and volatile constituents."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "bee-pollen",
+    "name": {
+      "zh": "蜂花粉",
+      "en": "Bee pollen"
+    },
+    "aliases": [
+      "蜂花粉",
+      "Bee pollen"
+    ],
+    "summary": {
+      "zh": "蜂花粉是采集后的花粉原料，通常为多组分颗粒，其来源与含水影响储存和加工。",
+      "en": "Bee pollen is a collected botanical material containing mixed particles whose origin and moisture affect storage and processing."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "eleuthero",
+    "name": {
+      "zh": "刺五加",
+      "en": "Eleuthero (Ciwujia)"
+    },
+    "aliases": [
+      "刺五加",
+      "Ciwujia",
+      "Eleuthero (Ciwujia)"
+    ],
+    "summary": {
+      "zh": "刺五加是植物性原料，根、茎等不同部位的纤维比例并不相同。",
+      "en": "Eleuthero (Ciwujia) is a botanical feedstock with different fibre contents in roots, stems and other plant parts."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "cordyceps-sinensis",
+    "name": {
+      "zh": "冬虫夏草",
+      "en": "Cordyceps sinensis"
+    },
+    "aliases": [
+      "冬虫夏草",
+      "Cordyceps sinensis"
+    ],
+    "summary": {
+      "zh": "冬虫夏草类原料需要明确物种、来源及干燥状态，小批次处理通常重视物料回收。",
+      "en": "Cordyceps-related feedstocks require species, origin and drying-state identification; small batches often prioritize material recovery."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "danshen",
+    "name": {
+      "zh": "丹参",
+      "en": "Danshen"
+    },
+    "aliases": [
+      "丹参",
+      "Danshen"
+    ],
+    "summary": {
+      "zh": "丹参以干燥根等植物部位为加工原料，纤维结构和含水状态影响成粉。",
+      "en": "Danshen is processed from botanical parts such as dried roots, with fibre structure and moisture affecting powder formation."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "ganoderma-powder",
+    "name": {
+      "zh": "灵芝粉",
+      "en": "Ganoderma powder"
+    },
+    "aliases": [
+      "灵芝粉",
+      "Ganoderma powder"
+    ],
+    "summary": {
+      "zh": "灵芝粉来自灵芝子实体等组织，与灵芝孢子属于不同结构的粉体原料。",
+      "en": "Ganoderma powder is derived from tissues such as fruiting bodies and has a different structure from Ganoderma spores."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "ganoderma-spores",
+    "name": {
+      "zh": "灵芝孢子",
+      "en": "Ganoderma spores"
+    },
+    "aliases": [
+      "灵芝孢子",
+      "Ganoderma spores"
+    ],
+    "summary": {
+      "zh": "灵芝孢子是微小的繁殖结构，完整孢子与破壁孢子粉应作为不同的目标状态。",
+      "en": "Ganoderma spores are microscopic reproductive structures; intact spores and disrupted-spore powder are different target products."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "ginseng",
+    "name": {
+      "zh": "人参",
+      "en": "Ginseng"
+    },
+    "aliases": [
+      "人参",
+      "Ginseng"
+    ],
+    "summary": {
+      "zh": "人参是植物根部原料，切片、干燥和品级会影响韧性与成粉特性。",
+      "en": "Ginseng is a botanical root feedstock whose slicing, drying and grade affect toughness and powder formation."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "green-tea",
+    "name": {
+      "zh": "绿茶",
+      "en": "Green tea"
+    },
+    "aliases": [
+      "绿茶",
+      "Green tea"
+    ],
+    "summary": {
+      "zh": "绿茶是含叶片纤维及易受热影响组分的植物原料，可加工成配方用茶粉。",
+      "en": "Green tea contains leaf fibres and heat-sensitive constituents and can be processed into formulation powders."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "konjac-powder",
+    "name": {
+      "zh": "魔芋粉",
+      "en": "Konjac powder"
+    },
+    "aliases": [
+      "魔芋粉",
+      "Konjac powder"
+    ],
+    "summary": {
+      "zh": "魔芋粉是富含葡甘聚糖的植物性粉体，吸湿与黏性会影响投料和分散。",
+      "en": "Konjac flour is a glucomannan-rich botanical powder whose moisture uptake and viscosity affect feeding and dispersion."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "shiitake",
+    "name": {
+      "zh": "香菇",
+      "en": "Shiitake mushroom"
+    },
+    "aliases": [
+      "香菇",
+      "Lentinus edodes",
+      "Shiitake mushroom"
+    ],
+    "summary": {
+      "zh": "香菇是菌类食品原料，干燥后的纤维组织、蛋白与其他组分共同影响粉碎。",
+      "en": "Shiitake mushrooms are food feedstocks whose dried fibres, proteins and other constituents jointly affect milling."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "pine-pollen",
+    "name": {
+      "zh": "松花粉",
+      "en": "Pine pollen"
+    },
+    "aliases": [
+      "松花粉",
+      "Pine pollen"
+    ],
+    "summary": {
+      "zh": "松花粉是细小植物花粉原料，原生颗粒细但仍可能因储存和含水形成团聚。",
+      "en": "Pine pollen is a fine botanical pollen that may form storage- or moisture-related agglomerates despite its small primary particles."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "sanqi",
+    "name": {
+      "zh": "三七（田七）",
+      "en": "Sanqi / Tianqi (Panax notoginseng)"
+    },
+    "aliases": [
+      "三七",
+      "Sanqi",
+      "三七（田七）",
+      "Sanqi / Tianqi (Panax notoginseng)",
+      "Panax notoginseng",
+      "田七",
+      "Tianqi"
+    ],
+    "summary": {
+      "zh": "三七又称田七，是植物根类原料；两种名称在本物料库中指向同一材料记录。",
+      "en": "Sanqi, also called Tianqi, is a botanical root feedstock; both names refer to the same material record in this library."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "sheep-placenta",
+    "name": {
+      "zh": "羊胎盘",
+      "en": "Sheep placenta"
+    },
+    "aliases": [
+      "羊胎盘",
+      "Sheep placenta"
+    ],
+    "summary": {
+      "zh": "羊胎盘属于动物源性原料，干燥方式、脂质含量和原料控制对加工路线影响很大。",
+      "en": "Sheep placenta is an animal-derived feedstock whose drying method, lipid content and source controls strongly influence processing."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "xiqingguo",
+    "name": {
+      "zh": "西青果",
+      "en": "Xiqingguo"
+    },
+    "aliases": [
+      "西青果",
+      "Xiqingguo"
+    ],
+    "summary": {
+      "zh": "西青果是植物果实类干燥原料，果皮、果肉与硬质部分会影响颗粒均匀性。",
+      "en": "Xiqingguo is a dried botanical fruit feedstock whose skin, flesh and harder fractions affect powder uniformity."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "boron-carbide",
+    "name": {
+      "zh": "碳化硼",
+      "en": "Boron carbide"
+    },
+    "aliases": [
+      "碳化硼",
+      "Boron carbide",
+      "B4C"
+    ],
+    "summary": {
+      "zh": "碳化硼是高硬度材料，可用于磨料、陶瓷及其他功能粉体。",
+      "en": "Boron carbide is a hard material used in abrasives, ceramics and functional powders."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "brown-corundum",
+    "name": {
+      "zh": "棕刚玉",
+      "en": "Brown corundum"
+    },
+    "aliases": [
+      "棕刚玉",
+      "Brown corundum"
+    ],
+    "summary": {
+      "zh": "棕刚玉是氧化铝基熔融磨料，可用于磨削、耐火和喷砂等用途。",
+      "en": "Brown fused alumina is an alumina-based fused abrasive used in grinding, refractories and blasting."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "chromium-carbide",
+    "name": {
+      "zh": "碳化铬",
+      "en": "Chromium carbide"
+    },
+    "aliases": [
+      "碳化铬",
+      "Chromium carbide"
+    ],
+    "summary": {
+      "zh": "碳化铬是耐磨粉体原料，可用于涂层及硬质复合材料配方。",
+      "en": "Chromium carbide is a wear-resistant powder feedstock used in coatings and hard composites."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "chromium-oxide",
+    "name": {
+      "zh": "氧化铬",
+      "en": "Chromium oxide"
+    },
+    "aliases": [
+      "氧化铬",
+      "Chromium oxide"
+    ],
+    "summary": {
+      "zh": "氧化铬可用于抛光、陶瓷及耐火配方，颗粒粗尾与异物对精细用途很关键。",
+      "en": "Chromium oxide is used in polishing, ceramics and refractories, with coarse tails and foreign matter critical to fine applications."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "grinding-wheel-material",
+    "name": {
+      "zh": "砂轮材料",
+      "en": "Grinding wheel material"
+    },
+    "aliases": [
+      "砂轮材料",
+      "Grinding wheel material",
+      "砂轮料"
+    ],
+    "summary": {
+      "zh": "砂轮材料指磨粒、结合剂或其混合配方，并不是单一物料，不能采用统一的粉碎条件。",
+      "en": "Grinding-wheel materials may be abrasives, binders or blends rather than one material and cannot share a single milling condition."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "pink-fused-alumina",
+    "name": {
+      "zh": "铬刚玉",
+      "en": "Pink fused alumina"
+    },
+    "aliases": [
+      "铬刚玉",
+      "Pink fused alumina"
+    ],
+    "summary": {
+      "zh": "铬刚玉是含铬的氧化铝基熔融磨料，常以粉红色刚玉形式用于磨削工具。",
+      "en": "Pink fused alumina is a chromium-containing fused alumina abrasive used in grinding tools."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "rare-earth-polishing-materials",
+    "name": {
+      "zh": "稀土抛光材料",
+      "en": "Rare earth polishing materials"
+    },
+    "aliases": [
+      "稀土抛光材料",
+      "Rare earth polishing materials"
+    ],
+    "summary": {
+      "zh": "稀土抛光材料常以稀土氧化物为主要组分，可用于玻璃等表面精加工。",
+      "en": "Rare-earth polishing materials commonly contain rare-earth oxides for fine surface finishing, including glass polishing."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "silicon-carbide",
+    "name": {
+      "zh": "碳化硅",
+      "en": "Silicon carbide"
+    },
+    "aliases": [
+      "碳化硅",
+      "Silicon carbide",
+      "SiC"
+    ],
+    "summary": {
+      "zh": "碳化硅（SiC）是硬质陶瓷和磨料材料，与电池硅碳复合（Si/C）不是同一原料。",
+      "en": "Silicon carbide (SiC) is a hard ceramic and abrasive, distinct from silicon–carbon (Si/C) battery composites."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "silicon-nitride",
+    "name": {
+      "zh": "氮化硅",
+      "en": "Silicon nitride"
+    },
+    "aliases": [
+      "氮化硅",
+      "Silicon nitride",
+      "Si3N4"
+    ],
+    "summary": {
+      "zh": "氮化硅是工程陶瓷粉体，可用于耐磨及结构陶瓷配方，纯度与团聚状态影响后续成型。",
+      "en": "Silicon nitride is an engineering-ceramic powder used in wear-resistant and structural formulations; purity and agglomeration affect subsequent forming."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "tungsten-carbide",
+    "name": {
+      "zh": "碳化钨",
+      "en": "Tungsten carbide"
+    },
+    "aliases": [
+      "碳化钨",
+      "Tungsten carbide",
+      "WC"
+    ],
+    "summary": {
+      "zh": "碳化钨是硬质合金与耐磨材料的重要粉体，纯碳化钨与含钴等粘结相的复合料不同。",
+      "en": "Tungsten carbide is a key powder for cemented carbides and wear-resistant materials; pure carbide differs from composites containing cobalt or other binders."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "white-corundum",
+    "name": {
+      "zh": "白刚玉",
+      "en": "White corundum"
+    },
+    "aliases": [
+      "白刚玉",
+      "White corundum"
+    ],
+    "summary": {
+      "zh": "白刚玉是高氧化铝含量的熔融磨料，用于精密磨削、抛光和耐火配方。",
+      "en": "White fused alumina is a high-alumina fused abrasive used in precision grinding, polishing and refractory formulations."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "zircon-sand",
+    "name": {
+      "zh": "锆英砂",
+      "en": "Zircon sand"
+    },
+    "aliases": [
+      "锆英砂",
+      "Zircon sand"
+    ],
+    "summary": {
+      "zh": "锆英砂是锆硅酸盐矿物原料，可用于陶瓷、铸造和耐火材料。",
+      "en": "Zircon sand is a zirconium-silicate mineral feedstock used in ceramics, foundry applications and refractories."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "zirconia",
+    "name": {
+      "zh": "氧化锆",
+      "en": "Zirconia"
+    },
+    "aliases": [
+      "氧化锆",
+      "Zirconia",
+      "ZrO2"
+    ],
+    "summary": {
+      "zh": "氧化锆是陶瓷和功能粉体原料，稳定剂类型、晶相和煅烧状态影响加工。",
+      "en": "Zirconia is a ceramic and functional powder whose stabilizer, phase and calcination condition influence processing."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "diamond",
+    "name": {
+      "zh": "金刚石",
+      "en": "Diamond"
+    },
+    "aliases": [
+      "金刚石",
+      "Diamond"
+    ],
+    "summary": {
+      "zh": "金刚石是高硬度磨料，微粉的粒度、形状和异物控制直接关系到使用场景。",
+      "en": "Diamond is a hard abrasive whose micropowder size, shape and foreign-particle control define its applications."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "aluminum-powder",
+    "name": {
+      "zh": "铝粉",
+      "en": "Aluminum powder"
+    },
+    "aliases": [
+      "铝粉",
+      "Aluminum powder"
+    ],
+    "summary": {
+      "zh": "铝粉是轻质金属粉体，可用于粉末冶金及功能配方，片状与球状等级加工目标不同。",
+      "en": "Aluminium powder is a lightweight metal powder for powder metallurgy and functional formulations; flake and spherical grades have different goals."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "cobalt-powder",
+    "name": {
+      "zh": "钴粉",
+      "en": "Cobalt powder"
+    },
+    "aliases": [
+      "钴粉",
+      "Cobalt powder"
+    ],
+    "summary": {
+      "zh": "钴粉可作为硬质合金粘结相及合金配方原料，粒度与氧含量影响配料。",
+      "en": "Cobalt powder is used as a binder in cemented carbides and as an alloy ingredient, with size and oxygen content affecting formulations."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "copper-clad-iron-powder",
+    "name": {
+      "zh": "铜包铁粉",
+      "en": "Copper clad iron powder"
+    },
+    "aliases": [
+      "铜包铁粉",
+      "Copper clad iron powder"
+    ],
+    "summary": {
+      "zh": "铜包铁粉以铁为核心并带有铜覆盖层，可用于导电及其他复合粉体配方。",
+      "en": "Copper-clad iron powder contains an iron core with a copper covering and is used in conductive and composite formulations."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "copper-lead-powder",
+    "name": {
+      "zh": "铜铅粉",
+      "en": "Copper lead powder"
+    },
+    "aliases": [
+      "铜铅粉",
+      "Copper lead powder"
+    ],
+    "summary": {
+      "zh": "铜铅粉通常指含铜、铅的合金或复合粉体，其组成和制粉方式需明确。",
+      "en": "Copper–lead powder denotes an alloy or composite containing copper and lead; composition and powder-production method must be specified."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "copper-powder",
+    "name": {
+      "zh": "铜粉",
+      "en": "Copper powder"
+    },
+    "aliases": [
+      "铜粉",
+      "Copper powder"
+    ],
+    "summary": {
+      "zh": "铜粉用于导电、冶金及摩擦材料配方，树枝状、球状或片状形貌各有不同用途。",
+      "en": "Copper powder is used in conductive, metallurgical and friction formulations, with dendritic, spherical and flake morphologies serving different purposes."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "copper-tin-powder",
+    "name": {
+      "zh": "铜锡粉",
+      "en": "Copper tin powder"
+    },
+    "aliases": [
+      "铜锡粉",
+      "Copper tin powder"
+    ],
+    "summary": {
+      "zh": "铜锡粉可用于青铜类粉末冶金和摩擦材料，预合金与混合粉需分开描述。",
+      "en": "Copper–tin powders are used in bronze powder metallurgy and friction materials; pre-alloyed powders differ from elemental blends."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "iron-powder",
+    "name": {
+      "zh": "铁粉",
+      "en": "Iron powder"
+    },
+    "aliases": [
+      "铁粉",
+      "Iron powder"
+    ],
+    "summary": {
+      "zh": "铁粉可用于粉末冶金、磁性及功能配方，雾化、还原和其他制粉方式形成的结构不同。",
+      "en": "Iron powders are used in powder metallurgy, magnetic and functional formulations, with different structures from atomization, reduction and other production methods."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "lead-tin-alloy",
+    "name": {
+      "zh": "铅锡合金",
+      "en": "Lead tin alloy"
+    },
+    "aliases": [
+      "铅锡合金",
+      "Lead tin alloy"
+    ],
+    "summary": {
+      "zh": "铅锡合金粉用于焊接等配方，合金比例和低熔点特征影响粉体处理。",
+      "en": "Lead–tin alloy powder is used in soldering and other formulations, with alloy ratio and low melting behaviour affecting handling."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "molybdenum-iron-powder",
+    "name": {
+      "zh": "钼铁粉",
+      "en": "Molybdenum iron powder"
+    },
+    "aliases": [
+      "钼铁粉",
+      "Molybdenum iron powder"
+    ],
+    "summary": {
+      "zh": "钼铁粉是含钼铁合金粉体，可作为冶金及合金化配料，不同合金比例和制粉状态需分别评价。",
+      "en": "Ferromolybdenum powder is an iron–molybdenum alloy used in metallurgical and alloying additions, with grade and powder-production condition requiring separate assessment."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "nickel-powder",
+    "name": {
+      "zh": "镍粉",
+      "en": "Nickel powder"
+    },
+    "aliases": [
+      "镍粉",
+      "Nickel powder"
+    ],
+    "summary": {
+      "zh": "镍粉用于电极、催化及合金配方，不同形貌和制粉方法的粉体特性差异明显。",
+      "en": "Nickel powder is used in electrodes, catalysts and alloys, with properties strongly dependent on morphology and production method."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "niobium-powder",
+    "name": {
+      "zh": "铌粉",
+      "en": "Niobium powder"
+    },
+    "aliases": [
+      "铌粉",
+      "Niobium powder"
+    ],
+    "summary": {
+      "zh": "铌粉是用于合金和功能材料的金属粉体，纯度与氧含量是重要的原料信息。",
+      "en": "Niobium powder is a metal feedstock for alloys and functional materials, with purity and oxygen content important to characterization."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "silver-powder",
+    "name": {
+      "zh": "银粉",
+      "en": "Silver powder"
+    },
+    "aliases": [
+      "银粉",
+      "Silver powder"
+    ],
+    "summary": {
+      "zh": "银粉用于导电浆料及相关功能配方，其粒形、比表面积与表面处理影响分散。",
+      "en": "Silver powder is used in conductive pastes and functional formulations, where shape, surface area and surface treatment affect dispersion."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "stainless-steel-powder",
+    "name": {
+      "zh": "不锈钢粉",
+      "en": "Stainless steel powder"
+    },
+    "aliases": [
+      "不锈钢粉",
+      "Stainless steel powder",
+      "不锈钢粉末"
+    ],
+    "summary": {
+      "zh": "不锈钢粉是铁基合金粉体，合金牌号、制粉方式和粒形决定具体用途。",
+      "en": "Stainless-steel powder is an iron-based alloy whose grade, production method and morphology determine its application."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "tantalum-powder",
+    "name": {
+      "zh": "钽粉",
+      "en": "Tantalum powder"
+    },
+    "aliases": [
+      "钽粉",
+      "Tantalum powder"
+    ],
+    "summary": {
+      "zh": "钽粉可用于电子及其他高纯功能材料，形貌和表面状态对粉体评价十分重要。",
+      "en": "Tantalum powder is used in electronic and high-purity functional materials, where morphology and surface condition are important."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "tin-powder",
+    "name": {
+      "zh": "锡粉",
+      "en": "Tin powder"
+    },
+    "aliases": [
+      "锡粉",
+      "Tin powder"
+    ],
+    "summary": {
+      "zh": "锡粉为低熔点、易变形的金属粉体，可用于焊接与合金配方。",
+      "en": "Tin powder is a low-melting, deformable metal powder used in soldering and alloy formulations."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "zinc-powder",
+    "name": {
+      "zh": "锌粉",
+      "en": "Zinc powder"
+    },
+    "aliases": [
+      "锌粉",
+      "Zinc powder"
+    ],
+    "summary": {
+      "zh": "锌粉可用于涂层、冶金和化工配方，表面氧化与颗粒形态影响使用。",
+      "en": "Zinc powder is used in coatings, metallurgy and chemical formulations, with surface oxidation and morphology affecting use."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "cement",
+    "name": {
+      "zh": "水泥",
+      "en": "Cement"
+    },
+    "aliases": [
+      "水泥",
+      "Cement"
+    ],
+    "summary": {
+      "zh": "水泥是多组分胶凝材料，成分、熟料和混合材比例影响细度需求。",
+      "en": "Cement is a multicomponent binder whose clinker and supplementary-material proportions affect fineness requirements."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "cement-additives",
+    "name": {
+      "zh": "水泥添加剂",
+      "en": "Cement additives"
+    },
+    "aliases": [
+      "水泥添加剂",
+      "Cement additives"
+    ],
+    "summary": {
+      "zh": "水泥添加剂包含助磨剂、矿物掺合料等不同功能原料，需先区分液体与粉体产品。",
+      "en": "Cement additives include grinding aids and mineral additions with different functions; liquid products and powder feedstocks must be distinguished."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "coal-gangue",
+    "name": {
+      "zh": "煤矸石",
+      "en": "Coal gangue"
+    },
+    "aliases": [
+      "煤矸石",
+      "Coal gangue"
+    ],
+    "summary": {
+      "zh": "煤矸石是煤炭开采或洗选产生的矿物固体物料，可作为建材资源化原料评估。",
+      "en": "Coal gangue is a mineral solid from coal mining or washing that can be assessed as a feedstock for building materials."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "fly-ash",
+    "name": {
+      "zh": "粉煤灰",
+      "en": "Fly ash"
+    },
+    "aliases": [
+      "粉煤灰",
+      "Fly ash"
+    ],
+    "summary": {
+      "zh": "粉煤灰是燃煤过程收集的细颗粒物料，可按品质评估建材及填料用途。",
+      "en": "Fly ash is a fine particulate collected from coal combustion and may be assessed for building-material and filler uses according to quality."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "furnace-bottom-slag",
+    "name": {
+      "zh": "炉底渣",
+      "en": "Furnace bottom slag"
+    },
+    "aliases": [
+      "炉底渣",
+      "Furnace bottom slag"
+    ],
+    "summary": {
+      "zh": "炉底渣是炉内排出的较粗固体残渣，与烟气中收集的粉煤灰不同。",
+      "en": "Furnace bottom ash is a relatively coarse residue discharged from a furnace, distinct from fly ash collected from flue gas."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "gypsum",
+    "name": {
+      "zh": "石膏",
+      "en": "Gypsum"
+    },
+    "aliases": [
+      "石膏",
+      "Gypsum"
+    ],
+    "summary": {
+      "zh": "石膏包括天然石膏与脱硫等工业来源，水合状态和杂质决定后续粉体用途。",
+      "en": "Gypsum includes natural and industrial sources such as flue-gas-desulfurization gypsum; hydration state and impurities determine use."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "lime",
+    "name": {
+      "zh": "石灰",
+      "en": "Lime"
+    },
+    "aliases": [
+      "石灰",
+      "Lime"
+    ],
+    "summary": {
+      "zh": "石灰是石灰类产品的统称，可能包含氧化钙或氢氧化钙，不能仅用名称确定工艺。",
+      "en": "Lime is a broad product term that may refer to calcium oxide or calcium hydroxide and does not alone define a process."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "perlite",
+    "name": {
+      "zh": "珍珠岩",
+      "en": "Perlite"
+    },
+    "aliases": [
+      "珍珠岩",
+      "Perlite"
+    ],
+    "summary": {
+      "zh": "珍珠岩是火山玻璃质原料，原矿与膨胀珍珠岩的密度和结构差异很大。",
+      "en": "Perlite is a volcanic glass feedstock; raw and expanded perlite have very different densities and structures."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "poor-ore",
+    "name": {
+      "zh": "贫矿",
+      "en": "Poor ore"
+    },
+    "aliases": [
+      "贫矿",
+      "Poor ore"
+    ],
+    "summary": {
+      "zh": "贫矿指有价组分含量较低的矿石，是资源品位描述而不是固定矿物名称。",
+      "en": "Low-grade ore describes ore with a relatively low valuable-component content rather than a fixed mineral identity."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "quicklime",
+    "name": {
+      "zh": "生石灰",
+      "en": "Quicklime"
+    },
+    "aliases": [
+      "生石灰",
+      "Quicklime"
+    ],
+    "summary": {
+      "zh": "生石灰以氧化钙为主要成分，可用于建材、冶金和水处理相关配料。",
+      "en": "Quicklime is mainly calcium oxide and is used in building materials, metallurgy and water-treatment formulations."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "red-mud",
+    "name": {
+      "zh": "赤泥",
+      "en": "Red mud"
+    },
+    "aliases": [
+      "赤泥",
+      "Red mud"
+    ],
+    "summary": {
+      "zh": "赤泥是氧化铝生产产生的细粒残渣，碱性、含水和组成随工艺与来源而变。",
+      "en": "Red mud is a fine residue from alumina production, with alkalinity, moisture and composition varying by process and source."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "silicon-ash",
+    "name": {
+      "zh": "硅灰",
+      "en": "Silicon ash"
+    },
+    "aliases": [
+      "硅灰",
+      "Silicon ash"
+    ],
+    "summary": {
+      "zh": "硅灰是硅或硅铁冶炼过程中形成的细颗粒硅质副产物，常以团聚状态供料。",
+      "en": "Silica fume is a fine siliceous by-product of silicon or ferrosilicon production, often supplied in an agglomerated state."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "slag",
+    "name": {
+      "zh": "矿渣 / 炉渣",
+      "en": "Slag"
+    },
+    "aliases": [
+      "炉渣",
+      "矿渣",
+      "矿渣 / 炉渣",
+      "Slag"
+    ],
+    "summary": {
+      "zh": "矿渣是冶炼副产物的类别名称，具体炉型、冷却方式和组成决定其可加工性。",
+      "en": "Slag is a class of smelting by-products whose furnace origin, cooling method and composition determine processability."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "steel-slag",
+    "name": {
+      "zh": "钢渣",
+      "en": "Steel slag"
+    },
+    "aliases": [
+      "钢渣",
+      "Steel slag"
+    ],
+    "summary": {
+      "zh": "钢渣来自炼钢过程，通常包含复杂矿物相及残留金属，可评估分选和建材利用。",
+      "en": "Steel slag comes from steelmaking and contains complex mineral phases and residual metals, enabling assessment for separation and building-material uses."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "tailings",
+    "name": {
+      "zh": "尾矿",
+      "en": "Tailings"
+    },
+    "aliases": [
+      "尾矿",
+      "Tailings"
+    ],
+    "summary": {
+      "zh": "尾矿是选矿后的剩余固体，矿种和选矿流程决定其组成、含水与残留药剂情况。",
+      "en": "Tailings are solids remaining after mineral processing, with composition, moisture and reagent residues determined by the ore and process."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "water-slag",
+    "name": {
+      "zh": "水渣",
+      "en": "Water slag"
+    },
+    "aliases": [
+      "水渣",
+      "Water slag"
+    ],
+    "summary": {
+      "zh": "水渣通常指水淬高炉矿渣，与缓冷渣或钢渣的结构和活性不同。",
+      "en": "Water-quenched slag commonly means granulated blast-furnace slag, distinct in structure and activity from air-cooled or steelmaking slags."
+    },
+    "categoryIds": [
+      "solid-waste"
+    ]
+  },
+  {
+    "slug": "benzidine-orange",
+    "name": {
+      "zh": "联苯胺橙",
+      "en": "Benzidine orange"
+    },
+    "aliases": [
+      "联苯胺橙",
+      "Benzidine orange"
+    ],
+    "summary": {
+      "zh": "联苯胺橙是有机橙色颜料的商品名称之一，实际化学身份与牌号应由供应信息确认。",
+      "en": "Benzidine orange is a commercial designation for an organic orange pigment; supplier information should identify the actual chemistry and grade."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "cedar-bark",
+    "name": {
+      "zh": "雪松树皮",
+      "en": "Cedar bark"
+    },
+    "aliases": [
+      "雪松树皮",
+      "Cedar bark"
+    ],
+    "summary": {
+      "zh": "雪松树皮是纤维性生物质原料，树种与部位需要明确；不同杉类树皮不能自动按同一材料处理。",
+      "en": "Cedar bark is a fibrous biomass feedstock requiring species and plant-part identification; other conifer barks are not automatically equivalent."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "chromium-oxide-green",
+    "name": {
+      "zh": "氧化铬绿",
+      "en": "Chromium oxide green"
+    },
+    "aliases": [
+      "氧化铬绿",
+      "Chromium oxide green"
+    ],
+    "summary": {
+      "zh": "氧化铬绿是无机绿色颜料，可用于涂料、陶瓷和其他着色配方。",
+      "en": "Chromium oxide green is an inorganic green pigment used in coatings, ceramics and other colouring formulations."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "clay",
+    "name": {
+      "zh": "黏土",
+      "en": "Clay"
+    },
+    "aliases": [
+      "黏土",
+      "Clay",
+      "粘土"
+    ],
+    "summary": {
+      "zh": "黏土是多种细粒矿物混合物的通称，可用于陶瓷、建材和吸附填料。",
+      "en": "Clay is a general term for fine mineral mixtures used in ceramics, building materials and adsorbent fillers."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "coal-moss",
+    "name": {
+      "zh": "煤苔",
+      "en": "Coal moss"
+    },
+    "aliases": [
+      "煤苔",
+      "Coal moss"
+    ],
+    "summary": {
+      "zh": "“煤苔”是需要结合来源和成分解释的物料名称，不足以直接确定为煤、泥炭或其他有机原料。",
+      "en": "“Coal moss” is a source-dependent material name and does not by itself establish coal, peat or another organic feedstock."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "cobalt-blue",
+    "name": {
+      "zh": "钴蓝",
+      "en": "Cobalt blue"
+    },
+    "aliases": [
+      "钴蓝",
+      "Cobalt blue"
+    ],
+    "summary": {
+      "zh": "钴蓝是钴系无机蓝色颜料，可用于陶瓷和耐热着色配方。",
+      "en": "Cobalt blue is a cobalt-based inorganic blue pigment used in ceramics and heat-resistant colouring formulations."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "dyestuff",
+    "name": {
+      "zh": "染料",
+      "en": "Dyestuff"
+    },
+    "aliases": [
+      "染料",
+      "Dyestuff"
+    ],
+    "summary": {
+      "zh": "染料是可按化学结构和溶解性质细分的着色原料，不能统一套用颜料的不溶性假设。",
+      "en": "Dyes are colourants with chemistry- and solubility-dependent behaviour and should not all be treated as insoluble pigments."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "electronic-waste",
+    "name": {
+      "zh": "电子废弃物",
+      "en": "Electronic waste"
+    },
+    "aliases": [
+      "电子废弃物",
+      "Electronic waste",
+      "电子废料"
+    ],
+    "summary": {
+      "zh": "电子废弃物包含金属、聚合物和其他组分，是需要拆解与分类的复合物料。",
+      "en": "Electronic waste contains metals, polymers and other constituents and is a composite feedstock requiring disassembly and sorting."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "fluorescent-pigment",
+    "name": {
+      "zh": "荧光颜料",
+      "en": "Fluorescent pigment"
+    },
+    "aliases": [
+      "荧光颜料",
+      "Fluorescent pigment"
+    ],
+    "summary": {
+      "zh": "荧光颜料可能是无机粉体或含染料的树脂体系，不同产品的温度与机械敏感性不同。",
+      "en": "Fluorescent pigments may be inorganic powders or dye-containing resin systems, with different thermal and mechanical sensitivities."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "fluorescent-whitening-agent",
+    "name": {
+      "zh": "荧光增白剂",
+      "en": "Fluorescent whitening agent"
+    },
+    "aliases": [
+      "荧光增白剂",
+      "Fluorescent whitening agent"
+    ],
+    "summary": {
+      "zh": "荧光增白剂是一类用于改善视觉白度的配方原料，具体化学类型决定热稳定性和分散方式。",
+      "en": "Optical brighteners are formulation ingredients used to modify perceived whiteness; chemistry determines thermal stability and dispersion method."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "iron-oxide-red",
+    "name": {
+      "zh": "氧化铁红",
+      "en": "Iron oxide red"
+    },
+    "aliases": [
+      "氧化铁红",
+      "Iron oxide red"
+    ],
+    "summary": {
+      "zh": "氧化铁红是铁氧化物系无机红色颜料，可用于涂料、建材及其他着色配方。",
+      "en": "Red iron oxide is an inorganic iron-oxide pigment used in coatings, building materials and other colouring formulations."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "lithopone",
+    "name": {
+      "zh": "立德粉",
+      "en": "Lithopone"
+    },
+    "aliases": [
+      "立德粉",
+      "Lithopone",
+      "锌钡白"
+    ],
+    "summary": {
+      "zh": "立德粉又称锌钡白，是含硫化锌和硫酸钡的白色颜料，可用于涂料等配方。",
+      "en": "Lithopone is a white pigment containing zinc sulfide and barium sulfate and is used in coating formulations."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "mica-titania-pearlescent-pigment",
+    "name": {
+      "zh": "云母钛珠光颜料",
+      "en": "Mica–titania pearlescent pigment"
+    },
+    "aliases": [
+      "云母钛珠光颜料",
+      "Mica–titania pearlescent pigment"
+    ],
+    "summary": {
+      "zh": "云母钛珠光颜料以片状基材和表面涂层形成光学效果，片状结构是功能的一部分。",
+      "en": "Mica–titania pearlescent pigments derive optical effects from a platelet substrate and surface coating; platelet structure is functional."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "phthalocyanine",
+    "name": {
+      "zh": "酞菁",
+      "en": "Phthalocyanine"
+    },
+    "aliases": [
+      "酞菁",
+      "Phthalocyanine"
+    ],
+    "summary": {
+      "zh": "酞菁类颜料包含蓝、绿等不同牌号，晶型和表面处理影响色相及分散。",
+      "en": "Phthalocyanine pigments include blue and green grades whose crystal form and surface treatment influence shade and dispersion."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "recycled-plastic",
+    "name": {
+      "zh": "再生塑料",
+      "en": "Recycled-plastic"
+    },
+    "aliases": [
+      "再生塑料",
+      "Recycled-plastic"
+    ],
+    "summary": {
+      "zh": "再生塑料是经回收分选的聚合物原料，树脂种类、添加剂与杂质决定加工方式。",
+      "en": "Recycled plastics are recovered and sorted polymers whose resin type, additives and contamination determine processing."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "vermilion",
+    "name": {
+      "zh": "银朱（成分需明确）",
+      "en": "Vermilion (composition-specific)"
+    },
+    "aliases": [
+      "银朱",
+      "银朱（成分需明确）",
+      "Vermilion (composition-specific)"
+    ],
+    "summary": {
+      "zh": "银朱通常是红色颜料的传统名称，必须先确认具体化学身份，不能仅凭名称选择粉体设备。",
+      "en": "Vermilion is a traditional red-pigment name whose actual chemistry must be identified before selecting powder equipment."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "soap",
+    "name": {
+      "zh": "肥皂",
+      "en": "Soap"
+    },
+    "aliases": [
+      "肥皂",
+      "Soap"
+    ],
+    "summary": {
+      "zh": "肥皂类粉体为表面活性配方原料，含水、脂肪酸盐组成及添加剂影响软化与黏附。",
+      "en": "Soap powders are surfactant formulations whose moisture, fatty-acid salts and additives affect softening and adhesion."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "toluidine-red",
+    "name": {
+      "zh": "甲苯胺红",
+      "en": "Toluidine Red"
+    },
+    "aliases": [
+      "甲苯胺红",
+      "Toluidine Red"
+    ],
+    "summary": {
+      "zh": "甲苯胺红是有机红色颜料的名称，牌号和表面处理决定其在配方中的分散表现。",
+      "en": "Toluidine red is an organic red pigment whose grade and surface treatment determine dispersion in formulations."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "wax",
+    "name": {
+      "zh": "蜡",
+      "en": "Wax"
+    },
+    "aliases": [
+      "蜡",
+      "Wax"
+    ],
+    "summary": {
+      "zh": "蜡是具有软化或熔融区间的一类材料，聚乙烯蜡、石蜡及天然蜡的加工条件并不相同。",
+      "en": "Waxes are materials with softening or melting ranges; polyethylene, paraffin and natural waxes have different processing requirements."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "wax-substance",
+    "name": {
+      "zh": "蜡质物",
+      "en": "Wax substance"
+    },
+    "aliases": [
+      "蜡质物",
+      "Wax substance",
+      "蜡状物"
+    ],
+    "summary": {
+      "zh": "蜡质物指具有蜡状外观或触感的配方原料，可能并非纯蜡，化学身份需具体说明。",
+      "en": "Waxy substances are formulation ingredients with a wax-like appearance or feel and are not necessarily pure waxes."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "flame-retardants",
+    "name": {
+      "zh": "阻燃剂",
+      "en": "Flame retardants"
+    },
+    "aliases": [
+      "阻燃剂",
+      "Flame retardants"
+    ],
+    "summary": {
+      "zh": "阻燃剂是一类用于降低材料燃烧倾向的添加剂，包括无机、含磷及其他不同化学体系。",
+      "en": "Flame retardants are additives intended to reduce flammability and include inorganic, phosphorus-containing and other chemistries."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "neodymium-oxide",
+    "name": {
+      "zh": "氧化钕",
+      "en": "Neodymium oxide"
+    },
+    "aliases": [
+      "氧化钕",
+      "Neodymium oxide"
+    ],
+    "summary": {
+      "zh": "氧化钕是稀土氧化物，可用于玻璃、陶瓷和稀土材料配料。",
+      "en": "Neodymium oxide is a rare-earth oxide used in glass, ceramics and rare-earth-material formulations."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "natural-coloured-sand",
+    "name": {
+      "zh": "天然彩砂",
+      "en": "Natural coloured sand"
+    },
+    "aliases": [
+      "天然彩砂",
+      "Natural coloured sand"
+    ],
+    "summary": {
+      "zh": "天然彩砂来自具有天然颜色的矿物原料，用于装饰涂层与建材配方。",
+      "en": "Natural coloured sand is derived from naturally coloured mineral feedstocks and used in decorative coatings and building materials."
+    },
+    "categoryIds": [
+      "abrasives"
+    ]
+  },
+  {
+    "slug": "green-coke",
+    "name": {
+      "zh": "生焦",
+      "en": "Green coke"
+    },
+    "aliases": [
+      "生焦",
+      "Green coke"
+    ],
+    "summary": {
+      "zh": "生焦是未经煅烧的焦类原料，挥发分和含水会影响碳材料加工。",
+      "en": "Green coke is coke before calcination, with volatiles and moisture affecting carbon processing."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "petroleum-coke",
+    "name": {
+      "zh": "石油焦",
+      "en": "Petroleum coke"
+    },
+    "aliases": [
+      "石油焦",
+      "Petroleum coke"
+    ],
+    "summary": {
+      "zh": "石油焦来自石油炼制过程，可作为碳材料原料，针状焦与其他等级需区分。",
+      "en": "Petroleum coke is derived from petroleum refining and used as a carbon feedstock; needle coke and other grades should be distinguished."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "calcined-coke",
+    "name": {
+      "zh": "煅后焦",
+      "en": "Calcined coke"
+    },
+    "aliases": [
+      "煅后焦",
+      "Calcined coke"
+    ],
+    "summary": {
+      "zh": "煅后焦是焦类原料经煅烧后的碳质材料，与生焦相比具有不同的挥发分和机械特性。",
+      "en": "Calcined coke is a carbonaceous material produced by calcining coke, with volatile content and mechanical behaviour different from green coke."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "silicon-metal",
+    "name": {
+      "zh": "金属硅",
+      "en": "Silicon metal"
+    },
+    "aliases": [
+      "金属硅",
+      "Silicon metal",
+      "Si"
+    ],
+    "summary": {
+      "zh": "金属硅是元素硅原料，可用于合金、化工及硅基电池材料加工。",
+      "en": "Silicon metal is elemental silicon used in alloys, chemicals and silicon-based battery-material processing."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "silicon-monoxide",
+    "name": {
+      "zh": "氧化亚硅（SiO）",
+      "en": "Silicon monoxide (SiO)"
+    },
+    "aliases": [
+      "氧化亚硅（SiO）",
+      "Silicon monoxide (SiO)",
+      "SiO"
+    ],
+    "summary": {
+      "zh": "氧化亚硅（SiO）是硅氧类粉体原料，可用于硅基复合负极相关加工。",
+      "en": "Silicon monoxide (SiO) is a silicon-oxide powder used in processing routes for silicon-based composite anodes."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "lithium-titanate",
+    "name": {
+      "zh": "钛酸锂（LTO）",
+      "en": "Lithium titanate (LTO)"
+    },
+    "aliases": [
+      "钛酸锂（LTO）",
+      "Lithium titanate (LTO)",
+      "LTO"
+    ],
+    "summary": {
+      "zh": "钛酸锂（LTO）是锂离子电池相关电极材料，可按具体牌号评价粒度和团聚控制。",
+      "en": "Lithium titanate (LTO) is an electrode material used in lithium-ion systems, with grade-specific size and agglomeration requirements."
+    },
+    "categoryIds": [
+      "battery-materials"
+    ]
+  },
+  {
+    "slug": "sulfur",
+    "name": {
+      "zh": "硫磺",
+      "en": "Sulfur"
+    },
+    "aliases": [
+      "硫磺",
+      "Sulfur"
+    ],
+    "summary": {
+      "zh": "硫磺是元素硫粉体，可用于多种化工配方，低熔点与粉尘特性对设备系统有直接影响。",
+      "en": "Sulfur is an elemental powder used in chemical formulations, with melting behaviour and dust properties directly affecting system design."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "superabsorbent-polymer",
+    "name": {
+      "zh": "高吸水性树脂（SAP）",
+      "en": "Superabsorbent polymer (SAP)"
+    },
+    "aliases": [
+      "高吸水性树脂（SAP）",
+      "Superabsorbent polymer (SAP)",
+      "SAP"
+    ],
+    "summary": {
+      "zh": "高吸水性树脂（SAP）是一类吸水膨胀高分子材料，常见形态是颗粒或粉体。",
+      "en": "Superabsorbent polymers (SAP) swell upon absorbing water and are commonly supplied as granules or powders."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "polyacrylamide",
+    "name": {
+      "zh": "聚丙烯酰胺（PAM）",
+      "en": "Polyacrylamide (PAM)"
+    },
+    "aliases": [
+      "聚丙烯酰胺（PAM）",
+      "Polyacrylamide (PAM)",
+      "PAM"
+    ],
+    "summary": {
+      "zh": "聚丙烯酰胺（PAM）是用于絮凝等用途的聚合物，离子类型与分子量决定应用。",
+      "en": "Polyacrylamide (PAM) is a polymer used in applications such as flocculation, with ionic type and molecular weight determining performance."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "urea",
+    "name": {
+      "zh": "尿素",
+      "en": "Urea"
+    },
+    "aliases": [
+      "尿素",
+      "Urea"
+    ],
+    "summary": {
+      "zh": "尿素是含氮化工原料，可按用途供应为颗粒或粉末，含水与结块影响加工。",
+      "en": "Urea is a nitrogen-containing chemical feedstock supplied as granules or powder, with moisture and caking affecting processing."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "polyphenylene-sulfide",
+    "name": {
+      "zh": "聚苯硫醚（PPS）",
+      "en": "Polyphenylene sulfide (PPS)"
+    },
+    "aliases": [
+      "聚苯硫醚（PPS）",
+      "Polyphenylene sulfide (PPS)",
+      "PPS"
+    ],
+    "summary": {
+      "zh": "聚苯硫醚（PPS）是工程热塑性聚合物，可用于涂层和复合材料粉体配方。",
+      "en": "Polyphenylene sulfide (PPS) is an engineering thermoplastic used in powder coatings and composites."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "resin-powders",
+    "name": {
+      "zh": "树脂粉",
+      "en": "Resin powders"
+    },
+    "aliases": [
+      "树脂粉",
+      "Resin powders"
+    ],
+    "summary": {
+      "zh": "树脂粉涵盖热塑性、热固性及复合配方，不能按统一树脂名称确定设备。",
+      "en": "Resin powders include thermoplastics, thermosets and composite formulations and cannot be assigned equipment from the generic name alone."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "aerogel",
+    "name": {
+      "zh": "气凝胶",
+      "en": "Aerogel"
+    },
+    "aliases": [
+      "气凝胶",
+      "Aerogel"
+    ],
+    "summary": {
+      "zh": "气凝胶是具有高度多孔结构的轻质材料，可用于隔热、吸附或复合填料。",
+      "en": "Aerogels are lightweight, highly porous materials used in insulation, adsorption and composite fillers."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "activated-carbon",
+    "name": {
+      "zh": "活性炭",
+      "en": "Activated carbon"
+    },
+    "aliases": [
+      "活性炭",
+      "Activated carbon"
+    ],
+    "summary": {
+      "zh": "活性炭是经活化形成孔结构的碳材料，常用于吸附及载体用途。",
+      "en": "Activated carbon is a porous carbon produced by activation and commonly used in adsorption and support applications."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "graphene",
+    "name": {
+      "zh": "石墨烯相关粉体",
+      "en": "Graphene-related powders"
+    },
+    "aliases": [
+      "石墨烯相关粉体",
+      "Graphene-related powders"
+    ],
+    "summary": {
+      "zh": "石墨烯相关粉体包含不同层数、片径和表面状态的材料，名称本身不能说明等级。",
+      "en": "Graphene-related powders vary in layer count, lateral size and surface condition; the name alone does not establish a grade."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "manganese-powder",
+    "name": {
+      "zh": "锰粉",
+      "en": "Manganese powder"
+    },
+    "aliases": [
+      "锰粉",
+      "Manganese powder"
+    ],
+    "summary": {
+      "zh": "锰粉是金属或合金化配料用粉体，具体纯度与表面状态影响加工。",
+      "en": "Manganese powder is used as a metallic or alloying feedstock, with purity and surface state affecting processing."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "ndfeb",
+    "name": {
+      "zh": "钕铁硼",
+      "en": "Neodymium–iron–boron"
+    },
+    "aliases": [
+      "钕铁硼",
+      "Neodymium–iron–boron",
+      "NdFeB"
+    ],
+    "summary": {
+      "zh": "钕铁硼是稀土永磁材料，合金粉的组成、氧含量及粒度影响后续成型。",
+      "en": "Neodymium–iron–boron is a rare-earth permanent-magnet material whose alloy-powder composition, oxygen and size affect subsequent forming."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "ferrochrome-alloy-powders",
+    "name": {
+      "zh": "铬铁及合金粉",
+      "en": "Ferrochrome and alloy powders"
+    },
+    "aliases": [
+      "铬铁及合金粉",
+      "Ferrochrome and alloy powders"
+    ],
+    "summary": {
+      "zh": "铬铁及合金粉是冶金或复合材料配料，合金成分和组织影响脆性与密度。",
+      "en": "Ferrochrome and alloy powders are feedstocks for metallurgy or composites, with composition and microstructure affecting brittleness and density."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "carbonyl-iron-powder",
+    "name": {
+      "zh": "羰基铁粉",
+      "en": "Carbonyl iron powder"
+    },
+    "aliases": [
+      "羰基铁粉",
+      "Carbonyl iron powder"
+    ],
+    "summary": {
+      "zh": "羰基铁粉是通过羰基工艺制得的铁粉，常以细颗粒形貌用于功能配方。",
+      "en": "Carbonyl iron powder is produced through a carbonyl process and is used as a fine iron powder in functional formulations."
+    },
+    "categoryIds": [
+      "metals"
+    ]
+  },
+  {
+    "slug": "bauxite",
+    "name": {
+      "zh": "铝土矿",
+      "en": "Bauxite"
+    },
+    "aliases": [
+      "铝土矿",
+      "Bauxite"
+    ],
+    "summary": {
+      "zh": "铝土矿是含铝矿物集合，可作为氧化铝和耐火材料原料，矿物组成因产地而异。",
+      "en": "Bauxite is an aluminium-bearing mineral assemblage used in alumina and refractory feedstocks, with deposit-dependent composition."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "calcite",
+    "name": {
+      "zh": "方解石",
+      "en": "Calcite"
+    },
+    "aliases": [
+      "方解石",
+      "Calcite"
+    ],
+    "summary": {
+      "zh": "方解石是碳酸钙矿物，可作为重质碳酸钙等粉体产品的原料。",
+      "en": "Calcite is a calcium-carbonate mineral and a feedstock for powders such as ground calcium carbonate."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "limestone",
+    "name": {
+      "zh": "石灰石",
+      "en": "Limestone"
+    },
+    "aliases": [
+      "石灰石",
+      "Limestone"
+    ],
+    "summary": {
+      "zh": "石灰石是以碳酸钙矿物为主的沉积岩，可用于建材、化工及填料原料。",
+      "en": "Limestone is a sedimentary rock rich in calcium-carbonate minerals and used in building materials, chemicals and filler feedstocks."
+    },
+    "categoryIds": [
+      "minerals"
+    ]
+  },
+  {
+    "slug": "tungsten-oxide",
+    "name": {
+      "zh": "氧化钨",
+      "en": "Tungsten oxide"
+    },
+    "aliases": [
+      "氧化钨",
+      "Tungsten oxide"
+    ],
+    "summary": {
+      "zh": "氧化钨是钨化合物粉体，可用于钨材料、陶瓷和功能配方的前驱体。",
+      "en": "Tungsten oxides are compound powders used as precursors for tungsten materials, ceramics and functional formulations."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  },
+  {
+    "slug": "oats-cereals",
+    "name": {
+      "zh": "燕麦与谷物",
+      "en": "Oats and cereals"
+    },
+    "aliases": [
+      "燕麦与谷物",
+      "Oats and cereals"
+    ],
+    "summary": {
+      "zh": "燕麦与谷物原料可加工成食品配方粉，谷皮、淀粉和脂质比例随品种与前处理而变。",
+      "en": "Oats and cereal grains can be processed into food-formulation powders, with bran, starch and lipid proportions varying by variety and pretreatment."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "protein-powders",
+    "name": {
+      "zh": "蛋白粉",
+      "en": "Protein powders"
+    },
+    "aliases": [
+      "蛋白粉",
+      "Protein powders"
+    ],
+    "summary": {
+      "zh": "蛋白粉包括植物、乳源及其他来源，变性、含水和脂质影响粉体表现。",
+      "en": "Protein powders include plant, dairy and other sources, with denaturation state, moisture and lipids affecting powder behaviour."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "nutritional-powders",
+    "name": {
+      "zh": "营养粉",
+      "en": "Nutritional powders"
+    },
+    "aliases": [
+      "营养粉",
+      "Nutritional powders"
+    ],
+    "summary": {
+      "zh": "营养粉是多组分食品配方，可包含谷物、蛋白、矿物质等不同密度与粒径的原料。",
+      "en": "Nutritional powders are multicomponent food blends that may contain cereals, proteins and minerals of different densities and sizes."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "meal-replacement-powders",
+    "name": {
+      "zh": "代餐粉",
+      "en": "Meal-replacement powders"
+    },
+    "aliases": [
+      "代餐粉",
+      "Meal-replacement powders"
+    ],
+    "summary": {
+      "zh": "代餐粉通常为谷物、蛋白和其他成分的复合配方，工艺要求由实际配料决定。",
+      "en": "Meal-replacement powders are typically blends of cereals, proteins and other ingredients, with requirements determined by the actual formulation."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "maca",
+    "name": {
+      "zh": "玛咖",
+      "en": "Maca"
+    },
+    "aliases": [
+      "玛咖",
+      "Maca"
+    ],
+    "summary": {
+      "zh": "玛咖是植物根部食品原料，可在干燥后加工成配方粉体。",
+      "en": "Maca is a botanical root food ingredient that can be dried and processed into formulation powder."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "active-pharmaceutical-ingredients",
+    "name": {
+      "zh": "原料药（API）",
+      "en": "Active pharmaceutical ingredients (API)"
+    },
+    "aliases": [
+      "原料药（API）",
+      "Active pharmaceutical ingredients (API)",
+      "API"
+    ],
+    "summary": {
+      "zh": "原料药（API）是按具体活性成分定义的材料类别，各化合物的晶型、效价与处理要求不同。",
+      "en": "Active pharmaceutical ingredients (APIs) are defined by the specific active compound; crystal form, potency and handling needs differ by substance."
+    },
+    "categoryIds": [
+      "pharma-food"
+    ]
+  },
+  {
+    "slug": "cosmetic-ingredients",
+    "name": {
+      "zh": "化妆品原料",
+      "en": "Cosmetic ingredients"
+    },
+    "aliases": [
+      "化妆品原料",
+      "Cosmetic ingredients"
+    ],
+    "summary": {
+      "zh": "化妆品原料可包括矿物、颜料、聚合物等多类粉体，应按实际配方与接触要求分别评价。",
+      "en": "Cosmetic ingredients include minerals, pigments and polymers and require evaluation against their actual formulation and contact requirements."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "toner",
+    "name": {
+      "zh": "碳粉 / 墨粉",
+      "en": "Toner"
+    },
+    "aliases": [
+      "碳粉 / 墨粉",
+      "Toner"
+    ],
+    "summary": {
+      "zh": "碳粉/墨粉是由树脂、着色剂和添加剂构成的成像用配方，不等同于单纯炭黑。",
+      "en": "Toner is an imaging formulation of resin, colourant and additives and is not simply carbon black."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "inorganic-pigments",
+    "name": {
+      "zh": "无机颜料",
+      "en": "Inorganic pigments"
+    },
+    "aliases": [
+      "无机颜料",
+      "Inorganic pigments"
+    ],
+    "summary": {
+      "zh": "无机颜料是氧化物及其他无机化合物着色粉体的集合，不同成分硬度与热稳定性不同。",
+      "en": "Inorganic pigments comprise colouring oxides and other inorganic compounds with chemistry-specific hardness and thermal stability."
+    },
+    "categoryIds": [
+      "other"
+    ]
+  },
+  {
+    "slug": "agrochemical-powders",
+    "name": {
+      "zh": "可湿性粉剂等农化配方",
+      "en": "Agrochemical powder formulations"
+    },
+    "aliases": [
+      "可湿性粉剂等农化配方",
+      "Agrochemical powder formulations"
+    ],
+    "summary": {
+      "zh": "农药可湿性粉剂等配方可能包含活性成分、载体与助剂，需要按具体组成评估粉体加工。",
+      "en": "Agrochemical wettable powders may contain active ingredients, carriers and auxiliaries and require composition-specific processing assessment."
+    },
+    "categoryIds": [
+      "chemicals"
+    ]
+  }
+]
