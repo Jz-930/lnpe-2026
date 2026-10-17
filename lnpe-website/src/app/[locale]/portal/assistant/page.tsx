@@ -4,10 +4,14 @@ import ChatContainer from "@/components/ai-assistant/ChatContainer";
 import { useLocale } from "@/i18n/LocaleProvider";
 import LanguageSwitcher from "@/components/i18n/LanguageSwitcher";
 import Link from "@/components/i18n/LocalizedLink";
+import { useRef } from "react";
+import { useVisualViewport } from "@/components/ai-assistant/useVisualViewport";
 
 export default function AssistantPortalPage() {
   const locale = useLocale(); const zh = locale === "zh";
-  return <main className="flex h-dvh min-h-[520px] flex-col bg-lnpe-bg text-lnpe-text">
+  const viewport = useRef<HTMLElement>(null);
+  useVisualViewport(viewport);
+  return <main ref={viewport} className="assistant-portal flex h-dvh min-h-[520px] flex-col bg-lnpe-bg text-lnpe-text">
     <header className="flex shrink-0 items-center justify-between gap-4 border-b border-lnpe-border bg-lnpe-paper px-6 py-5">
       <div><Link href="/" className="text-xs text-lnpe-muted">← {zh ? "返回网站" : "Back to website"}</Link><h1 className="assistant-workbench-title mt-2 font-display font-bold text-lnpe-dark">{zh ? "LNPE 技术资料工作台" : "LNPE Technical Reference Desk"}</h1></div>
       <LanguageSwitcher />

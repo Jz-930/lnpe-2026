@@ -8,6 +8,8 @@ import { getHomeInsights } from '@/content/home-insights';
 import { HomeInsightPanel } from './HomeInsightPanel';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react';
+import styles from './HomeMobile.module.css';
+import { useCompactHome, useTouchHome } from './useCompactHome';
 
 const CATEGORIES = ['All', 'Grinding', 'Classifying', 'Modification', 'Turnkey Line'] as const;
 
@@ -30,7 +32,7 @@ const PRODUCTS = [
 
 function SpecDrawer({ specs }: { specs: string[] }) {
   return (
-    <div className="grid gap-1.5 border border-[#c8d2dc] bg-white/92 p-3 shadow-[0_16px_28px_rgba(15,23,42,0.10)] backdrop-blur">
+    <div className={`${styles.specDrawer} grid gap-1.5 border border-[#c8d2dc] bg-white/92 p-3 shadow-[0_16px_28px_rgba(15,23,42,0.10)] backdrop-blur`}>
       {specs.map((spec) => (
         <div key={spec} className="flex items-center justify-between gap-3 font-mono text-[9px] uppercase tracking-[0.14em] text-[#566272]">
           <span className="h-px flex-1 bg-[#d6dee6]" />
@@ -51,10 +53,12 @@ export function ProductBentoBox() {
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
+  const compact = useCompactHome();
+  const touch = useTouchHome();
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || paused || hovered || focused || selectedProduct) return;
+    if (compact || touch || reducedMotion || paused || hovered || focused || selectedProduct) return;
 
     const interval = window.setInterval(() => {
       if (document.visibilityState !== 'visible') return;
@@ -65,7 +69,7 @@ export function ProductBentoBox() {
     }, 5400);
 
     return () => window.clearInterval(interval);
-  }, [paused, hovered, focused, selectedProduct]);
+  }, [compact, touch, paused, hovered, focused, selectedProduct]);
 
   const visibleProducts = useMemo(
     () => (category === 'All' ? PRODUCTS : PRODUCTS.filter((product) => product.category === category))
@@ -73,7 +77,7 @@ export function ProductBentoBox() {
     [category, t]
   );
   const featured = visibleProducts[0] ?? { ...PRODUCTS[0], ...t.items[PRODUCTS[0].id] };
-  const supportingProducts = visibleProducts.slice(1, 5);
+  const supportingProducts = visibleProducts.slice(1, compact ? undefined : 5);
   const quickLook = (product: typeof featured) => (
     <>
       <button type="button" onClick={() => { setSelectedProduct(selectedProduct === product.id ? null : product.id); setPaused(true); }} aria-expanded={selectedProduct === product.id} aria-controls={`product-quick-${product.id}`} className="flex w-full items-center justify-between gap-3 border border-[#cbd5df] bg-white px-4 py-3 text-left text-xs font-semibold text-[#52606f] transition-colors hover:border-[#F26522] hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">
@@ -84,14 +88,14 @@ export function ProductBentoBox() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#f1f4f6] py-24 text-[#111827]">
+    <section className={`${styles.section} relative overflow-hidden bg-[#f1f4f6] py-24 text-[#111827]`}>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-white/95 to-transparent" />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(17,24,39,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.035)_1px,transparent_1px)] bg-[length:52px_52px]" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
-        <div className="relative isolate mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div className={`${styles.sectionHeading} ${styles.productHeader} relative isolate mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end`}>
           <div className="relative z-10">
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] sm:text-4xl md:text-6xl">
               {t.title}
@@ -109,7 +113,7 @@ export function ProductBentoBox() {
           </Link>
         </div>
 
-        <div className="mb-8 flex gap-2 overflow-x-auto border-y border-[#d4dde6] py-3">
+        <div className={`${styles.scrollRail} ${styles.productFilters} mb-8 flex gap-2 overflow-x-auto border-y border-[#d4dde6] py-3`}>
           {CATEGORIES.map((item) => {
             const active = category === item;
             return (
@@ -138,10 +142,10 @@ export function ProductBentoBox() {
           <div className="min-w-0 space-y-3">
           <Link
             href={featured.href}
-            className="group relative flex min-h-[560px] flex-col overflow-hidden border border-[#c9d3dd] bg-[#f8fafb] shadow-[0_26px_80px_rgba(15,23,42,0.10)] transition-colors hover:border-[#aebbc7] hover:bg-white md:block"
+            className={`${styles.featuredProduct} group relative flex min-h-[560px] flex-col overflow-hidden border border-[#c9d3dd] bg-[#f8fafb] shadow-[0_26px_80px_rgba(15,23,42,0.10)] transition-colors hover:border-[#aebbc7] hover:bg-white md:block`}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(232,238,243,0.96))]" />
-            <div className="relative z-10 mx-6 mt-6 flex items-center justify-between border-b border-[#d7e0e8] pb-4 md:absolute md:inset-x-6 md:top-6 md:m-0">
+            <div className={`${styles.featuredHeading} relative z-10 mx-6 mt-6 flex items-center justify-between border-b border-[#d7e0e8] pb-4 md:absolute md:inset-x-6 md:top-6 md:m-0`}>
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#64748b]">{t.featured}</div>
                 <h3 className="mt-3 font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] md:text-5xl">
@@ -153,7 +157,7 @@ export function ProductBentoBox() {
               </span>
             </div>
 
-            <div className="relative mx-8 my-6 h-[240px] shrink-0 md:absolute md:inset-x-8 md:bottom-[138px] md:top-[142px] md:m-0 md:h-auto">
+            <div className={`${styles.featuredImage} relative mx-8 my-6 h-[240px] shrink-0 md:absolute md:inset-x-8 md:bottom-[138px] md:top-[142px] md:m-0 md:h-auto`}>
               <div className="absolute inset-x-[9%] bottom-8 h-14 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.28),transparent_72%)] blur-lg" />
               <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(15,23,42,0.09))]" />
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(17,24,39,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.04)_1px,transparent_1px)] bg-[length:40px_40px]" />
@@ -174,7 +178,7 @@ export function ProductBentoBox() {
               </div>
             </div>
 
-            <div className="relative z-10 mx-6 mb-6 grid gap-5 md:absolute md:inset-x-6 md:bottom-6 md:m-0 md:grid-cols-[0.94fr_1.06fr] md:items-end">
+            <div className={`${styles.featuredFooter} relative z-10 mx-6 mb-6 grid gap-5 md:absolute md:inset-x-6 md:bottom-6 md:m-0 md:grid-cols-[0.94fr_1.06fr] md:items-end`}>
               <p className="max-w-xl text-sm leading-7 text-[#586474] md:text-base">{featured.desc}</p>
               <div>
                 <SpecDrawer specs={featured.specs} />
@@ -190,7 +194,7 @@ export function ProductBentoBox() {
           {quickLook(featured)}
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-1">
+          <div className={`${styles.supportGrid} grid gap-5 md:grid-cols-2 xl:grid-cols-1`}>
             {supportingProducts.length === 0 ? (
               <div className="flex min-h-[260px] items-center border border-[#d1dae3] bg-white/72 p-6 text-sm leading-7 text-[#5f6b78]">
                 {t.emptyRelated}
@@ -200,9 +204,9 @@ export function ProductBentoBox() {
                 <div key={product.id} className="min-w-0 space-y-3">
                 <Link
                   href={product.href}
-                  className="group grid min-h-[220px] overflow-hidden border border-[#d1dae3] bg-white/78 shadow-[0_14px_38px_rgba(15,23,42,0.06)] transition-colors hover:border-[#aebbc7] hover:bg-white sm:grid-cols-[0.92fr_1.08fr]"
+                  className={`${styles.supportCard} group grid min-h-[220px] overflow-hidden border border-[#d1dae3] bg-white/78 shadow-[0_14px_38px_rgba(15,23,42,0.06)] transition-colors hover:border-[#aebbc7] hover:bg-white sm:grid-cols-[0.92fr_1.08fr]`}
                 >
-                  <div className="relative min-h-[180px] bg-[#e8eef3]">
+                  <div className={`${styles.supportImage} relative min-h-[180px] bg-[#e8eef3]`}>
                     <div className="absolute inset-x-[12%] bottom-5 h-9 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.24),transparent_72%)] blur-md" />
                     <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-[linear-gradient(90deg,transparent,rgba(242,101,34,0.72),transparent)] [animation:catalog-glide_5.2s_ease-in-out_infinite] motion-reduce:animate-none" />
                     <Image
@@ -217,7 +221,7 @@ export function ProductBentoBox() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col p-5">
+                  <div className={`${styles.supportBody} flex flex-col p-5`}>
                     <div className="mb-3 flex items-start justify-between gap-4">
                       <div>
                         <div className="mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-[#7b8794]">{t.categories[product.category]}</div>

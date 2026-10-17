@@ -92,9 +92,9 @@ export function ProductTechnicalContent({ locale, slug }: { locale: Locale; slug
             <p className="mt-1 text-xs text-[#62748a]">{ui.modelNote}</p>
           </div>}
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[480px] border-collapse text-left text-sm">
+            <table className="specification-table w-full min-w-[480px] border-collapse text-left text-sm">
               <thead><tr className="border-b border-[#cbd7e6]"><th className="py-3 pr-6 font-medium text-[#3b526c]">{ui.field}</th><th className="py-3 font-medium text-[#3b526c]">{ui.purpose}</th></tr></thead>
-              <tbody>{specificationInputs[locale].map(([field, purpose]) => <tr key={field} className="border-b border-[#e1e7ef]"><th scope="row" className="py-3 pr-6 align-top font-normal">{field}</th><td className="py-3 align-top">{purpose}</td></tr>)}</tbody>
+              <tbody>{specificationInputs[locale].map(([field, purpose]) => <tr key={field} className="border-b border-[#e1e7ef]"><th scope="row" className="py-3 pr-6 align-top font-normal">{field}</th><td data-label={ui.purpose} className="py-3 align-top">{purpose}</td></tr>)}</tbody>
             </table>
           </div>
           <Link href={`/contact-us?equipment=${slug}&service=selection`} className="mt-5 inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.consult}<ArrowRight size={14} /></Link>

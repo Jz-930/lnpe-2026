@@ -33,7 +33,7 @@ export default function LanguageSwitcher() {
       lang={targetLocale === 'zh' ? 'zh-CN' : 'en'}
       aria-label={locale === 'en' ? '切换到中文' : 'Switch to English'}
       title={locale === 'en' ? '切换到中文' : 'Switch to English'}
-      className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-[6px] border border-lnpe-border bg-white/70 px-3 text-xs font-semibold text-lnpe-dark transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic focus-visible:outline-offset-4"
+      className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-[6px] border border-lnpe-border bg-white/70 px-3 text-xs font-semibold text-lnpe-dark transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic focus-visible:outline-offset-4 max-lg:h-11 max-lg:touch-manipulation max-lg:active:bg-lnpe-bg-light [@media(pointer:coarse)]:h-11"
       onClick={(event) => {
         if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();

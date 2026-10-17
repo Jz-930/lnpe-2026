@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { ArrowLeft, ArrowRight, X } from 'lucide-react';
@@ -9,6 +9,7 @@ import MediaLightbox from '@/components/content/MediaLightbox';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { homeMessages } from '@/i18n/messages/home';
 import type { HomeInsight } from '@/content/home-insights';
+import styles from './HomeMobile.module.css';
 
 export function HomeInsightPanel({ id, insight, onClose, dark = false, compact = false }: {
   id: string;
@@ -21,12 +22,17 @@ export function HomeInsightPanel({ id, insight, onClose, dark = false, compact =
   const reducedMotion = useReducedMotion();
   const [imageIndex, setImageIndex] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const swipeStart = useRef<{ x: number; y: number } | null>(null);
+  const swiped = useRef(false);
   const currentIndex = imageIndex % insight.images.length;
   const photo = insight.images[currentIndex];
   const close = () => {
-    const trigger = document.querySelector<HTMLButtonElement>(`[aria-controls="${id}"][aria-expanded="true"]`);
+    const trigger = Array.from(document.querySelectorAll<HTMLButtonElement>(`[aria-controls="${id}"][aria-expanded="true"]`)).find((element) => element.getClientRects().length > 0);
     onClose();
-    trigger?.focus();
+    trigger?.focus({ preventScroll: true });
+    if (trigger && window.matchMedia('(max-width: 1023px)').matches) {
+      trigger.scrollIntoView({ block: 'nearest', behavior: 'instant' });
+    }
   };
 
   return (
@@ -37,7 +43,7 @@ export function HomeInsightPanel({ id, insight, onClose, dark = false, compact =
       onKeyDown={(event) => { if (event.key === 'Escape' && !lightbox) { event.stopPropagation(); close(); } }}
       initial={reducedMotion ? false : { opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`relative mt-4 min-w-0 border p-4 text-left sm:p-5 ${dark ? 'border-white/20 bg-[#111b27] text-white' : 'border-[#cbd5df] bg-white text-[#111827]'}`}
+      className={`${styles.insight} relative mt-4 min-w-0 border p-4 text-left sm:p-5 ${dark ? 'border-white/20 bg-[#111b27] text-white' : 'border-[#cbd5df] bg-white text-[#111827]'}`}
     >
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="min-w-0">
@@ -50,7 +56,23 @@ export function HomeInsightPanel({ id, insight, onClose, dark = false, compact =
       </div>
       <div className={`grid min-w-0 gap-5 ${compact ? '' : 'md:grid-cols-[0.9fr_1.1fr]'}`}>
         <figure className="min-w-0">
-          <button type="button" onClick={() => setLightbox(true)} aria-label={`${t.enlarge}: ${photo.alt}`} className="group relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F26522]">
+          <button type="button" onClick={() => {
+            if (swiped.current) { swiped.current = false; return; }
+            setLightbox(true);
+          }} onPointerDown={(event) => {
+            swiped.current = false;
+            if (event.pointerType === 'touch') swipeStart.current = { x: event.clientX, y: event.clientY };
+          }} onPointerCancel={() => { swipeStart.current = null; }} onPointerUp={(event) => {
+            const start = swipeStart.current;
+            swipeStart.current = null;
+            if (!start || insight.images.length < 2) return;
+            const dx = event.clientX - start.x;
+            const dy = event.clientY - start.y;
+            if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+              swiped.current = true;
+              setImageIndex((current) => (current + insight.images.length + (dx < 0 ? 1 : -1)) % insight.images.length);
+            }
+          }} aria-label={`${t.enlarge}: ${photo.alt}`} className="group relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden bg-black/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F26522]">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div key={photo.src} initial={reducedMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.18 }} className="absolute inset-0">
                 <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.025]" />

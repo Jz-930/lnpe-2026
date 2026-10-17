@@ -9,6 +9,7 @@ import { getHomeInsights } from '@/content/home-insights';
 import { InlineMediaExplorer } from '@/components/content/InlineMediaExplorer';
 import { HomeInsightPanel } from './HomeInsightPanel';
 import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Gauge, Layers3, Route as RouteIcon, SlidersHorizontal } from 'lucide-react';
+import styles from './HomeMobile.module.css';
 
 const ROUTES = [
   { name: 'Grinding' },
@@ -43,14 +44,14 @@ export function ResearchForm() {
   const selectedRoute = useMemo(() => t.routes[route], [route, t]);
 
   return (
-    <section className="relative overflow-hidden border-t border-[#cfd8e1] bg-[#f4f7f9] py-24 text-[#111827]">
+    <section className={`${styles.section} relative overflow-hidden border-t border-[#cfd8e1] bg-[#f4f7f9] py-24 text-[#111827]`}>
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(17,24,39,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.04)_1px,transparent_1px)] bg-[length:48px_48px]" />
         <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-white to-transparent" />
       </div>
 
       <div className="container relative z-10 mx-auto px-6">
-        <div className="mb-12 grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-end">
+        <div className={`${styles.sectionHeading} mb-12 grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-end`}>
           <div>
             <h2 className="mb-6 font-display text-3xl font-bold uppercase tracking-tight text-[#0f172a] sm:text-4xl md:text-6xl">
               <span className={locale === 'zh' ? 'inline' : 'block sm:inline'}>{t.titleProcess}</span>
@@ -69,7 +70,7 @@ export function ResearchForm() {
 
         <div className="overflow-hidden border border-[#c8d2dc] bg-white shadow-[0_28px_86px_rgba(15,23,42,0.10)]">
           <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-            <aside className="preserve-white relative min-w-0 overflow-hidden bg-[#111827] p-6 text-white md:p-8">
+            <aside className={`${styles.researchAside} preserve-white relative min-w-0 overflow-hidden bg-[#111827] p-6 text-white md:p-8`}>
               <Image
                 src="/images/backgrounds/LRadjusted-1.webp"
                 alt=""
@@ -95,7 +96,7 @@ export function ResearchForm() {
 
                 <p className="mb-8 text-sm leading-7 text-white/70">{selectedRoute.summary}</p>
 
-                <div className="mb-8 space-y-2">
+                <div className={`${styles.researchRouteChoices} mb-8 space-y-2`}>
                   {ROUTES.map((item) => {
                     const active = route === item.name;
                     return (
@@ -142,7 +143,7 @@ export function ResearchForm() {
               </div>
             </aside>
 
-            <div className="min-w-0 p-6 md:p-8">
+            <div className={`${styles.researchFields} min-w-0 p-6 md:p-8`}>
               <div className="mb-8 flex flex-col gap-4 border-b border-[#e0e7ee] pb-6 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-[#0f172a]">{t.parameterPanel}</h3>
@@ -169,6 +170,8 @@ export function ResearchForm() {
                     <input
                       type="text"
                       required
+                      autoComplete="off"
+                      enterKeyHint="next"
                       value={material}
                       onChange={(event) => {
                         setMaterial(event.target.value);
@@ -199,6 +202,8 @@ export function ResearchForm() {
                     <span className="mb-2 block font-mono text-[11px] uppercase tracking-[0.22em] text-[#64748b]">{t.capacity}</span>
                     <input
                       type="text"
+                      inputMode="text"
+                      enterKeyHint="next"
                       value={capacity}
                       onChange={(event) => {
                         setCapacity(event.target.value);
@@ -238,7 +243,7 @@ export function ResearchForm() {
                   />
                 </label>
 
-                <div className="relative grid gap-4 overflow-hidden border border-[#d6dee6] bg-[#f3f6f8] p-5 md:grid-cols-[0.78fr_1.22fr]">
+                <div className={`${styles.researchPreview} relative grid gap-4 overflow-hidden border border-[#d6dee6] bg-[#f3f6f8] p-5 md:grid-cols-[0.78fr_1.22fr]`}>
                   <span className="pointer-events-none absolute inset-x-0 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(242,101,34,0.82),transparent)] [animation:catalog-glide_4.6s_ease-in-out_infinite] motion-reduce:animate-none" />
                   <div>
                     <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#64748b]">

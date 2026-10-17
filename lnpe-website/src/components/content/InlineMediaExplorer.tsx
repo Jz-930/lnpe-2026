@@ -21,6 +21,7 @@ export function InlineMediaExplorer({ items, label, initialId, autoPlay = false,
   const [focused, setFocused] = useState(false);
   const [lightbox, setLightbox] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [touchReading, setTouchReading] = useState(false);
   const zh = useLocale() === 'zh';
   const id = useId();
   const index = Math.max(0, items.findIndex((item) => item.id === selected));
@@ -36,7 +37,7 @@ export function InlineMediaExplorer({ items, label, initialId, autoPlay = false,
   }, []);
 
   useEffect(() => {
-    if (!autoPlay || paused || hovered || focused || lightbox || expanded || reducedMotion) return;
+    if (!autoPlay || paused || hovered || focused || lightbox || expanded || reducedMotion || touchReading) return;
     const keys = ids.split('|');
     if (keys.length < 2) return;
     const timer = window.setInterval(() => {
@@ -44,15 +45,31 @@ export function InlineMediaExplorer({ items, label, initialId, autoPlay = false,
       setSelected((current) => keys[(Math.max(0, keys.indexOf(current ?? '')) + 1) % keys.length]);
     }, 6500);
     return () => window.clearInterval(timer);
-  }, [autoPlay, paused, hovered, focused, lightbox, expanded, reducedMotion, ids]);
+  }, [autoPlay, paused, hovered, focused, lightbox, expanded, reducedMotion, touchReading, ids]);
+
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 1023px), (pointer: coarse)');
+    const update = () => setTouchReading(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
 
   if (!active) return null;
-  const select = (itemId: string, reveal = false) => { setSelected(itemId); setExpanded(reveal); };
+  const select = (itemId: string, reveal = false) => {
+    setSelected(itemId); setExpanded(reveal);
+    if (touchReading) {
+      const tab = document.getElementById(`${id}-${itemId}`);
+      const rail = tab?.parentElement;
+      if (tab && rail) rail.scrollTo({ left: rail.scrollLeft + tab.getBoundingClientRect().left - rail.getBoundingClientRect().left - (rail.clientWidth - tab.clientWidth) / 2, behavior: reducedMotion ? 'instant' : 'smooth' });
+    }
+  };
   const step = (offset: number) => { select(items[(index + offset + items.length) % items.length].id); setPaused(true); };
   const hasDetails = Boolean(active.details?.length || active.content);
 
   return <section aria-label={label} className="min-w-0" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false); }}>
-    <div role="tablist" aria-label={label} className={layout === 'cards' ? 'grid gap-3 sm:grid-cols-2 xl:grid-cols-4' : 'mb-4 flex flex-wrap gap-2'}>
+    <p className="touch-only mb-3 text-xs text-lnpe-steel">{zh ? '滑动浏览主题 · 点按查看内容' : 'Swipe through topics · Tap to explore'}</p>
+    <div role="tablist" aria-label={label} className={`mobile-topic-rail ${layout === 'cards' ? 'grid gap-3 sm:grid-cols-2 xl:grid-cols-4' : 'mb-4 flex flex-wrap gap-2'}`}>
       {items.map((item) => <button key={item.id} id={`${id}-${item.id}`} type="button" role="tab" aria-selected={active.id === item.id} aria-controls={`${id}-panel`} tabIndex={active.id === item.id ? 0 : -1}
         onPointerEnter={(event) => { if (event.pointerType === 'mouse' && item.id !== active.id) select(item.id); }}
         onFocus={() => { if (item.id !== active.id) select(item.id); }}
@@ -65,7 +82,7 @@ export function InlineMediaExplorer({ items, label, initialId, autoPlay = false,
         }}
         className={`${layout === 'cards' ? 'flex min-h-24 items-start gap-3 p-4 text-left' : 'inline-flex min-h-11 items-center gap-2 px-4 py-2.5'} border text-sm font-semibold transition-colors ${active.id === item.id ? 'border-lnpe-blue bg-[#edf4f9] text-lnpe-blue' : 'border-lnpe-border bg-white text-lnpe-muted hover:border-lnpe-blue hover:text-lnpe-blue'}`}>
         {item.icon && <span aria-hidden="true" className="shrink-0 text-lnpe-blue">{item.icon}</span>}
-        <span className="min-w-0">{item.title}{layout === 'cards' && <span className="mt-2 block text-[11px] font-normal text-lnpe-steel">{zh ? '悬停预览 · 点击展开' : 'Hover to preview · Click to explore'}</span>}</span>
+        <span className="min-w-0">{item.title}{layout === 'cards' && <span className="mt-2 block text-[11px] font-normal text-lnpe-steel">{touchReading ? (zh ? '点按展开说明' : 'Tap to explore') : (zh ? '悬停预览 · 点击展开' : 'Hover to preview · Click to explore')}</span>}</span>
       </button>)}
     </div>
     <div id={`${id}-panel`} role="tabpanel" aria-labelledby={`${id}-${active.id}`} tabIndex={0} className={`${layout === 'cards' ? 'mt-4' : ''} overflow-hidden border border-lnpe-border bg-white`}>
@@ -84,7 +101,7 @@ export function InlineMediaExplorer({ items, label, initialId, autoPlay = false,
                 <button type="button" onClick={() => step(-1)} aria-label={zh ? '上一项内容' : 'Previous topic'} className="grid h-10 w-10 place-items-center border border-lnpe-border hover:border-lnpe-blue"><ChevronLeft size={17} /></button>
                 <button type="button" onClick={() => step(1)} aria-label={zh ? '下一项内容' : 'Next topic'} className="grid h-10 w-10 place-items-center border border-lnpe-border hover:border-lnpe-blue"><ChevronRight size={17} /></button>
               </>}
-              {autoPlay && !reducedMotion && <button type="button" onClick={() => { setPaused(!paused); if (paused) setExpanded(false); }} aria-label={paused ? (zh ? '开始自动轮播' : 'Start slideshow') : (zh ? '暂停自动轮播' : 'Pause slideshow')} aria-pressed={!paused} className="grid h-10 w-10 place-items-center border border-lnpe-border hover:border-lnpe-blue">{paused ? <Play size={15} /> : <Pause size={15} />}</button>}
+              {autoPlay && !reducedMotion && !touchReading && <button type="button" onClick={() => { setPaused(!paused); if (paused) setExpanded(false); }} aria-label={paused ? (zh ? '开始自动轮播' : 'Start slideshow') : (zh ? '暂停自动轮播' : 'Pause slideshow')} aria-pressed={!paused} className="grid h-10 w-10 place-items-center border border-lnpe-border hover:border-lnpe-blue">{paused ? <Play size={15} /> : <Pause size={15} />}</button>}
             </div>
           </div>
         </div>

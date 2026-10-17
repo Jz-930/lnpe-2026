@@ -5,6 +5,7 @@ import { useEffect, useId, useRef } from "react";
 import { X } from "lucide-react";
 import ChatContainer from "./ChatContainer";
 import { assistantMessages } from "@/i18n/messages/assistant";
+import { useVisualViewport } from "./useVisualViewport";
 
 interface ChatDrawerProps {
   isOpen: boolean;
@@ -24,6 +25,7 @@ export default function ChatDrawer({ isOpen, onClose, lang, setLang }: ChatDrawe
 function ChatDrawerDialog({ onClose, lang, setLang }: Omit<ChatDrawerProps, "isOpen">) {
   const copy = assistantMessages[lang];
   const dialog = useRef<HTMLDialogElement>(null);
+  useVisualViewport(dialog);
   const closeButton = useRef<HTMLButtonElement>(null);
   const titleId = useId();
   const subtitleId = useId();
@@ -76,9 +78,9 @@ function ChatDrawerDialog({ onClose, lang, setLang }: Omit<ChatDrawerProps, "isO
               if (!anchor || anchor.hasAttribute("download") || (anchor.target && anchor.target !== "_self")) return;
               if (new URL(anchor.href, window.location.href).origin === window.location.origin) onClose();
             }}
-            className="fixed inset-y-3 right-3 z-50 flex w-[calc(100vw-24px)] max-w-[430px] flex-col overflow-hidden border border-lnpe-border bg-lnpe-paper shadow-[0_26px_80px_rgba(17,24,39,0.24)] md:inset-y-6 md:right-6 md:w-full clip-chamfer"
+            className="assistant-panel fixed inset-y-3 right-3 z-50 flex w-[calc(100vw-24px)] max-w-[430px] flex-col overflow-hidden border border-lnpe-border bg-lnpe-paper shadow-[0_26px_80px_rgba(17,24,39,0.24)] md:inset-y-6 md:right-6 md:w-full clip-chamfer"
           >
-            <div className="flex shrink-0 flex-wrap items-start justify-between gap-3 border-b border-lnpe-border bg-lnpe-bg-light px-5 py-4">
+            <div className="assistant-header flex shrink-0 flex-wrap items-start justify-between gap-3 border-b border-lnpe-border bg-lnpe-bg-light px-5 py-4">
               <div className="min-w-0 flex-1 basis-[180px]">
                 <div className="flex items-center gap-2">
                   <span className="h-2.5 w-2.5 shrink-0 bg-lnpe-kinetic" />
@@ -100,7 +102,7 @@ function ChatDrawerDialog({ onClose, lang, setLang }: Omit<ChatDrawerProps, "isO
                 >
                   {lang === "en" ? "中" : "EN"}
                 </button>
-                <span className="border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-steel">
+                <span className="assistant-access border border-lnpe-border bg-lnpe-paper px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-lnpe-steel">
                   {copy.access}
                 </span>
                 <button

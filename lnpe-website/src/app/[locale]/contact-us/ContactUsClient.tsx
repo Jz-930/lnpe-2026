@@ -39,13 +39,13 @@ export default function ContactUsClient({ initial = {} }: { initial?: Record<str
     catch { setCopyStatus(zh ? "请在下方文本框中选择并复制需求。" : "Select and copy the brief in the text box below."); }
   }
   return (
-    <main className="min-h-screen flex flex-col pt-[88px] bg-lnpe-bg text-lnpe-text">
+    <main className="contact-page min-h-screen flex flex-col pt-[88px] bg-lnpe-bg text-lnpe-text">
       <Navbar />
 
       <div className="flex-1">
         <section className="relative overflow-hidden border-b border-lnpe-border bg-lnpe-bg-light">
           <div className="absolute inset-0 bg-technical-grid opacity-70" />
-          <div className="container relative mx-auto max-w-6xl px-6 py-[72px]">
+          <div className="contact-hero container relative mx-auto max-w-6xl px-6 py-[72px]">
             <div className="max-w-4xl">
               <p className="spec-label mb-5">{t.eyebrow}</p>
               <h1 className="font-display text-4xl font-bold uppercase leading-[1.04] tracking-tight text-lnpe-dark md:text-6xl">
@@ -67,8 +67,8 @@ export default function ContactUsClient({ initial = {} }: { initial?: Record<str
           </div>
         </section>
 
-        <section className="py-20">
-          <div className="container mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <section className="contact-body py-20">
+          <div className="contact-layout container mx-auto grid max-w-6xl grid-cols-1 gap-8 px-6 lg:grid-cols-[0.9fr_1.1fr]">
             <aside className="space-y-5">
               <div className="border border-lnpe-border bg-lnpe-paper p-7 clip-chamfer">
                 <p className="spec-label mb-4">{t.serviceLabel}</p>
@@ -115,7 +115,7 @@ export default function ContactUsClient({ initial = {} }: { initial?: Record<str
               </div>
             </aside>
 
-            <div className="border border-lnpe-border bg-lnpe-paper p-6 md:p-8 shadow-[0_20px_60px_rgba(17,24,39,0.06)] clip-chamfer">
+            <div className="contact-form-panel border border-lnpe-border bg-lnpe-paper p-6 md:p-8 shadow-[0_20px_60px_rgba(17,24,39,0.06)] clip-chamfer">
               <div className="mb-8 flex flex-col justify-between gap-4 border-b border-lnpe-border pb-6 md:flex-row md:items-end">
                 <div>
                   <p className="spec-label mb-3">{t.formLabel}</p>

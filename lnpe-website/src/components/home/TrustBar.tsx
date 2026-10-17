@@ -5,6 +5,7 @@ import { useLocale } from '@/i18n/LocaleProvider';
 import { homeMessages } from '@/i18n/messages/home';
 import { getHomeInsights } from '@/content/home-insights';
 import { HomeInsightPanel } from './HomeInsightPanel';
+import styles from './HomeMobile.module.css';
 
 const TRUST_VALUES = ['5,000+', '30+', '20+', '20+'];
 
@@ -15,7 +16,7 @@ export function TrustBar() {
   const insights = useMemo(() => getHomeInsights(locale).trust, [locale]);
   const [selected, setSelected] = useState<number | null>(null);
   return (
-    <section className="relative overflow-hidden border-y border-[#d5dee7] bg-[#f2f5f7] text-[#111827]">
+    <section className={`${styles.trust} relative overflow-hidden border-y border-[#d5dee7] bg-[#f2f5f7] text-[#111827]`}>
       <div className="pointer-events-none absolute inset-y-0 left-0 w-1/2 bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.72),transparent)] [animation:trust-sweep_7.5s_linear_infinite] motion-reduce:animate-none" />
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4">

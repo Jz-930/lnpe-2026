@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { useTouchHome } from './useCompactHome';
 
 interface Vec2 {
   x: number;
@@ -124,13 +125,14 @@ function drawStaticPath(ctx: CanvasRenderingContext2D, w: number, h: number, act
 
 export function ParticleFlow({ activeIndex = 1, intensity = 1, theme = 'light' }: ParticleFlowProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const touch = useTouchHome();
 
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!canvas || !ctx) return;
 
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = touch || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const particles: Particle[] = [];
     let frame = 0;
     let width = 0;
@@ -238,7 +240,7 @@ export function ParticleFlow({ activeIndex = 1, intensity = 1, theme = 'light' }
       cancelAnimationFrame(frame);
       ro.disconnect();
     };
-  }, [activeIndex, intensity, theme]);
+  }, [activeIndex, intensity, theme, touch]);
 
   return <canvas ref={canvasRef} className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true" />;
 }

@@ -8,6 +8,7 @@ import { getProjectCases, PROJECT_FILTERS, type ProjectFilter } from "./project-
 import { useLocale } from "@/i18n/LocaleProvider";
 import { catalogUi, projectFilterLabels, formatCatalogMessage } from "@/i18n/messages/catalog";
 import { projectEngineering, projectDetailLabels } from "@/content/projects";
+import touchStyles from "@/components/applications/TouchCatalog.module.css";
 
 export function ProjectsWallClient() {
   const locale = useLocale();
@@ -21,8 +22,8 @@ export function ProjectsWallClient() {
   }, [activeFilter, projects]);
 
   return (
-    <section className="bg-[#f6f8fb] py-14 md:py-20">
-      <div className="container mx-auto px-6">
+    <section className="bg-[#f6f8fb] py-14 md:py-20 max-lg:py-9">
+      <div className="container mx-auto px-6 max-lg:px-5">
         <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <h2 className="font-display text-3xl font-semibold tracking-tight text-[#142033]">{ui.projectWall}</h2>
@@ -31,7 +32,12 @@ export function ProjectsWallClient() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2 pb-0" style={{ maxWidth: 760 }}>
+          <div className="min-w-0 lg:contents">
+            <div className="mb-3 flex items-center justify-between gap-3 text-xs text-[#62748a] lg:hidden">
+              <span className="font-semibold text-[#314155]">{locale === "zh" ? "按应用筛选" : "Filter by application"}</span>
+              <span>{locale === "zh" ? "左右滑动选择" : "Swipe to explore"} <span aria-hidden="true">↔</span></span>
+            </div>
+          <div className={`${touchStyles.rail} flex flex-wrap gap-2 pb-0 lg:max-w-[760px]`} aria-label={locale === "zh" ? "项目应用分类" : "Project application filters"}>
             {PROJECT_FILTERS.map((filter) => {
               const active = filter === activeFilter;
               return (
@@ -39,7 +45,14 @@ export function ProjectsWallClient() {
                   key={filter}
                   type="button"
                   aria-pressed={active}
-                  onClick={() => setActiveFilter(filter)}
+                  onClick={(event) => {
+                    setActiveFilter(filter);
+                    if (window.matchMedia("(max-width: 1023px)").matches) {
+                      const button = event.currentTarget;
+                      const rail = button.parentElement;
+                      if (rail) rail.scrollTo({ left: rail.scrollLeft + button.getBoundingClientRect().left - rail.getBoundingClientRect().left - (rail.clientWidth - button.clientWidth) / 2, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+                    }
+                  }}
                   className={`inline-flex shrink-0 items-center gap-2 border px-3 py-2 text-sm font-semibold transition-colors ${
                     active
                       ? "border-[#f26522] bg-[#f26522] text-white"
@@ -52,15 +65,17 @@ export function ProjectsWallClient() {
               );
             })}
           </div>
+          </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-2">
+        <p className="mb-4 text-xs font-medium text-[#62748a] lg:hidden" role="status" aria-live="polite" aria-atomic="true">{locale === "zh" ? `正在展示 ${visibleProjects.length} 个项目` : `${visibleProjects.length} projects shown`}</p>
+        <div className="grid gap-6 lg:grid-cols-2 max-lg:gap-5">
           {visibleProjects.map((project) => (
             <article
               key={project.slug}
-              className="grid overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] md:grid-cols-[240px_1fr]"
+              className={`${touchStyles.projectCard} grid overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] md:grid-cols-[240px_1fr]`}
             >
-              <div className="relative min-h-[240px] bg-[#edf3f9]">
+              <div className="relative min-h-[240px] bg-[#edf3f9] max-md:aspect-[8/5] max-md:min-h-0">
                 <InteractiveImage
                   images={[{ src: project.image, alt: project.title, caption: project.description }, ...project.gallery.map((src, index) => ({ src, alt: `${project.title} · ${index + 1}`, caption: project.title }))]}
                   src={project.image}
@@ -71,7 +86,7 @@ export function ProjectsWallClient() {
                 />
               </div>
 
-              <div className="flex flex-col p-6">
+              <div className="flex flex-col p-6 max-lg:min-w-0 max-lg:p-5">
                 <div className="mb-4 flex flex-wrap gap-2">
                   <span className="border border-[#dbe3ee] bg-[#f8fafc] px-2.5 py-1 text-xs font-semibold text-[#536276]">
                     {project.date}
@@ -84,7 +99,7 @@ export function ProjectsWallClient() {
                   </span>
                 </div>
 
-                <h3 className="font-display text-2xl font-semibold tracking-tight text-[#142033]"><Link href={`/projects/${project.slug}`} className="hover:text-lnpe-blue">{project.title}</Link></h3>
+                <h3 className="font-display text-2xl font-semibold tracking-tight text-[#142033] max-lg:text-[22px] max-lg:leading-snug"><Link href={`/projects/${project.slug}`} className="hover:text-lnpe-blue">{project.title}</Link></h3>
                 <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#536276]">{project.description}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -99,7 +114,7 @@ export function ProjectsWallClient() {
                   <summary className="cursor-pointer font-medium text-[#174a7c]">{projectDetailLabels[locale].scope}</summary>
                   <div className="mt-3 space-y-3">{projectEngineering[project.slug].copy[locale].scope.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
                 </details>
-                <Link href={`/projects/${project.slug}`} className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-[#174a7c] transition-colors hover:text-[#f26522]">
+                <Link href={`/projects/${project.slug}`} className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-[#174a7c] transition-colors hover:text-[#f26522] max-lg:min-h-12 max-lg:justify-between max-lg:pb-2">
                   {ui.viewCase}
                   <ArrowRight size={16} />
                 </Link>

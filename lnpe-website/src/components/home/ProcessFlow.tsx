@@ -8,6 +8,8 @@ import { getHomeInsights } from '@/content/home-insights';
 import { ArrowLeft, ArrowRight, Boxes, Fan, FlaskConical, Gauge, PackageCheck, Pause, Play, Route as RouteIcon } from 'lucide-react';
 import { ParticleFlow } from './ParticleFlow';
 import { HomeInsightPanel } from './HomeInsightPanel';
+import styles from './HomeMobile.module.css';
+import { useCompactHome, useTouchHome } from './useCompactHome';
 
 const ROUTES = [
   { name: 'Battery Materials', boost: 1.18 },
@@ -36,10 +38,12 @@ export function ProcessFlow() {
   const [focused, setFocused] = useState(false);
   const [paused, setPaused] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const compact = useCompactHome();
+  const touch = useTouchHome();
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || hovered || focused || paused || expanded) return;
+    if (compact || touch || reducedMotion || hovered || focused || paused || expanded) return;
 
     const interval = window.setInterval(() => {
       if (document.visibilityState !== 'visible') return;
@@ -47,11 +51,11 @@ export function ProcessFlow() {
     }, 2800);
 
     return () => window.clearInterval(interval);
-  }, [hovered, focused, paused, expanded]);
+  }, [compact, touch, hovered, focused, paused, expanded]);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || hovered || focused || paused || expanded) return;
+    if (compact || touch || reducedMotion || hovered || focused || paused || expanded) return;
 
     const interval = window.setInterval(() => {
       if (document.visibilityState !== 'visible') return;
@@ -62,7 +66,7 @@ export function ProcessFlow() {
     }, 14000);
 
     return () => window.clearInterval(interval);
-  }, [hovered, focused, paused, expanded]);
+  }, [compact, touch, hovered, focused, paused, expanded]);
 
   const activeRoute = useMemo(() => ROUTES.find((route) => route.name === routeName) ?? ROUTES[0], [routeName]);
   const activeStep = STEPS[activeIndex];
@@ -75,7 +79,7 @@ export function ProcessFlow() {
   const selectStep = (index: number) => { setActiveIndex(index); setPaused(true); setExpanded(true); };
 
   return (
-    <section className="preserve-white relative overflow-hidden bg-[#0b0f14] py-24 text-white">
+    <section className={`${styles.section} preserve-white relative overflow-hidden bg-[#0b0f14] py-24 text-white`}>
       <div className="pointer-events-none absolute inset-0">
         <Image
           src="/images/backgrounds/LRadjusted-59.webp"
@@ -89,7 +93,7 @@ export function ProcessFlow() {
       </div>
 
       <div className="container relative z-10 mx-auto px-6" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
-        <div className="mb-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
+        <div className={`${styles.sectionHeading} mb-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end`}>
           <div>
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-white sm:text-4xl md:text-6xl">
               {t.title}
@@ -103,7 +107,7 @@ export function ProcessFlow() {
         <div
           className="overflow-hidden border border-white/14 bg-[#0f151d]/94 shadow-[0_34px_120px_rgba(0,0,0,0.36)] backdrop-blur"
         >
-          <div className="grid border-b border-white/12 bg-white/[0.045] md:grid-cols-[0.92fr_1.08fr]">
+          <div className={`${styles.processHeader} grid border-b border-white/12 bg-white/[0.045] md:grid-cols-[0.92fr_1.08fr]`}>
             <div className="flex items-center gap-3 border-b border-white/12 px-5 py-4 md:border-b-0 md:border-r md:px-7">
               <RouteIcon size={17} className="text-[#F26522]" />
               <div>
@@ -112,7 +116,7 @@ export function ProcessFlow() {
               </div>
             </div>
 
-            <div className="flex gap-2 overflow-x-auto px-5 py-4 md:px-7">
+            <div className={`${styles.scrollRail} ${styles.processRoutes} flex gap-2 overflow-x-auto px-5 py-4 md:px-7`}>
               {ROUTES.map((route) => {
                 const active = route.name === routeName;
                 return (
@@ -126,6 +130,7 @@ export function ProcessFlow() {
                         : 'border-white/12 bg-white/[0.055] text-white/58 hover:border-white/30 hover:text-white'
                     }`}
                     aria-pressed={active}
+                    aria-controls={compact ? 'process-mobile-route-note' : 'process-route-note'}
                   >
                     <span className="relative z-10">{t.routes[route.name].name}</span>
                     {active && (
@@ -137,10 +142,34 @@ export function ProcessFlow() {
             </div>
           </div>
 
+          <div id="process-route-note" role="status" aria-live="polite" aria-atomic="true" className="hidden border-b border-white/12 bg-[#F26522]/[0.055] px-7 py-3 lg:block">
+            <p className="border-l-2 border-[#F26522] pl-3 text-sm leading-7 text-white/75">{routeContent.note}</p>
+          </div>
+
+          <div className={styles.mobileSteps}>
+            <p id="process-mobile-route-note">{routeContent.note}</p>
+            <p>{locale === 'zh' ? '左右滑动工序，点按查看工艺' : 'Swipe the stages. Tap to explore a process.'}</p>
+            <div className={`${styles.scrollRail} ${styles.mobileStepRail}`} aria-label={t.activeStep}>
+              {STEPS.map((step, index) => {
+                const Icon = step.icon;
+                return <button key={step.name} type="button" aria-pressed={activeIndex === index} aria-controls="process-active-summary" onClick={(event) => {
+                  setActiveIndex(index);
+                  setExpanded(false);
+                  setPaused(true);
+                  const rail = event.currentTarget.parentElement;
+                  if (rail) rail.scrollTo({ left: event.currentTarget.offsetLeft - rail.offsetLeft - 16, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+                }}>
+                  <span><Icon size={22} aria-hidden="true" /><small>0{index + 1}</small></span>
+                  <strong>{t.steps[step.name].name}</strong>
+                </button>;
+              })}
+            </div>
+          </div>
+
           <div className="grid lg:grid-cols-[1.38fr_0.62fr]">
-            <div className="overflow-x-auto border-b border-white/12 lg:overflow-visible lg:border-b-0 lg:border-r">
+            <div className={`${styles.desktopDiagram} overflow-x-auto border-b border-white/12 lg:overflow-visible lg:border-b-0 lg:border-r`}>
               <div className="relative min-h-[500px] min-w-[880px] overflow-hidden px-8 py-10 lg:min-w-0">
-                <ParticleFlow activeIndex={activeIndex} intensity={intensity} theme="dark" />
+                {!compact && <ParticleFlow activeIndex={activeIndex} intensity={intensity} theme="dark" />}
 
                 <div className="absolute inset-8 border border-white/8" />
                 <div className="absolute left-10 right-10 top-[52%] h-px bg-white/12" />
@@ -194,10 +223,7 @@ export function ProcessFlow() {
                   })}
                 </div>
 
-                <div className="absolute bottom-8 left-8 right-8 z-10 flex items-center justify-between border-t border-white/12 pt-5">
-                  <span className="max-w-xl font-mono text-[11px] uppercase tracking-[0.2em] text-white/48">
-                    {routeContent.note}
-                  </span>
+                <div className="absolute bottom-8 left-8 right-8 z-10 flex items-center justify-end border-t border-white/12 pt-5">
                   <span className="relative h-2 w-40 overflow-hidden bg-white/12" aria-hidden="true">
                     <span className="absolute inset-y-0 left-0 w-2/3 bg-gradient-to-r from-[#F26522] via-[#1E5F8A] to-white/60 [animation:route-progress_2.8s_linear_infinite] motion-reduce:animate-none" />
                   </span>
@@ -205,7 +231,7 @@ export function ProcessFlow() {
               </div>
             </div>
 
-            <aside className="bg-[#111827] p-6 text-white md:p-8">
+            <aside id="process-active-summary" className={`${styles.processAside} bg-[#111827] p-6 text-white md:p-8`}>
               <div className="mb-8 flex items-center justify-between border-b border-white/15 pb-5">
                 <div>
                   <div className="font-mono text-[11px] uppercase tracking-[0.22em] text-white/45">{t.activeStep}</div>
@@ -239,8 +265,9 @@ export function ProcessFlow() {
               </div>
             </aside>
           </div>
-          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/12 px-5 py-4 text-xs text-white/60">
-            <span>{interaction.previewHint}</span>
+          <div className={`${styles.desktopControls} flex flex-wrap items-center justify-between gap-3 border-t border-white/12 px-5 py-4 text-xs text-white/60`}>
+            <span className={styles.hoverHint}>{interaction.previewHint}</span>
+            <span className={styles.touchHint}>{locale === 'zh' ? '点按工序查看详情，使用箭头切换' : 'Tap a stage for details, or use the arrows to explore.'}</span>
             <div className="flex items-center gap-2">
               <button type="button" onClick={() => selectStep((activeIndex + STEPS.length - 1) % STEPS.length)} aria-label={interaction.previous} className="border border-white/20 p-2 hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]"><ArrowLeft size={16} /></button>
               <button type="button" onClick={() => { setPaused(!paused); if (paused) setExpanded(false); }} aria-pressed={paused} className="inline-flex items-center gap-2 border border-white/20 px-3 py-2 hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">{paused ? <Play size={14} /> : <Pause size={14} />}{paused ? interaction.resume : interaction.pause}</button>

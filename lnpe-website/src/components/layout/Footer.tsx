@@ -4,6 +4,8 @@ import Link from '@/components/i18n/LocalizedLink';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { footerMessages } from '@/i18n/messages/footer';
 import Image from 'next/image';
+import { ArrowUpRight, ArrowRight, Plus } from 'lucide-react';
+import styles from './Footer.module.css';
 
 const footerBackgroundImages = [
   '/images/backgrounds/LRadjusted-1.webp',
@@ -21,7 +23,7 @@ function FooterBackgroundSlideshow() {
       {footerBackgroundImages.map((src, index) => (
         <div
           key={src}
-          className="absolute inset-0 opacity-0 [animation:footer-image-fade_168s_ease-in-out_infinite] motion-reduce:animate-none"
+          className={`absolute inset-0 opacity-0 [animation:footer-image-fade_168s_ease-in-out_infinite] motion-reduce:animate-none ${styles.footerSlide}`}
           style={{ animationDelay: `${index * 24}s` }}
         >
           <Image
@@ -36,7 +38,7 @@ function FooterBackgroundSlideshow() {
             alt=""
             fill
             sizes="100vw"
-            className="footer-alpha-scan object-cover opacity-[0.2] mix-blend-multiply brightness-[0.92] contrast-[1.28] saturate-[0.76]"
+            className={`footer-alpha-scan object-cover opacity-[0.2] mix-blend-multiply brightness-[0.92] contrast-[1.28] saturate-[0.76] ${styles.scanImage}`}
             style={{ animationDelay: `${index * 24}s` }}
           />
         </div>
@@ -48,8 +50,29 @@ function FooterBackgroundSlideshow() {
 export function Footer() {
   const locale = useLocale();
   const t = footerMessages[locale];
+  const zh = locale === 'zh';
+  const productLinks = [
+    ['/products/jet-mill', t.jetMill],
+    ['/products/impact-mill', t.impactMill],
+    ['/products/jet-pulverizer', t.jetPulverizer],
+    ['/products/turnkey-epc', t.turnkeyEpc],
+    ['/products/shaping-mill', t.shapingMill],
+    ['/products/air-classifier', t.airClassifier],
+    ['/products/laboratory-equipment', t.laboratory],
+  ];
+  const companyLinks = [
+    ['/about', t.about], ['/news', t.news], ['/projects', t.projects], ['/contact-us', t.contact],
+  ];
+  const resourceLinks = [
+    ['/research', zh ? '研究与实验中心' : 'Research & testing'],
+    ['/support', zh ? '服务与支持' : 'Service & support'],
+    ['/resources', zh ? '资料与常见问题' : 'Resources & FAQ'],
+    ['/applications/materials', zh ? '物料目录' : 'Material directory'],
+    ['/about#purpose', zh ? '人才与发展' : 'Careers & development'],
+    ['/privacy', zh ? '网站与联系说明' : 'Website & contact information'],
+  ];
   return (
-    <footer className="relative isolate w-full overflow-hidden border-t border-slate-800 bg-[#111a26] py-12 text-slate-300 md:py-20">
+    <footer className={`relative isolate w-full overflow-hidden border-t border-slate-800 bg-[#111a26] py-12 text-slate-300 md:py-20 ${styles.footer}`}>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-[#d7dde6]/42" />
         <FooterBackgroundSlideshow />
@@ -58,7 +81,7 @@ export function Footer() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,17,29,0.24),rgba(8,17,29,0.48)_48%,rgba(8,17,29,0.8)_100%)]" />
       </div>
       <div className="absolute left-0 top-0 z-20 h-[3px] w-full bg-gradient-to-r from-lnpe-kinetic via-lnpe-blue to-transparent" />
-      <div className="container relative z-10 mx-auto grid grid-cols-1 gap-12 px-6 md:grid-cols-4">
+      <div className={`container relative z-10 mx-auto grid grid-cols-1 gap-12 px-6 md:grid-cols-4 ${styles.desktopFooter}`}>
         {/* Brand Col */}
         <div className="md:col-span-2">
           <Link href="/" className="relative mb-6 inline-block">
@@ -113,7 +136,7 @@ export function Footer() {
           </Link>
         </div>
       </div>
-      <nav aria-label={locale === 'zh' ? '更多资料与服务' : 'Resources and services'} className="container relative z-10 mx-auto mt-10 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/15 px-6 pt-6 text-xs text-slate-300">
+      <nav aria-label={locale === 'zh' ? '更多资料与服务' : 'Resources and services'} className={`container relative z-10 mx-auto mt-10 flex flex-wrap gap-x-7 gap-y-3 border-t border-white/15 px-6 pt-6 text-xs text-slate-300 ${styles.desktopFooter}`}>
         {[
           ['/research', locale === 'zh' ? '研究与实验中心' : 'Research & testing'],
           ['/support', locale === 'zh' ? '服务与支持' : 'Service & support'],
@@ -123,6 +146,40 @@ export function Footer() {
           ['/privacy', locale === 'zh' ? '网站与联系说明' : 'Website & contact information'],
         ].map(([href, label]) => <Link key={href} href={href} className="transition-colors hover:text-white">{label}</Link>)}
       </nav>
+      <div className={styles.mobileFooter}>
+        <div className={styles.mobileIntro}>
+          <div>
+            <Link href="/" className={styles.mobileLogo}>
+              <Image src="/images/00_brand/logo_01_lnpe-logo.webp" alt={t.logoAlt} width={160} height={50} className="h-10 w-auto brightness-0 invert opacity-90" />
+            </Link>
+            <p className={styles.description}>{t.description}</p>
+          </div>
+          <div className={styles.mobileContact}>
+            <p>{zh ? '让下一步，更清晰。' : 'Make your next step clear.'}</p>
+            <Link href="/contact-us" className={styles.quoteLink}>{t.quote}<ArrowRight size={18} aria-hidden="true" /></Link>
+          </div>
+        </div>
+        <div className={styles.disclosures}>
+          {[
+            { label: t.products, links: productLinks },
+            { label: t.company, links: companyLinks },
+          ].map((group) => (
+            <details key={group.label} className={styles.disclosure}>
+              <summary>{group.label}<Plus size={18} aria-hidden="true" /></summary>
+              <nav aria-label={group.label} className={styles.disclosureLinks}>
+                {group.links.map(([href, label]) => <Link href={href} key={href}>{label}<ArrowUpRight size={14} aria-hidden="true" /></Link>)}
+              </nav>
+            </details>
+          ))}
+        </div>
+        <nav aria-label={zh ? '更多资料与服务' : 'Resources and services'} className={styles.mobileResources}>
+          {resourceLinks.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
+        </nav>
+        <div className={styles.mobileBottom}>
+          <Link href="/portal/assistant">{t.portal}<ArrowUpRight size={14} aria-hidden="true" /></Link>
+          <p>{t.copyright}</p>
+        </div>
+      </div>
     </footer>
   );
 }

@@ -1,0 +1,65 @@
+/* These refinements deliberately leave the desktop layout untouched. */
+@media (max-width: 1023px) {
+  .rail {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    max-width: none;
+    margin-inline: -20px;
+    padding: 0 20px 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #b8c8d8 transparent;
+  }
+  .rail > button {
+    min-height: 46px;
+    padding-inline: 16px;
+    scroll-snap-align: start;
+    white-space: nowrap;
+    touch-action: manipulation;
+  }
+  .rail > button:active { transform: translateY(1px); }
+  .fields { min-width: 0; }
+  .fields input, .fields select {
+    min-width: 0;
+    min-height: 48px;
+    font-size: 16px;
+  }
+  .fields input:focus-visible, .fields select:focus-visible { outline: 2px solid #174a7c; outline-offset: 3px; }
+  .materialList { gap: 12px; }
+  .materialList > li { border: 1px solid #dbe3ee; background: white; }
+  .materialList summary { padding: 18px 16px; }
+  .materialList summary > span:first-child { font-size: 16px; line-height: 1.5; }
+  .materialList summary > span:nth-child(2) { font-size: 14px; line-height: 1.8; }
+  .materialList summary > span:last-child { font-size: 12px; }
+  .materialList details[open] { border-top: 2px solid #f26522; }
+  .materialList details[open] summary { padding-top: 16px; }
+  .materialList details > div { margin: 0 12px 12px; font-size: 14px; line-height: 1.85; }
+  .materialList details a { min-height: 44px; font-size: 13px; }
+  .newsList { max-height: none; overflow: visible; padding-right: 0; }
+  .newsList h2 { font-size: 16px; line-height: 1.6; }
+  .newsList p { font-size: 14px; line-height: 1.8; }
+  .newsList > a { padding-block: 20px; }
+  .newsList > a:active { background: #edf3f8; }
+  .productCard summary, .projectCard summary { min-height: 44px; padding-block: 10px; }
+  .productCard details, .projectCard details { padding-top: 0; }
+  .productCard details a { min-height: 44px; }
+}
+
+@media (min-width: 560px) and (max-width: 1023px) {
+  .productGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Larger touch tablets retain their grid, with usable tap targets. */
+@media (hover: none) and (pointer: coarse) {
+  .rail > button, .productCard summary, .projectCard summary { min-height: 44px; }
+  .fields input, .fields select { min-height: 48px; font-size: 16px; }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) and (hover: none) and (pointer: coarse) {
+  .projectCard { grid-template-columns: minmax(0, 1fr); }
+  .projectCard > div:first-child { min-height: 0; aspect-ratio: 8 / 5; }
+}

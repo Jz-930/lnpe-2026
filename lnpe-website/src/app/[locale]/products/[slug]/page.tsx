@@ -48,7 +48,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
   const galleryImages = getProductGalleryImages(product);
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
+    <main className="product-detail relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
       <div className="absolute left-0 right-0 top-0 h-[88px] bg-[#0b1220]" aria-hidden="true" />
       <Navbar />
 
@@ -57,7 +57,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
           <div className="container mx-auto px-6 py-10 md:py-16">
             <Link
               href="/products"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#536276] transition-colors hover:text-[#174a7c]"
+              className="product-back mb-8 inline-flex items-center gap-2 text-sm font-semibold text-[#536276] transition-colors hover:text-[#174a7c]"
             >
               <ChevronLeft size={17} />
               {ui.backToProducts}
@@ -109,7 +109,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
         <section className="border-b border-[#dbe3ee] bg-white">
           <div className="container mx-auto px-6 py-8">
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="product-specs grid gap-4 md:grid-cols-4">
               {product.specs.map((spec) => (
                 <div key={spec.label} className="border-l-2 border-[#f26522] bg-[#f8fafc] p-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6b7b8f]">{spec.label}</p>

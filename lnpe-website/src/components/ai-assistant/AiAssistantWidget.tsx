@@ -35,7 +35,7 @@ export default function AiAssistantWidget() {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 pointer-events-none">
+      <div className="assistant-launcher fixed bottom-6 right-6 z-50 flex flex-col items-end gap-4 pointer-events-none">
         <AnimatePresence>
           {showTooltip && (
             <motion.div
@@ -72,14 +72,16 @@ export default function AiAssistantWidget() {
 
         <motion.button
           onClick={toggleOpen}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          onPointerEnter={(event) => { if (event.pointerType === "mouse") handleMouseEnter(); }}
+          onPointerLeave={(event) => { if (event.pointerType === "mouse") handleMouseLeave(); }}
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           whileHover={{ y: -2 }}
           whileTap={{ scale: 0.96 }}
           className="pointer-events-auto relative flex h-14 w-14 items-center justify-center border border-lnpe-border bg-lnpe-paper text-lnpe-blue shadow-[0_16px_38px_rgba(17,24,39,0.18)] transition-colors hover:border-lnpe-kinetic hover:text-lnpe-kinetic clip-chamfer"
           aria-label={isOpen ? copy.close : copy.open}
+          aria-haspopup="dialog"
+          aria-expanded={isOpen}
         >
           <span className="absolute right-2 top-2 h-2.5 w-2.5 bg-lnpe-kinetic" />
           <AnimatePresence mode="wait">

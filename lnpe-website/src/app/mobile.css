@@ -1,0 +1,98 @@
+/* Touch adaptations are deliberately isolated from the desktop presentation. */
+.touch-only { display: none; }
+
+@media (max-width: 1023px), (pointer: coarse) {
+  .touch-only { display: block; }
+  html { -webkit-text-size-adjust: 100%; }
+  :where(button, a, summary, input, select, textarea) { -webkit-tap-highlight-color: transparent; }
+  :where(button, a, summary) { touch-action: manipulation; }
+  :where(button, summary):active { filter: brightness(.94); }
+  :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) { font-size: 16px; }
+  :where(input:not([type="checkbox"]):not([type="radio"]), select) { min-height: 48px; }
+  .inline-facts button, .inline-facts a, [role="tabpanel"] button { min-height: 44px; }
+  [role="tabpanel"] button:has(> svg:only-child) { min-width: 44px; }
+  .media-lightbox-content {
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .media-lightbox-content figcaption { max-height: 24dvh; overflow-y: auto; overscroll-behavior: contain; }
+}
+
+@media (max-width: 1023px) {
+  main[class~="pt-[88px]"] { padding-top: calc(72px + env(safe-area-inset-top)); }
+  main > div[aria-hidden="true"][class~="h-[88px]"] { height: calc(72px + env(safe-area-inset-top)); }
+  main :where(h1:not(.assistant-workbench-title)) { font-size: clamp(2rem, 6.5vw, 2.875rem); line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; }
+  main :where(section[id], div[id], details[id]) { scroll-margin-top: calc(88px + env(safe-area-inset-top)); }
+  .container { padding-inline: max(20px, env(safe-area-inset-left)) max(20px, env(safe-area-inset-right)); }
+  .mobile-topic-rail {
+    position: relative; display: flex; flex-wrap: nowrap; gap: 10px; overflow-x: auto;
+    padding: 2px 2px 12px; scroll-snap-type: x proximity; scroll-padding-inline: 2px;
+    overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: #b7c8d5 transparent;
+  }
+  .mobile-topic-rail > button { flex: 0 0 auto; max-width: 78%; min-height: 52px; scroll-snap-align: start; }
+  .mobile-topic-rail > button[aria-selected="true"] { box-shadow: inset 0 -2px #1e5f8a; }
+  .mobile-topic-rail + [role="tabpanel"] { margin-top: 4px; }
+  .media-lightbox-content figure > div { min-height: 0; }
+  .contact-page .contact-layout > aside { order: 2; }
+  .contact-page .contact-form-panel { order: 1; scroll-margin-top: 88px; }
+  .contact-page a[href^="tel:"], .contact-page a[href^="mailto:"] { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; }
+  .contact-page .contact-hero { padding-block: 36px; }
+  .contact-page .contact-hero > div:last-child { margin-top: 28px; }
+  .contact-page .contact-body { padding-block: 36px 56px; }
+  .contact-page .contact-form-panel { padding: 24px; }
+  .contact-page .contact-form-panel h2 { font-size: 26px; }
+  .contact-page .contact-form-panel button, .contact-page .contact-form-panel a { min-height: 44px; }
+  .assistant-launcher { right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); }
+  .assistant-launcher > button { width: 48px; height: 48px; }
+  .assistant-launcher > div { display: none; }
+  .assistant-panel button { min-height: 44px; }
+  .assistant-panel button:has(> svg:only-child) { min-width: 44px; }
+  .assistant-panel .assistant-header { align-items: center; flex-wrap: nowrap; padding: 12px 16px; gap: 8px; }
+  .assistant-panel .assistant-header > div:first-child { flex-basis: auto; }
+  .assistant-panel .assistant-access { display: none; }
+  .assistant-composer { padding-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .assistant-suggestions { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; overscroll-behavior-x: contain; }
+  .assistant-suggestions button { min-height: 44px; flex-shrink: 0; }
+  .assistant-composer button[type="submit"] { min-width: 44px; min-height: 44px; }
+  .assistant-log { overscroll-behavior-y: contain; }
+  .assistant-portal { min-height: 0; }
+  .assistant-portal > header { padding-top: max(16px, env(safe-area-inset-top)); padding-left: max(20px, env(safe-area-inset-left)); padding-right: max(20px, env(safe-area-inset-right)); }
+  .assistant-portal { height: var(--visible-height, 100dvh); }
+}
+
+@media (min-width: 1024px) and (pointer: coarse) {
+  .mobile-topic-rail { position: relative; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 10px; padding-bottom: 12px; scroll-snap-type: x proximity; overscroll-behavior-x: contain; }
+  .mobile-topic-rail > button { flex: 0 0 auto; max-width: 32%; min-height: 52px; scroll-snap-align: start; }
+}
+
+@media (max-width: 639px) {
+  .assistant-panel {
+    inset: var(--visible-top, 0px) 0 auto; width: 100%; max-width: none; height: var(--visible-height, 100dvh); border: 0; clip-path: none;
+    padding-top: env(safe-area-inset-top);
+  }
+  .assistant-panel .assistant-header h3 { font-size: 14px; }
+  .assistant-panel .assistant-header p { font-size: 10px; letter-spacing: .02em; }
+  .contact-page .contact-form-panel { padding: 20px; }
+  .specification-table thead { display: none; }
+  .specification-table, .specification-table tbody, .specification-table tr, .specification-table th, .specification-table td { display: block; width: 100%; min-width: 0; }
+  .specification-table tr { padding: 16px 0; }
+  .specification-table th { padding: 0; font-weight: 600; color: #314155; }
+  .specification-table td { padding: 8px 0 0; color: #62748a; }
+  .specification-table td::before { content: attr(data-label) " · "; font-size: 12px; color: #1e5f8a; }
+  .product-detail .product-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .product-detail .product-specs > div { padding: 14px 12px; }
+  .product-detail .product-back { min-height: 44px; margin-bottom: 20px; }
+}
+
+@media (max-height: 500px) and (pointer: coarse) {
+  .assistant-panel .assistant-header p, .assistant-composer > p { display: none; }
+  .assistant-panel .assistant-suggestions { display: none; }
+  .media-lightbox-content figcaption { max-height: 18dvh; }
+}
+
+@media (prefers-reduced-motion: reduce) and (max-width: 1023px) {
+  html { scroll-behavior: auto; }
+  .mobile-topic-rail { scroll-behavior: auto; }
+}

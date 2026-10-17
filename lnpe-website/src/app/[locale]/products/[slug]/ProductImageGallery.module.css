@@ -1,0 +1,37 @@
+.touchGallery { display: none; }
+
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .gallery { min-width: 0; max-width: 100%; }
+  .desktopGallery { display: none; }
+  .touchGallery { display: block; min-width: 0; max-width: 100%; }
+  .slides {
+    display: flex;
+    width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    border: 1px solid #dbe3ee;
+    background: linear-gradient(135deg, #fff, #f2f6fa, #e7edf5);
+  }
+  .slides::-webkit-scrollbar { display: none; }
+  .slide {
+    position: relative;
+    flex: 0 0 100%;
+    min-width: 0;
+    aspect-ratio: 4 / 3;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; }
+  .hint { color: #62748a; font-size: 12px; line-height: 1.7; }
+  .controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  .controls button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #dbe3ee; color: #174a7c; background: white; }
+  .controls button:disabled { opacity: 0.35; }
+  .controls button:active:not(:disabled) { background: #edf3f9; }
+  .count { min-width: 35px; text-align: center; color: #536276; font-size: 12px; font-variant-numeric: tabular-nums; }
+  .thumbs { display: flex; gap: 10px; overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: 3px; padding: 3px 3px 10px; scrollbar-width: thin; scrollbar-color: #b8c8d8 transparent; }
+  .thumbs > button { flex: 0 0 76px; width: 76px; height: 76px; }
+  .thumbs img { object-fit: contain; padding: 5px; }
+  .controls button:focus-visible, .thumbs button:focus-visible { outline: 2px solid #174a7c; outline-offset: 3px; }
+}

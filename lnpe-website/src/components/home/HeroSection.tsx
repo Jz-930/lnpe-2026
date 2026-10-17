@@ -8,6 +8,7 @@ import { getHomeInsights } from '@/content/home-insights';
 import { HomeInsightPanel } from './HomeInsightPanel';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight, MoveDown, RadioTower } from 'lucide-react';
+import styles from './HomeMobile.module.css';
 
 export function HeroSection() {
   const locale = useLocale();
@@ -16,7 +17,7 @@ export function HeroSection() {
   const insights = useMemo(() => getHomeInsights(locale).hero, [locale]);
   const [openSpec, setOpenSpec] = useState<number | null>(null);
   return (
-    <section className="preserve-white relative isolate min-h-[calc(100svh-88px)] overflow-hidden bg-[#0b0f14] text-white">
+    <section className={`${styles.hero} preserve-white relative isolate min-h-[calc(100svh-88px)] overflow-hidden bg-[#0b0f14] text-white`}>
       <Image
         src="/images/backgrounds/LRadjusted-287.webp"
         alt={t.imageAlt}
@@ -32,6 +33,7 @@ export function HeroSection() {
       <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-white/30" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-32 bg-gradient-to-t from-[#0b0f14] to-transparent" />
       <div
+        className={styles.heroScan}
         aria-hidden="true"
         style={{
           pointerEvents: 'none',
@@ -146,8 +148,8 @@ export function HeroSection() {
         </span>
       </div>
 
-      <div className="relative z-20 mx-auto flex min-h-[calc(100svh-88px)] w-full max-w-[1440px] flex-col justify-between px-6 pb-8 pt-12 sm:pt-16 lg:pb-10 lg:pt-20">
-        <div className="ml-auto min-w-0 w-full max-w-full pt-4 text-right sm:max-w-[860px] sm:pt-8 lg:w-[660px] lg:max-w-[660px] lg:pt-10">
+      <div className={`${styles.heroContent} relative z-20 mx-auto flex min-h-[calc(100svh-88px)] w-full max-w-[1440px] flex-col justify-between px-6 pb-8 pt-12 sm:pt-16 lg:pb-10 lg:pt-20`}>
+        <div className={`${styles.heroCopy} ml-auto min-w-0 w-full max-w-full pt-4 text-right sm:max-w-[860px] sm:pt-8 lg:w-[660px] lg:max-w-[660px] lg:pt-10`}>
           <div className="mb-6 ml-auto h-px w-20 bg-[#F26522]" aria-hidden="true" />
 
           <h1 className={`ml-auto ${locale === 'zh' ? 'max-w-full' : 'max-w-[11ch]'} font-display text-5xl font-bold uppercase leading-[0.96] tracking-normal text-white drop-shadow-[0_10px_34px_rgba(0,0,0,0.42)] sm:text-6xl md:text-7xl`}>
@@ -158,10 +160,10 @@ export function HeroSection() {
             {t.description}
           </p>
 
-          <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end">
+          <div className={`${styles.heroActions} mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-end`}>
             <Link
               href="/contact-us"
-              className="group relative inline-flex w-full max-w-full items-center justify-center gap-3 overflow-hidden bg-[#F26522] px-6 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_18px_42px_rgba(242,101,34,0.28)] transition-colors hover:bg-white hover:text-[#111827] sm:w-auto"
+              className={`${styles.heroAction} group relative inline-flex w-full max-w-full items-center justify-center gap-3 overflow-hidden bg-[#F26522] px-6 py-4 text-sm font-bold uppercase tracking-wider text-white shadow-[0_18px_42px_rgba(242,101,34,0.28)] transition-colors hover:bg-white hover:text-[#111827] sm:w-auto`}
             >
               <span className="absolute inset-y-0 left-0 w-12 -skew-x-12 bg-white/18 [animation:trust-sweep_4.2s_linear_infinite] motion-reduce:animate-none" />
               <span className="relative z-10 inline-flex items-center gap-3">
@@ -172,7 +174,7 @@ export function HeroSection() {
 
             <Link
               href="/products"
-              className="group inline-flex w-full max-w-full items-center justify-center gap-3 border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur transition-colors hover:border-white hover:bg-white hover:text-[#111827] sm:w-auto"
+              className={`${styles.heroAction} group inline-flex w-full max-w-full items-center justify-center gap-3 border border-white/30 bg-white/10 px-6 py-4 text-sm font-bold uppercase tracking-wider text-white backdrop-blur transition-colors hover:border-white hover:bg-white hover:text-[#111827] sm:w-auto`}
             >
               {t.viewSystems}
               <ChevronRight size={16} className="transition-transform group-hover:translate-x-1" />
@@ -180,7 +182,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="ml-auto mt-10 w-full max-w-[980px] lg:w-[980px]">
+        <div className={`${styles.heroStats} ml-auto mt-10 w-full max-w-[980px] lg:w-[980px]`}>
         <div className="grid grid-cols-2 border border-white/18 bg-[#0d1218]/72 text-right shadow-[0_28px_80px_rgba(0,0,0,0.28)] backdrop-blur-md sm:grid-cols-4">
           {t.specRail.map((item, index) => (
             <button key={item.label} type="button" aria-expanded={openSpec === index} aria-controls="hero-spec-detail" onClick={() => setOpenSpec(openSpec === index ? null : index)} className={`group relative overflow-hidden px-4 py-4 text-right transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#F26522] sm:px-5 sm:py-5 ${openSpec === index ? 'bg-white/10' : ''}`}>
@@ -201,7 +203,7 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-7 right-6 z-20 hidden items-center gap-2 text-white/52 md:flex">
+      <div className={`${styles.heroHint} pointer-events-none absolute bottom-7 right-6 z-20 hidden items-center gap-2 text-white/52 md:flex`}>
         <RadioTower size={15} className="text-[#F26522]" />
         <span className="font-mono text-[10px] uppercase tracking-[0.22em]">{t.scrollHint}</span>
         <MoveDown size={15} className="animate-bounce motion-reduce:animate-none" />

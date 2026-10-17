@@ -1,4 +1,5 @@
 .process { min-width: 0; }
+.touchHint { display: none; }
 .hint { margin: 0 0 14px; color: #788491; font-size: 11px; line-height: 1.7; }
 .steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 0 0 26px; padding: 0; list-style: none; }
 .step { min-width: 0; }
@@ -86,4 +87,39 @@
 @media (prefers-reduced-motion: reduce) {
   .preview, .notes:not([hidden]) { animation: none; }
   .stepButton, .detailButton svg, .controls button { transition: none; }
+}
+
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .hint { font-size: 12px; }
+  .touchHint { display: block; margin-top: 4px; color: #536276; }
+  .steps {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: #b8c8d8 transparent;
+  }
+  .step { flex: 1 0 100px; scroll-snap-align: center; }
+  .stepButton { align-items: center; justify-content: center; min-height: 100px; gap: 10px; padding: 12px 8px; background: #f5f7fa; text-align: center; }
+  .stepButton[data-selected="true"] { background: #edf3f9; }
+  .stepMark { flex-direction: row; gap: 9px; }
+  .number { font-size: 11px; }
+  .icon { width: 32px; height: 32px; }
+  .label { display: block; font-size: 12px; line-height: 1.5; }
+  .compactLabel { display: none; }
+  .detailButton { min-height: 46px; width: 100%; margin-top: 16px; font-size: 14px; }
+  .description, .note p { font-size: 14px; line-height: 1.85; }
+  .note h4 { font-size: 14px; }
+  .eyebrow { font-size: 11px; }
+  .imageLabel { font-size: 10px; }
+  .footer { align-items: flex-end; gap: 12px; }
+  .footer p { font-size: 12px; }
+  .controls { gap: 8px; }
+  .controls button { width: 44px; height: 44px; }
+  .controls button:active { background: #edf3f8; }
 }

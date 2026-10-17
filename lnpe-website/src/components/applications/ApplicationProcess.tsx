@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState } from 'react';
+import { useEffect, useId, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
 import { PowderProcessIcon, powderProcessSteps } from './PowderProcessIcon';
 import { getProcessInsights } from '@/content/process-insights';
@@ -15,15 +15,22 @@ export default function ApplicationProcess({ labels }: { labels: string[] }) {
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const id = useId();
+  const steps = useRef<HTMLOListElement>(null);
   const active = items[selected];
   const compactLabels = zh ? ['进料', '粉碎', '分级', '整形', '收集'] : ['Feed', 'Grind', 'Classify', 'Shape', 'Collect'];
   const preview = (index: number) => {
     if (index !== selected) { setSelected(index); setExpanded(false); }
   };
+  useEffect(() => {
+    const rail = steps.current;
+    const step = rail?.children[selected] as HTMLElement | undefined;
+    if (!rail || !step || rail.scrollWidth <= rail.clientWidth) return;
+    rail.scrollTo({ left: rail.scrollLeft + step.getBoundingClientRect().left - rail.getBoundingClientRect().left - (rail.clientWidth - step.clientWidth) / 2, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  }, [selected]);
 
   return <div className={styles.process}>
-    <p className={styles.hint}>{zh ? '选择工序，了解作用与评价重点' : 'Select a stage to explore its role in the process'}</p>
-    <ol className={styles.steps} aria-label={zh ? '粉体加工流程' : 'Powder processing steps'}>
+    <p className={styles.hint}>{zh ? '选择工序，了解作用与评价重点' : 'Select a stage to explore its role in the process'}<span className={styles.touchHint}>{zh ? '左右滑动浏览 · 点按展开' : 'Swipe to browse · Tap for details'} <span aria-hidden="true">↔</span></span></p>
+    <ol ref={steps} className={styles.steps} aria-label={zh ? '粉体加工流程' : 'Powder processing steps'}>
       {powderProcessSteps.map((step, index) => <li key={step} className={styles.step}>
         <button
           type="button"

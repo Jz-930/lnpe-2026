@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono, Noto_Sans_SC } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
+import "../mobile.css";
 import AiAssistantWidget from "@/components/ai-assistant/AiAssistantWidget";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { isLocale, locales } from "@/i18n/config";
@@ -40,6 +41,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
+  interactiveWidget: "resizes-content",
 };
 
 export function generateStaticParams() {
