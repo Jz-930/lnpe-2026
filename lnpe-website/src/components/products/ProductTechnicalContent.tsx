@@ -2,7 +2,9 @@ import Link from "@/components/i18n/LocalizedLink";
 import { ContentDisclosure } from "@/components/content/ContentDisclosure";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 import type { Locale } from "@/i18n/config";
-import { getProductTechnologies, productTechnologyPath } from "@/content/product-technology";
+import { getProductTechnologies, getProductTechnology, productTechnologyPath } from "@/content/product-technology";
+import TechnologyPreview from "./TechnologyPreview";
+import DetailCard from "@/components/content/DetailCard";
 import { productNames } from "@/i18n/messages/product-names";
 import type { ProductSlug } from "@/i18n/messages/catalog";
 
@@ -74,17 +76,13 @@ export function ProductTechnicalContent({ locale, slug }: { locale: Locale; slug
   const entries = getProductTechnologies(locale, slug).filter((item) => item.slug !== "powder-terminology");
   const series = [...new Set(entries.flatMap((entry) => entry.models ?? []))];
   const productVideos = videos.filter((video) => video.parents.includes(slug));
+  const terms = getProductTechnology("powder-terminology", locale);
   return (
     <section className="border-y border-[#dbe3ee] bg-[#f6f8fb]" aria-label={ui.configurations}>
       <div className="container mx-auto px-6 py-5 md:py-8">
         <ContentDisclosure title={ui.configurations} intro={ui.directoryIntro} id="technical-configurations">
-          <div className="grid gap-x-10 md:grid-cols-2">
-            {entries.map((entry) => <div key={entry.slug} className="border-t border-[#dbe3ee] py-4">
-              <Link href={productTechnologyPath(entry.slug)} className="inline-flex items-center gap-2 font-medium text-[#3b526c] transition-colors hover:text-[#174a7c]">
-                {entry.title}<ArrowRight size={14} aria-hidden="true" className="shrink-0" />
-              </Link>
-              <p className="mt-1.5 text-sm leading-6 text-[#62748a]">{entry.summary}</p>
-            </div>)}
+          <div className="grid gap-4 md:grid-cols-2">
+            {entries.map((entry) => <TechnologyPreview key={entry.slug} entry={entry} locale={locale} />)}
           </div>
         </ContentDisclosure>
         <ContentDisclosure title={ui.specifications} intro={ui.specificationIntro} id="specification-inputs">
@@ -102,7 +100,8 @@ export function ProductTechnicalContent({ locale, slug }: { locale: Locale; slug
           <Link href={`/contact-us?equipment=${slug}&service=selection`} className="mt-5 inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.consult}<ArrowRight size={14} /></Link>
         </ContentDisclosure>
         <ContentDisclosure title={ui.terms} intro={ui.termsIntro} id="performance-metrics">
-          <Link href={productTechnologyPath("powder-terminology")} className="inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.details}<ArrowRight size={14} /></Link>
+          {terms && <><p className="mb-4">{terms.principle}</p><div className="grid gap-4 md:grid-cols-2">{terms.configurations.map((entry) => <DetailCard key={entry.title} title={entry.title}><p>{entry.body}</p></DetailCard>)}</div></>}
+          <Link href={productTechnologyPath("powder-terminology")} className="mt-5 inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.details}<ArrowRight size={14} /></Link>
         </ContentDisclosure>
         {productVideos.length > 0 && <ContentDisclosure title={ui.videos} intro={ui.videoNote} id="product-videos">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -126,7 +125,7 @@ export function ProductTechnologyDirectory({ locale }: { locale: Locale }) {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {parents.map((parent) => <div key={parent}>
             <h3 className="mb-3 text-sm font-medium text-[#3b526c]">{productNames[locale][parent]}</h3>
-            <ul className="space-y-2">{getProductTechnologies(locale, parent).filter((entry) => entry.slug !== "powder-terminology").map((entry) => <li key={entry.slug}><Link href={productTechnologyPath(entry.slug)} className="text-sm text-[#62748a] transition-colors hover:text-[#174a7c]">{entry.title}</Link></li>)}</ul>
+            <div className="space-y-3">{getProductTechnologies(locale, parent).filter((entry) => entry.slug !== "powder-terminology").map((entry) => <TechnologyPreview key={entry.slug} entry={entry} locale={locale} />)}</div>
           </div>)}
         </div>
         <Link href="/products/technologies" className="mt-6 inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.all}<ArrowRight size={14} /></Link>

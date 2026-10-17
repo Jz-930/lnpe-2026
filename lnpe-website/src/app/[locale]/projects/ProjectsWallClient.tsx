@@ -1,12 +1,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { ArrowRight, Filter } from "lucide-react";
 import { getProjectCases, PROJECT_FILTERS, type ProjectFilter } from "./project-data";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { catalogUi, projectFilterLabels, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { projectEngineering, projectDetailLabels } from "@/content/projects";
 
 export function ProjectsWallClient() {
   const locale = useLocale();
@@ -55,18 +56,18 @@ export function ProjectsWallClient() {
 
         <div className="grid gap-6 lg:grid-cols-2">
           {visibleProjects.map((project) => (
-            <Link
+            <article
               key={project.slug}
-              href={`/projects/${project.slug}`}
-              className="group grid overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_24px_56px_rgba(15,23,42,0.12)] md:grid-cols-[240px_1fr]"
+              className="grid overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] md:grid-cols-[240px_1fr]"
             >
               <div className="relative min-h-[240px] bg-[#edf3f9]">
-                <Image
+                <InteractiveImage
+                  images={[{ src: project.image, alt: project.title, caption: project.description }, ...project.gallery.map((src, index) => ({ src, alt: `${project.title} · ${index + 1}`, caption: project.title }))]}
                   src={project.image}
                   alt={formatCatalogMessage(ui.coverAlt, { title: project.title })}
                   fill
                   sizes="(min-width: 1024px) 240px, 90vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                  className="object-cover transition duration-500 motion-safe:group-hover/zoom:scale-[1.04]"
                 />
               </div>
 
@@ -83,7 +84,7 @@ export function ProjectsWallClient() {
                   </span>
                 </div>
 
-                <h3 className="font-display text-2xl font-semibold tracking-tight text-[#142033]">{project.title}</h3>
+                <h3 className="font-display text-2xl font-semibold tracking-tight text-[#142033]"><Link href={`/projects/${project.slug}`} className="hover:text-lnpe-blue">{project.title}</Link></h3>
                 <p className="mt-3 line-clamp-4 text-sm leading-6 text-[#536276]">{project.description}</p>
 
                 <div className="mt-5 flex flex-wrap gap-2">
@@ -94,12 +95,16 @@ export function ProjectsWallClient() {
                   ))}
                 </div>
 
-                <div className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-[#174a7c] transition-colors group-hover:text-[#f26522]">
+                <details className="mt-4 border-t border-[#dbe3ee] pt-3 text-sm leading-6 text-[#536276]">
+                  <summary className="cursor-pointer font-medium text-[#174a7c]">{projectDetailLabels[locale].scope}</summary>
+                  <div className="mt-3 space-y-3">{projectEngineering[project.slug].copy[locale].scope.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div>
+                </details>
+                <Link href={`/projects/${project.slug}`} className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-[#174a7c] transition-colors hover:text-[#f26522]">
                   {ui.viewCase}
-                  <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                </div>
+                  <ArrowRight size={16} />
+                </Link>
               </div>
-            </Link>
+            </article>
           ))}
         </div>
       </div>

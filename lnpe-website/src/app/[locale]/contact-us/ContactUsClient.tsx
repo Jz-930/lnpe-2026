@@ -9,6 +9,8 @@ import { contactMessages } from "@/i18n/messages/pages";
 import { useState, type FormEvent } from "react";
 import Link from "@/components/i18n/LocalizedLink";
 import ContentDisclosure from "@/components/content/ContentDisclosure";
+import DetailCard from "@/components/content/DetailCard";
+import { supportDetails } from "@/content/company";
 
 const inputClass =
   "h-12 w-full border border-lnpe-border bg-lnpe-bg-light px-4 text-sm text-lnpe-dark outline-none transition-colors placeholder:text-lnpe-steel focus:border-lnpe-kinetic focus:bg-lnpe-paper";
@@ -55,14 +57,11 @@ export default function ContactUsClient({ initial = {} }: { initial?: Record<str
             </div>
 
             <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-3">
-              {t.serviceCards.map(([title, copy]) => (
-                <div key={title} className="border border-lnpe-border bg-lnpe-paper p-6 transition-colors hover:border-lnpe-kinetic clip-chamfer">
-                  <div className="mb-6 flex h-10 w-10 items-center justify-center border border-lnpe-border text-lnpe-blue">
-                    <Settings2 size={18} />
-                  </div>
-                  <h2 className="font-display text-lg font-bold uppercase tracking-wide text-lnpe-dark">{title}</h2>
-                  <p className="mt-3 text-sm leading-6 text-lnpe-muted">{copy}</p>
-                </div>
+              {t.serviceCards.map(([title, copy], index) => (
+                <DetailCard key={title} title={title} description={copy} icon={<Settings2 size={18} />}>
+                  <p>{supportDetails[locale][0].items[index].text}</p>
+                  <button type="button" className="inline-flex min-h-11 items-center gap-2 font-semibold text-lnpe-blue hover:underline" onClick={() => { setService("selection"); setBrief(""); document.getElementById("enquiry-form")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block: "start" }); document.getElementById("enquiry-type")?.focus({ preventScroll: true }); }}>{zh ? "整理这项咨询需求" : "Prepare this enquiry"}<ArrowRight size={15} /></button>
+                </DetailCard>
               ))}
             </div>
           </div>
@@ -125,11 +124,11 @@ export default function ContactUsClient({ initial = {} }: { initial?: Record<str
                 <p className="text-sm text-lnpe-muted">{t.required}</p>
               </div>
 
-              <form className="space-y-5" onSubmit={prepareBrief} onChange={() => setBrief("")}>
+              <form id="enquiry-form" className="scroll-mt-28 space-y-5" onSubmit={prepareBrief} onChange={() => setBrief("")}>
                 {initial.project && <p className="border-l-2 border-lnpe-border pl-4 text-xs text-lnpe-muted">{zh ? "参考项目：" : "Reference project: "}{initial.project}</p>}
                 <label className="block">
                   <span className="mb-2 block text-xs font-semibold text-lnpe-steel">{zh ? "咨询类型" : "Enquiry type"}</span>
-                  <select name="service" value={service} onChange={event => setService(event.target.value)} className={inputClass}>
+                  <select id="enquiry-type" name="service" value={service} onChange={event => setService(event.target.value)} className={inputClass}>
                     {Object.entries(services).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                   </select>
                 </label>

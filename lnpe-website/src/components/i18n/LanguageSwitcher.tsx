@@ -5,13 +5,16 @@ import { useSyncExternalStore } from 'react';
 import { usePathname } from 'next/navigation';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { localizeHref } from '@/i18n/routing';
+import { browserUrlChanged } from '@/i18n/browser-url';
 
 function subscribeToUrl(listener: () => void) {
   window.addEventListener('popstate', listener);
   window.addEventListener('hashchange', listener);
+  window.addEventListener(browserUrlChanged, listener);
   return () => {
     window.removeEventListener('popstate', listener);
     window.removeEventListener('hashchange', listener);
+    window.removeEventListener(browserUrlChanged, listener);
   };
 }
 

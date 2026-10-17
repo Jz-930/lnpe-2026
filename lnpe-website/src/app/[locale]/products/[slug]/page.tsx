@@ -1,5 +1,5 @@
 import Link from "@/components/i18n/LocalizedLink";
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -189,25 +189,29 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
 
             <div className="grid gap-5 md:grid-cols-3">
               {relatedProducts.map((related) => (
-                <Link
+                <article
                   key={related.slug}
-                  href={`/products/${related.slug}`}
-                  className="group overflow-hidden border border-[#dbe3ee] bg-white transition hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_20px_44px_rgba(15,23,42,0.1)]"
+                  className="overflow-hidden border border-[#dbe3ee] bg-white"
                 >
                   <div className="relative aspect-[16/10] bg-[#f2f6fa]">
-                    <Image
+                    <InteractiveImage
                       src={getProductListingImage(related)}
                       alt={formatCatalogMessage(ui.listingAlt, { title: related.title })}
                       fill
                       sizes="(min-width: 768px) 30vw, 90vw"
-                      className="object-contain p-5 transition duration-500 group-hover:scale-[1.04]"
+                      className="object-contain p-5 transition duration-500 motion-safe:group-hover/zoom:scale-[1.04]"
                     />
                   </div>
                   <div className="p-5">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">{related.category}</p>
-                    <h3 className="font-display text-xl font-semibold text-[#142033]">{related.title}</h3>
+                    <h3 className="font-display text-xl font-semibold text-[#142033]"><Link href={`/products/${related.slug}`} className="hover:text-[#174a7c]">{related.title}</Link></h3>
+                    <details className="mt-4 border-t border-[#dbe3ee] pt-3 text-sm leading-6 text-[#536276]">
+                      <summary className="cursor-pointer font-medium text-[#174a7c]">{ui.productOverview}</summary>
+                      <p className="mt-3">{related.principle}</p>
+                      <Link href={`/products/${related.slug}`} className="mt-3 inline-flex items-center gap-2 font-medium text-[#174a7c] hover:underline">{locale === "zh" ? "查看完整设备资料" : "View full equipment details"}<ArrowRight size={14} /></Link>
+                    </details>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
           </div>

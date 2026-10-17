@@ -1,4 +1,4 @@
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { ArrowRight, Factory, Gauge, ShieldCheck } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -8,14 +8,14 @@ import { ProductTechnologyDirectory } from "@/components/products/ProductTechnic
 import { getProductCatalog, getProductCoverImage } from "./product-catalog";
 import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
-import { catalogMetadata, catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
 
 type ProductsPageProps = { params: Promise<{ locale: Locale }> };
 
 export async function generateMetadata({ params }: ProductsPageProps) {
   const { locale } = await params;
   return createPageMetadata(locale, "/products", {
-    en: catalogMetadata.en,
+    en: { title: catalogUi.en.productsTitle + " | LNPE", description: catalogUi.en.productsIntro },
     zh: { title: catalogUi.zh.productsTitle + " | LNPE", description: catalogUi.zh.productsIntro },
   });
 }
@@ -90,7 +90,7 @@ export default async function ProductsPage({ params }: ProductsPageProps) {
                   </span>
                 </div>
                 <div className="relative aspect-[16/11] bg-gradient-to-br from-[#f8fafc] via-[#edf3f9] to-[#e6edf5]">
-                  <Image
+                  <InteractiveImage
                     src={getProductCoverImage(featuredProduct)}
                     alt={formatCatalogMessage(ui.coverAlt, { title: featuredProduct.title })}
                     fill

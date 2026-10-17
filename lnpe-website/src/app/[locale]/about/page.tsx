@@ -1,13 +1,15 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import { Factory, FlaskConical, Globe2, Settings2, ArrowRight } from "lucide-react";
 
 import type { Locale } from "@/i18n/config";
 import { aboutMessages } from "@/i18n/messages/pages";
 import { createPageMetadata } from "@/i18n/metadata";
-import { companyDetails } from "@/content/company";
+import { companyDetails, researchDetails, supportDetails } from "@/content/company";
 import EditorialSections from "@/components/content/EditorialSections";
+import { InlineMediaExplorer } from "@/components/content/InlineMediaExplorer";
+import { fieldScenes } from "@/content/field-scenes";
 import Link from "@/components/i18n/LocalizedLink";
 
 const capabilityIcons = [FlaskConical, Factory, Settings2, Globe2];
@@ -24,6 +26,8 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function AboutPage({ params }: PageProps) {
   const { locale } = await params;
   const t = aboutMessages[locale];
+  const capabilityScenes = [fieldScenes.laboratory, fieldScenes.machining, fieldScenes.engineering, fieldScenes.training];
+  const capabilityContent = [researchDetails[locale][0], companyDetails[locale].find((section) => section.id === "bases")!, supportDetails[locale][0], supportDetails[locale][1]];
 
   return (
     <main className="min-h-screen flex flex-col pt-[88px] bg-lnpe-bg text-lnpe-text">
@@ -57,10 +61,11 @@ export default async function AboutPage({ params }: PageProps) {
               <div className="absolute -right-8 -top-8 h-32 w-32 border border-lnpe-blue/20" />
               <div className="relative border border-lnpe-border bg-lnpe-paper p-4 shadow-[0_24px_70px_rgba(17,24,39,0.08)] clip-chamfer">
                 <div className="relative aspect-[4/3] overflow-hidden bg-lnpe-panel">
-                  <Image
+                  <InteractiveImage
                     src="/images/03_about/about_02_jet-pulverizer.webp"
                     alt={t.equipmentAlt}
                     fill
+                    sizes="(min-width: 1024px) 45vw, 90vw"
                     priority
                     className="object-cover"
                   />
@@ -70,9 +75,9 @@ export default async function AboutPage({ params }: PageProps) {
                     <p className="spec-label">{t.equipmentLabel}</p>
                     <p className="mt-1 font-display text-xl font-semibold text-lnpe-dark">{t.equipmentTitle}</p>
                   </div>
-                  <div className="h-10 w-10 border border-lnpe-kinetic bg-lnpe-kinetic/10 text-lnpe-kinetic grid place-items-center">
+                  <Link href="/products/jet-pulverizer" aria-label={locale === "zh" ? "查看气流粉碎机详情" : "View jet pulverizer details"} className="h-10 w-10 border border-lnpe-kinetic bg-lnpe-kinetic/10 text-lnpe-kinetic grid place-items-center hover:bg-lnpe-kinetic hover:text-white">
                     <ArrowRight size={18} />
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -93,10 +98,11 @@ export default async function AboutPage({ params }: PageProps) {
 
             <div className="border border-lnpe-border bg-lnpe-paper p-6 clip-chamfer">
               <div className="relative min-h-[360px] overflow-hidden bg-lnpe-bg-light">
-                <Image
+                <InteractiveImage
                   src="/images/03_about/about_01_world-map.webp"
                   alt={t.mapAlt}
                   fill
+                  sizes="(min-width: 1024px) 50vw, 90vw"
                   className="object-contain p-8"
                 />
               </div>
@@ -125,20 +131,14 @@ export default async function AboutPage({ params }: PageProps) {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
-              {t.capabilities.map(({ title, copy }, index) => {
+            <InlineMediaExplorer label={t.capabilityLabel} layout="cards" items={t.capabilities.map(({ title, copy }, index) => {
                 const Icon = capabilityIcons[index];
-                return (
-                <div key={title} className="border border-lnpe-border bg-lnpe-bg p-6 transition-colors hover:border-lnpe-kinetic clip-chamfer">
-                  <div className="mb-8 flex h-11 w-11 items-center justify-center border border-lnpe-border bg-lnpe-paper text-lnpe-blue">
-                    <Icon size={21} strokeWidth={1.8} />
-                  </div>
-                  <h3 className="font-display text-xl font-bold uppercase tracking-wide text-lnpe-dark">{title}</h3>
-                  <p className="mt-4 text-sm leading-6 text-lnpe-muted">{copy}</p>
-                </div>
-                );
-              })}
-            </div>
+                const scene = capabilityScenes[index];
+                return { id: `capability-${index}`, title, description: copy, icon: <Icon size={22} strokeWidth={1.8} />, image: scene.src, imageAlt: scene.alt[locale],
+                  content: <dl className="grid gap-6 md:grid-cols-2">{capabilityContent[index].items.map((item) => <div key={item.title}><dt className="font-semibold text-lnpe-dark">{item.title}</dt><dd className="mt-2 text-sm leading-7 text-lnpe-muted">{item.text}</dd></div>)}</dl>,
+                };
+              })} />
+            <p className="mt-3 text-xs text-lnpe-steel">{locale === "zh" ? "场景示意图用于说明研发、制造与服务环节。" : "Illustrative scenes explain research, manufacturing and service stages."}</p>
           </div>
         </section>
 

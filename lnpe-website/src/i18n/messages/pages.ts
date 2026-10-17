@@ -101,7 +101,7 @@ export const aboutMessages: Record<Locale, typeof aboutEn> = { en: aboutEn, zh: 
   ],
   "capabilityLabel": "核心能力",
   "capabilityTitle": "四大能力，构建一体化设备方案。",
-  "capabilityIntro": "LNPE 的工程制造能力涵盖生产制造、实验验证与全球项目服务。",
+  "capabilityIntro": "研发、制造、实验验证与项目服务，将物料需求衔接为可落地的设备方案。",
   "capabilities": [
     {
       "title": "研发",
@@ -161,7 +161,7 @@ const contactEn = {
       "email": "sales@lnpe.ca"
     },
     {
-      "title": "Mian Yang Factory",
+      "title": "Mianyang Factory",
       "lines": [
         "No.5, Caiyuan Road, Kechuangyuan District",
         "Mianyang, Sichuan, China"

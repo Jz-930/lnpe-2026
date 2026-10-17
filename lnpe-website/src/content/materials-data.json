@@ -1046,7 +1046,7 @@
       "slug": "poor-ore",
       "name": {
         "zh": "贫矿",
-        "en": "Poor ore"
+        "en": "Low-grade ore"
       },
       "legacy": true
     },
@@ -1076,7 +1076,7 @@
       "slug": "silicon-ash",
       "name": {
         "zh": "硅灰",
-        "en": "Silicon ash"
+        "en": "Silica fume"
       },
       "legacy": true
     },
@@ -1116,7 +1116,7 @@
       "slug": "water-slag",
       "name": {
         "zh": "水渣",
-        "en": "Water slag"
+        "en": "Water-quenched slag"
       },
       "legacy": true
     },
@@ -5604,7 +5604,7 @@
       "slug": "poor-ore",
       "name": {
         "zh": "贫矿",
-        "en": "Poor ore"
+        "en": "Low-grade ore"
       },
       "categoryIds": [
         "solid-waste"
@@ -5614,7 +5614,7 @@
       ],
       "aliases": [
         "贫矿",
-        "Poor ore"
+        "Low-grade ore"
       ],
       "images": [
         "/images/05_applications/category_08_solid-waste/material_009_poor-ore.png"
@@ -5633,7 +5633,10 @@
           "kind": "local-copy",
           "document": "LNPE-应用领域.docx",
           "locator": "646–648段《贫矿》",
-          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results."
+          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results.",
+          "originalLabels": [
+            "Poor ore"
+          ]
         }
       ]
     },
@@ -5715,7 +5718,7 @@
       "slug": "silicon-ash",
       "name": {
         "zh": "硅灰",
-        "en": "Silicon ash"
+        "en": "Silica fume"
       },
       "categoryIds": [
         "solid-waste"
@@ -5725,7 +5728,7 @@
       ],
       "aliases": [
         "硅灰",
-        "Silicon ash"
+        "Silica fume"
       ],
       "images": [
         "/images/05_applications/category_08_solid-waste/material_012_silicon-ash.png"
@@ -5744,7 +5747,10 @@
           "kind": "local-copy",
           "document": "LNPE-应用领域.docx",
           "locator": "634–636段《硅灰》",
-          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results."
+          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results.",
+          "originalLabels": [
+            "Silicon ash"
+          ]
         }
       ]
     },
@@ -5868,7 +5874,7 @@
       "slug": "water-slag",
       "name": {
         "zh": "水渣",
-        "en": "Water slag"
+        "en": "Water-quenched slag"
       },
       "categoryIds": [
         "solid-waste"
@@ -5878,7 +5884,7 @@
       ],
       "aliases": [
         "水渣",
-        "Water slag"
+        "Water-quenched slag"
       ],
       "images": [
         "/images/05_applications/category_08_solid-waste/material_016_water-slag.png"
@@ -5897,7 +5903,10 @@
           "kind": "local-copy",
           "document": "LNPE-应用领域.docx",
           "locator": "664–666段《水渣》",
-          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results."
+          "basis": "Material identity and uses; process explanation is conditional editorial guidance, not test results.",
+          "originalLabels": [
+            "Water slag"
+          ]
         }
       ]
     },

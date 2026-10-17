@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { ArrowRight, Layers3, SlidersHorizontal } from "lucide-react";
 import {
@@ -27,7 +27,7 @@ export function ProductsCatalogClient() {
 
   return (
     <section className="bg-[#f6f8fb] py-12 md:py-16">
-      <div className="container mx-auto grid gap-8 px-6 lg:grid-cols-[240px_1fr]">
+      <div className="container mx-auto grid grid-cols-1 gap-8 px-6 lg:grid-cols-[240px_minmax(0,1fr)]">
         <aside className="hidden lg:block">
           <div className="sticky top-[112px] border border-[#dbe3ee] bg-white p-4 shadow-[0_20px_50px_rgba(15,23,42,0.06)]">
             <div className="mb-5 flex items-center gap-2 border-b border-[#e5eaf2] pb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#536276]">
@@ -65,7 +65,7 @@ export function ProductsCatalogClient() {
           </div>
         </aside>
 
-        <div>
+        <div className="min-w-0">
           <div className="mb-8 flex gap-3 overflow-x-auto pb-2 lg:hidden">
             {PRODUCT_CATEGORIES.map((category) => {
               const active = category === activeCategory;
@@ -104,40 +104,40 @@ export function ProductsCatalogClient() {
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {visibleProducts.map((product) => (
-              <Link
+              <article
                 key={product.slug}
-                href={`/products/${product.slug}`}
-                className="group flex min-h-[440px] flex-col overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] transition duration-300 hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_24px_56px_rgba(15,23,42,0.12)]"
+                className="flex min-h-[440px] flex-col overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)]"
               >
                 <div className="relative aspect-[4/3] bg-gradient-to-br from-[#f8fafc] via-[#edf3f9] to-[#e6edf5]">
-                  <Image
+                  <InteractiveImage
                     src={getProductListingImage(product)}
                     alt={formatCatalogMessage(ui.productAlt, { title: product.title })}
                     fill
                     sizes="(min-width: 1280px) 28vw, (min-width: 768px) 44vw, 90vw"
-                    className="object-contain p-7 transition duration-500 group-hover:scale-[1.04]"
+                    className="object-contain p-7 transition duration-500 motion-safe:group-hover/zoom:scale-[1.04]"
                   />
-                  <div className="absolute left-5 top-5 bg-white/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#174a7c] shadow-sm">
+                  <div className="pointer-events-none absolute left-5 top-5 bg-white/90 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-[#174a7c] shadow-sm">
                     {product.series}
                   </div>
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
                   <div className="mb-4 flex items-start justify-between gap-4">
-                    <div>
+                    <div className="min-w-0">
                       <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">
                         {product.category}
                       </p>
                       <h3 className="font-display text-2xl font-semibold tracking-tight text-[#142033]">
-                        {product.title}
+                        <Link href={`/products/${product.slug}`} className="hover:text-lnpe-blue">{product.title}</Link>
                       </h3>
                     </div>
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#dbe3ee] text-[#174a7c] transition-colors group-hover:border-[#f26522] group-hover:text-[#f26522]">
+                    <Link href={`/products/${product.slug}`} aria-label={`${ui.productOverview}: ${product.title}`} className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#dbe3ee] text-[#174a7c] transition-colors hover:border-[#f26522] hover:text-[#f26522]">
                       <ArrowRight size={18} />
-                    </div>
+                    </Link>
                   </div>
 
                   <p className="mb-5 text-sm leading-6 text-[#5f6f84]">{product.summary}</p>
+                  <details className="mb-5 border-t border-[#e8edf4] pt-3 text-sm text-[#536276]"><summary className="cursor-pointer font-medium text-[#174a7c]">{locale === "zh" ? "就地查看工作原理" : "Explore how it works"}</summary><p className="mt-3 leading-7">{product.principle}</p><Link href={`/products/${product.slug}`} className="mt-3 inline-flex items-center gap-2 text-[#174a7c]">{ui.productOverview}<ArrowRight size={14} /></Link></details>
 
                   <div className="mt-auto flex flex-wrap gap-2 border-t border-[#e8edf4] pt-5">
                     {product.tags.map((tag) => (
@@ -150,7 +150,7 @@ export function ProductsCatalogClient() {
                     ))}
                   </div>
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
         </div>

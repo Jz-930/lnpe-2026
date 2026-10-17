@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { homeMessages } from '@/i18n/messages/home';
-import { Boxes, Fan, FlaskConical, Gauge, PackageCheck, Route as RouteIcon } from 'lucide-react';
+import { getHomeInsights } from '@/content/home-insights';
+import { ArrowLeft, ArrowRight, Boxes, Fan, FlaskConical, Gauge, PackageCheck, Pause, Play, Route as RouteIcon } from 'lucide-react';
 import { ParticleFlow } from './ParticleFlow';
+import { HomeInsightPanel } from './HomeInsightPanel';
 
 const ROUTES = [
   { name: 'Battery Materials', boost: 1.18 },
@@ -24,27 +26,35 @@ const STEPS = [
 type RouteName = (typeof ROUTES)[number]['name'];
 
 export function ProcessFlow() {
-  const t = homeMessages[useLocale()].process;
+  const locale = useLocale();
+  const t = homeMessages[locale].process;
+  const interaction = homeMessages[locale].interactions;
+  const insights = useMemo(() => getHomeInsights(locale).process, [locale]);
   const [routeName, setRouteName] = useState<RouteName>('Battery Materials');
   const [activeIndex, setActiveIndex] = useState(1);
-  const [isInteracting, setIsInteracting] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || isInteracting) return;
+    if (reducedMotion || hovered || focused || paused || expanded) return;
 
     const interval = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
       setActiveIndex((current) => (current + 1) % STEPS.length);
     }, 2800);
 
     return () => window.clearInterval(interval);
-  }, [isInteracting]);
+  }, [hovered, focused, paused, expanded]);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion || isInteracting) return;
+    if (reducedMotion || hovered || focused || paused || expanded) return;
 
     const interval = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
       setRouteName((current) => {
         const currentIndex = ROUTES.findIndex((route) => route.name === current);
         return ROUTES[(currentIndex + 1) % ROUTES.length].name;
@@ -52,7 +62,7 @@ export function ProcessFlow() {
     }, 14000);
 
     return () => window.clearInterval(interval);
-  }, [isInteracting]);
+  }, [hovered, focused, paused, expanded]);
 
   const activeRoute = useMemo(() => ROUTES.find((route) => route.name === routeName) ?? ROUTES[0], [routeName]);
   const activeStep = STEPS[activeIndex];
@@ -60,6 +70,9 @@ export function ProcessFlow() {
   const routeContent = t.routes[activeRoute.name];
   const stepContent = t.steps[activeStep.name];
   const intensity = activeStep.intensity * activeRoute.boost;
+  const insight = insights[activeStep.name];
+  const previewStep = (index: number) => { if (index !== activeIndex) { setActiveIndex(index); setExpanded(false); } };
+  const selectStep = (index: number) => { setActiveIndex(index); setPaused(true); setExpanded(true); };
 
   return (
     <section className="preserve-white relative overflow-hidden bg-[#0b0f14] py-24 text-white">
@@ -75,7 +88,7 @@ export function ProcessFlow() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[length:56px_56px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-6">
+      <div className="container relative z-10 mx-auto px-6" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
         <div className="mb-12 grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
           <div>
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-white sm:text-4xl md:text-6xl">
@@ -89,8 +102,6 @@ export function ProcessFlow() {
 
         <div
           className="overflow-hidden border border-white/14 bg-[#0f151d]/94 shadow-[0_34px_120px_rgba(0,0,0,0.36)] backdrop-blur"
-          onMouseEnter={() => setIsInteracting(true)}
-          onMouseLeave={() => setIsInteracting(false)}
         >
           <div className="grid border-b border-white/12 bg-white/[0.045] md:grid-cols-[0.92fr_1.08fr]">
             <div className="flex items-center gap-3 border-b border-white/12 px-5 py-4 md:border-b-0 md:border-r md:px-7">
@@ -108,7 +119,7 @@ export function ProcessFlow() {
                 <button
                   key={route.name}
                   type="button"
-                  onClick={() => setRouteName(route.name)}
+                  onClick={() => { setRouteName(route.name); setPaused(true); }}
                   className={`relative shrink-0 overflow-hidden border px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] transition-colors ${
                       active
                         ? 'border-[#F26522] bg-[#F26522] text-white'
@@ -145,15 +156,17 @@ export function ProcessFlow() {
                       <button
                         key={step.name}
                         type="button"
-                        onClick={() => setActiveIndex(index)}
-                        onMouseEnter={() => setActiveIndex(index)}
-                        onFocus={() => setActiveIndex(index)}
+                        onClick={() => selectStep(index)}
+                        onPointerEnter={(event) => { if (event.pointerType === 'mouse') previewStep(index); }}
+                        onFocus={() => previewStep(index)}
                         className={`group relative min-h-[188px] overflow-hidden border p-4 text-left transition-colors ${
                           active
                             ? 'border-[#F26522] bg-white text-[#111827] shadow-[0_18px_38px_rgba(242,101,34,0.16)]'
                             : 'border-white/12 bg-white/[0.075] text-white/66 hover:border-[#F26522] hover:text-white'
                         }`}
                         aria-pressed={active}
+                        aria-expanded={active && expanded}
+                        aria-controls="process-step-detail"
                       >
                         <div className="mb-5 flex items-center justify-between">
                           <span
@@ -167,7 +180,7 @@ export function ProcessFlow() {
                             0{index + 1}
                           </span>
                         </div>
-                        <div className={`font-display text-lg font-bold uppercase tracking-normal ${active ? 'text-[#0f172a]' : 'text-white'}`}>
+                        <div className={`font-display text-sm font-bold uppercase leading-snug tracking-normal [overflow-wrap:anywhere] ${active ? 'text-[#0f172a]' : 'text-white'}`}>
                           {t.steps[step.name].name}
                         </div>
                         <div className={`mt-3 text-xs leading-5 ${active ? 'text-[#64748b]' : 'text-white/52'}`}>
@@ -205,6 +218,11 @@ export function ProcessFlow() {
 
               <p className="text-sm leading-7 text-white/70">{stepContent.body}</p>
 
+              <button type="button" onClick={() => { setExpanded(!expanded); setPaused(true); }} aria-expanded={expanded} aria-controls="process-step-detail" className="group mt-5 block w-full overflow-hidden border border-white/20 text-left transition-colors hover:border-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">
+                <span className="relative block aspect-[16/9] overflow-hidden"><Image src={insight.images[0].src} alt={insight.images[0].alt} fill sizes="(min-width: 1024px) 28vw, 100vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.025]" /></span>
+                <span className="flex items-center justify-between gap-3 px-4 py-3 text-xs font-semibold">{expanded ? interaction.closeDetails : interaction.openDetails}<span aria-hidden="true">{expanded ? '−' : '+'}</span></span>
+              </button>
+
               <div className="mt-8 space-y-3">
                 <div className="flex items-center justify-between border border-white/10 bg-white/10 px-4 py-3">
                   <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">{t.output}</span>
@@ -221,7 +239,16 @@ export function ProcessFlow() {
               </div>
             </aside>
           </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/12 px-5 py-4 text-xs text-white/60">
+            <span>{interaction.previewHint}</span>
+            <div className="flex items-center gap-2">
+              <button type="button" onClick={() => selectStep((activeIndex + STEPS.length - 1) % STEPS.length)} aria-label={interaction.previous} className="border border-white/20 p-2 hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]"><ArrowLeft size={16} /></button>
+              <button type="button" onClick={() => { setPaused(!paused); if (paused) setExpanded(false); }} aria-pressed={paused} className="inline-flex items-center gap-2 border border-white/20 px-3 py-2 hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">{paused ? <Play size={14} /> : <Pause size={14} />}{paused ? interaction.resume : interaction.pause}</button>
+              <button type="button" onClick={() => selectStep((activeIndex + 1) % STEPS.length)} aria-label={interaction.next} className="border border-white/20 p-2 hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]"><ArrowRight size={16} /></button>
+            </div>
+          </div>
         </div>
+        {expanded && <HomeInsightPanel key={activeStep.name} id="process-step-detail" insight={insight} dark onClose={() => setExpanded(false)} />}
       </div>
     </section>
   );

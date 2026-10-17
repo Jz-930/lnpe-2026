@@ -1,9 +1,13 @@
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
+import InlineFactList from "@/components/content/InlineFactList";
+import ApplicationProcess from "@/components/applications/ApplicationProcess";
+import ApplicationHighlights from "@/components/applications/ApplicationHighlights";
+import { getMaterialPreviews } from "@/content/material-previews";
+import { materialFact, getEquipmentFacts } from "@/content/inline-previews";
 import Link from "@/components/i18n/LocalizedLink";
-import { ArrowRight, Beaker, Factory, GitBranch, Layers3 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PowderProcessIcon, powderProcessSteps } from "@/components/applications/PowderProcessIcon";
 
 import type { Locale } from "@/i18n/config";
 import { applicationMessages, getApplications } from "@/i18n/messages/applications";
@@ -26,6 +30,9 @@ export default async function ApplicationsPage({ params }: PageProps) {
   const t = applicationMessages[locale];
   const applications = getApplications(locale);
   const zh = locale === "zh";
+  const previews = getMaterialPreviews(locale);
+  const equipmentFacts = getEquipmentFacts(locale);
+  const factsFor = (slugs: string[]) => previews.filter((item) => slugs.includes(item.slug)).map(materialFact);
 
   return (
     <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
@@ -34,8 +41,8 @@ export default async function ApplicationsPage({ params }: PageProps) {
 
       <div className="flex-1">
         <section className="border-b border-[#dbe3ee] bg-[#eef3f8]">
-          <div className="container mx-auto grid gap-10 px-6 py-14 md:py-20 xl:grid-cols-[0.8fr_1.2fr] xl:items-center">
-            <div className="min-w-0">
+          <div className="container mx-auto grid gap-10 px-6 py-14 md:py-20 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
+            <div className="min-w-0 xl:pt-12">
               <h1 className="font-display text-4xl font-semibold tracking-tight text-[#142033] md:text-6xl">
                 {t.title}
               </h1>
@@ -44,46 +51,18 @@ export default async function ApplicationsPage({ params }: PageProps) {
               </p>
             </div>
 
-            <div className="@container min-w-0 border border-[#dbe3ee] bg-white p-5 shadow-[0_22px_60px_rgba(15,23,42,0.1)]">
-              <div className="mb-5 flex items-center justify-between border-b border-[#e5eaf2] pb-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">{t.routeLabel}</p>
-                  <h2 className="font-display text-2xl font-semibold text-[#142033]">{t.routeTitle}</h2>
-                </div>
-                <GitBranch className="text-[#174a7c]" size={24} />
+            <div className="@container min-w-0 border border-[#dbe3ee] bg-white p-5 shadow-[0_16px_45px_rgba(15,23,42,0.05)] sm:p-7">
+              <div className="mb-6">
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#a26849]">{t.routeLabel}</p>
+                <h2 className="font-display text-xl font-semibold tracking-tight text-[#142033] sm:text-2xl">{t.routeTitle}</h2>
               </div>
-              <ol className="grid gap-3 @min-[36rem]:grid-cols-5">
-                {powderProcessSteps.map((step, index) => (
-                  <li key={step} className="relative flex min-w-0 items-center gap-4 border border-[#dbe3ee] bg-[#f8fafc] p-3 @min-[36rem]:flex-col @min-[36rem]:items-start @min-[36rem]:gap-3 @min-[36rem]:px-2.5 @min-[36rem]:py-4">
-                    <span className="absolute right-2 top-2 text-[10px] font-semibold tabular-nums tracking-wider text-[#62748a]" aria-hidden="true">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <PowderProcessIcon step={step} className="h-14 w-14 shrink-0 @min-[36rem]:h-16 @min-[36rem]:w-16" />
-                    <p className="min-w-0 text-sm font-semibold leading-5 text-[#142033] @min-[36rem]:text-xs">{t.steps[index]}</p>
-                    {index < powderProcessSteps.length - 1 && (
-                      <div className="absolute -bottom-3 left-10 h-3 w-px bg-[#f26522] @min-[36rem]:-right-3 @min-[36rem]:bottom-auto @min-[36rem]:left-auto @min-[36rem]:top-1/2 @min-[36rem]:h-px @min-[36rem]:w-3" aria-hidden="true" />
-                    )}
-                  </li>
-                ))}
-              </ol>
+              <ApplicationProcess labels={t.steps} />
             </div>
           </div>
         </section>
 
         <section className="bg-white py-8">
-          <div className="container mx-auto grid gap-4 px-6 md:grid-cols-4">
-            {[
-              { icon: Factory, label: t.stats[0], href: "#application-groups" },
-              { icon: Beaker, label: t.stats[1], href: "/applications/materials" },
-              { icon: Layers3, label: t.stats[2], href: "#process-notes" },
-              { icon: GitBranch, label: t.stats[3], href: "#equipment-notes" },
-            ].map((item) => (
-              <Link href={item.href} key={item.label} className="flex items-center gap-3 border border-[#dbe3ee] bg-[#f8fafc] p-4 transition-colors hover:border-[#a6b9d0] focus-visible:outline-2 focus-visible:outline-[#174a7c]">
-                <item.icon size={20} className="text-[#174a7c]" />
-                <span className="text-sm font-semibold text-[#314155]">{item.label}</span>
-              </Link>
-            ))}
-          </div>
+          <div className="container mx-auto px-6"><ApplicationHighlights locale={locale} /></div>
         </section>
 
         <section id="application-groups" className="scroll-mt-28 bg-[#f6f8fb] py-14 md:py-20">
@@ -103,13 +82,14 @@ export default async function ApplicationsPage({ params }: PageProps) {
 
             <div className="grid gap-6 lg:grid-cols-2">
               {applications.map((category) => (
-                <article id={category.id} key={category.name} className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)]">
+                <article id={category.id} key={category.name} className="scroll-mt-28 overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)]">
                   <div className="grid gap-0 sm:grid-cols-[180px_1fr]">
                     <div className="grid grid-cols-2 border-b border-[#e5eaf2] bg-[#edf3f9] sm:block sm:border-b-0 sm:border-r">
                       {category.images.map((image, index) => (
                         <div key={image} className="relative aspect-square">
-                          <Image
+                          <InteractiveImage
                             src={image}
+                            images={category.images.map((src, position) => ({ src, alt: `${category.name} ${t.sample} ${position + 1}` }))}
                             alt={`${category.name} ${t.sample} ${index + 1}`}
                             fill
                             sizes="180px"
@@ -143,29 +123,15 @@ export default async function ApplicationsPage({ params }: PageProps) {
                         </div>
                       </div>
 
-                      <div className="mt-5 flex flex-wrap gap-2 border-t border-[#e8edf4] pt-5">
-                        {category.relatedEquipment.map((equipment) => (
-                          <Link
-                            key={equipment.href}
-                            href={equipment.href}
-                            className="inline-flex items-center gap-1 border border-[#dbe3ee] px-2.5 py-1.5 text-xs font-semibold text-[#142033] transition-colors hover:border-[#f26522] hover:text-[#f26522]"
-                          >
-                            {equipment.label}
-                            <ArrowRight size={12} />
-                          </Link>
-                        ))}
+                      <div className="mt-5 border-t border-[#e8edf4] pt-5">
+                        <InlineFactList label={zh ? '相关设备' : 'Related equipment'} items={equipmentFacts.filter((item) => category.relatedEquipment.some((entry) => entry.href === item.href))} />
                       </div>
-
-                      <div className="mt-5 flex flex-wrap gap-2">
-                        {category.materials.filter((item) => item.legacy).map((item) => (
-                          <Link href={`/applications/materials/${item.slug}`} key={item.id} className="bg-[#f6f8fb] px-2.5 py-1 text-xs leading-5 text-[#5f6f84] transition-colors hover:bg-[#edf3f9] hover:text-[#174a7c] focus-visible:outline-2 focus-visible:outline-[#174a7c]">
-                            {item.name}
-                          </Link>
-                        ))}
+                      <div className="mt-5">
+                        <InlineFactList label={zh ? '典型物料' : 'Featured materials'} items={factsFor(category.materials.filter((item) => item.legacy).map((item) => item.slug))} />
                       </div>
                       {category.materials.some((item) => !item.legacy) && <details className="mt-4 border-t border-[#e8edf4] pt-3 text-xs text-[#62748a]">
                         <summary className="cursor-pointer py-2 hover:text-[#174a7c]">{zh ? '更多相关物料' : 'More related materials'} · {category.materials.filter((item) => !item.legacy).length}</summary>
-                        <div className="mt-2 flex flex-wrap gap-2">{category.materials.filter((item) => !item.legacy).map((item) => <Link href={`/applications/materials/${item.slug}`} key={item.id} className="bg-[#f6f8fb] px-2.5 py-1 leading-5 text-[#5f6f84] hover:text-[#174a7c]">{item.name}</Link>)}</div>
+                        <div className="mt-2"><InlineFactList label={zh ? '更多相关物料' : 'More related materials'} items={factsFor(category.materials.filter((item) => !item.legacy).map((item) => item.slug))} /></div>
                       </details>}
                       <ContentDisclosure id={`${category.id}-processing`} title={zh ? '行业加工说明' : 'Industry processing notes'} className="mt-4 border-t border-[#e8edf4] [&_summary]:py-3 [&_summary]:text-xs">
                         <div className="space-y-3 text-xs leading-6 text-[#62748a]">

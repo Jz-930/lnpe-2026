@@ -5,6 +5,7 @@ import "../globals.css";
 import AiAssistantWidget from "@/components/ai-assistant/AiAssistantWidget";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { isLocale, locales } from "@/i18n/config";
+import { siteMetadata } from "@/i18n/metadata";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,10 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   return {
     metadataBase: new URL("https://lnpe-2026.vercel.app"),
-    title: locale === 'zh' ? 'LNPE | 先进粉体技术' : 'LNPE | Advanced Powder Technology',
-    description: locale === 'zh'
-      ? '专注粉碎、输送与颗粒改性，为不同物料与生产需求提供粉体装备和工艺解决方案。'
-      : 'A globally recognized powder equipment expert, specializing in grinding, conveying, and particle modification.',
+    ...siteMetadata[isLocale(locale) ? locale : 'en'],
     other: { generator: 'jiackey-studio/lnpe-v1.0' },
   };
 }

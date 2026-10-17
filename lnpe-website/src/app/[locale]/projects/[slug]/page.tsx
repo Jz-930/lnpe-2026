@@ -1,4 +1,5 @@
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
+import DetailCard from "@/components/content/DetailCard";
 import Link from "@/components/i18n/LocalizedLink";
 import { notFound } from "next/navigation";
 import { ArrowRight, ChevronLeft } from "lucide-react";
@@ -37,6 +38,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   const engineering = projectEngineering[project.slug];
   const content = engineering.copy[locale];
   const labels = projectDetailLabels[locale];
+  const media = [{ src: project.image, alt: project.title, caption: project.description }, ...project.gallery.map((src, index) => ({ src, alt: content.captions[index] ?? project.title, caption: content.captions[index] ?? project.title }))];
 
   const relatedProjects = getProjectCases(locale).filter((item) => item.slug !== project.slug).slice(0, 3);
 
@@ -77,7 +79,8 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
               <div className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_22px_60px_rgba(15,23,42,0.1)]">
                 <div className="relative aspect-[16/11] bg-[#edf3f9]">
-                  <Image
+                  <InteractiveImage
+                    images={media}
                     src={project.image}
                     alt={formatCatalogMessage(ui.coverAlt, { title: project.title })}
                     fill
@@ -93,11 +96,11 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
         <section className="border-b border-[#dbe3ee] bg-white">
           <div className="container mx-auto grid gap-4 px-6 py-8 md:grid-cols-3">
-            {project.evidence.map((item) => (
-              <div key={item} className="border-l-2 border-[#f26522] bg-[#f8fafc] p-4">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#6b7b8f]">{ui.evidenceMarker}</p>
-                <p className="mt-2 text-sm font-semibold leading-5 text-[#142033]">{item}</p>
-              </div>
+            {project.evidence.map((item, index) => (
+              <DetailCard key={item} eyebrow={ui.evidenceMarker} title={item}>
+                <p>{index === 0 ? content.scope[0] : index === 1 ? content.scope[1] : content.validation[0]}</p>
+                <p className="text-xs">{labels.note}</p>
+              </DetailCard>
             ))}
           </div>
         </section>
@@ -131,7 +134,9 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               {project.gallery.map((image, index) => (
                 <div key={image} className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_12px_34px_rgba(15,23,42,0.05)]">
                   <div className="relative aspect-[4/3] bg-[#edf3f9]">
-                    <Image
+                    <InteractiveImage
+                      images={media}
+                      initialIndex={index + 1}
                       src={image}
                       alt={content.captions[index] ?? formatCatalogMessage(ui.projectContentAlt, { title: project.title, number: index + 1 })}
                       fill
@@ -163,25 +168,29 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
 
             <div className="grid gap-5 md:grid-cols-3">
               {relatedProjects.map((related) => (
-                <Link
+                <article
                   key={related.slug}
-                  href={`/projects/${related.slug}`}
-                  className="group overflow-hidden border border-[#dbe3ee] bg-white transition hover:-translate-y-1 hover:border-[#b5c6dc] hover:shadow-[0_20px_44px_rgba(15,23,42,0.1)]"
+                  className="overflow-hidden border border-[#dbe3ee] bg-white"
                 >
                   <div className="relative aspect-[16/10] bg-[#edf3f9]">
-                    <Image
+                    <InteractiveImage
                       src={related.image}
                       alt={formatCatalogMessage(ui.relatedProjectAlt, { title: related.title })}
                       fill
                       sizes="(min-width: 768px) 30vw, 90vw"
-                      className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                      className="object-cover transition duration-500 motion-safe:group-hover/zoom:scale-[1.04]"
                     />
                   </div>
                   <div className="p-5">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#f26522]">{related.focus}</p>
-                    <h3 className="font-display text-xl font-semibold text-[#142033]">{related.title}</h3>
+                    <h3 className="font-display text-xl font-semibold text-[#142033]"><Link href={`/projects/${related.slug}`} className="hover:text-[#174a7c]">{related.title}</Link></h3>
+                    <details className="mt-4 border-t border-[#dbe3ee] pt-3 text-sm leading-6 text-[#536276]">
+                      <summary className="cursor-pointer font-medium text-[#174a7c]">{locale === "zh" ? "就地查看项目概况" : "Explore the project overview"}</summary>
+                      <p className="mt-3">{related.description}</p>
+                      <Link href={`/projects/${related.slug}`} className="mt-3 inline-flex items-center gap-2 font-medium text-[#174a7c] hover:underline">{ui.viewCase}<ArrowRight size={14} /></Link>
+                    </details>
                   </div>
-                </Link>
+                </article>
               ))}
             </div>
           </div>

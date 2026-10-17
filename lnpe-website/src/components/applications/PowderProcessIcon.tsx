@@ -4,8 +4,8 @@ export const powderProcessSteps = ["feed", "grinding", "classification", "shapin
 
 type PowderProcessStep = (typeof powderProcessSteps)[number];
 
-const accent = "#f26522";
-const wash = "#e8eff6";
+const accent = "var(--powder-icon-accent, #f26522)";
+const wash = "var(--powder-icon-wash, #e8eff6)";
 
 // Illustrate the material transformation, rather than a specific machine model.
 const drawings: Record<PowderProcessStep, ReactNode> = {
@@ -57,7 +57,7 @@ const drawings: Record<PowderProcessStep, ReactNode> = {
       <path d="m6 26 7-5 9 3 3 9-4 9-10 1-6-8Z" fill={wash} />
       <path d="m10 28 5-3 5 2" />
       <path d="M29 32h8m-4-4 4 4-4 4" stroke={accent} />
-      <circle cx="51" cy="32" r="9.5" fill="#fff0e7" stroke={accent} />
+      <circle cx="51" cy="32" r="9.5" fill="var(--powder-icon-warm-wash, #fff0e7)" stroke={accent} />
       <path d="M47 29a5 5 0 0 1 5-2" stroke={accent} />
     </>
   ),
@@ -85,7 +85,7 @@ export function PowderProcessIcon({ step, className }: { step: PowderProcessStep
       width="64"
       height="64"
       fill="none"
-      stroke="#174a7c"
+      stroke="var(--powder-icon-stroke, #174a7c)"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

@@ -1,11 +1,14 @@
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ArrowLeft, ArrowRight, ChevronRight } from 'lucide-react';
 import Link from '@/components/i18n/LocalizedLink';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ContentDisclosure } from '@/components/content/ContentDisclosure';
-import { getMaterial, getMaterialSlugs, getMaterialEquipment, getMaterialInquiryHref, materialGuidance, materialCategories, materials, type MaterialCategoryId } from '@/content/materials';
+import InteractiveImage from '@/components/content/InteractiveImage';
+import InlineFactList, { type InlineFact } from '@/components/content/InlineFactList';
+import { getMaterial, getMaterialSlugs, getMaterialEquipment, getMaterialInquiryHref, materialGuidance, materialCategories, type MaterialCategoryId } from '@/content/materials';
+import { getMaterialPreviews } from '@/content/material-previews';
+import { getProductBySlug, getProductListingImage } from '../../../products/product-catalog';
 import type { Locale } from '@/i18n/config';
 import { createPageMetadata } from '@/i18n/metadata';
 
@@ -27,7 +30,30 @@ export default async function MaterialPage({ params }: Props) {
   const zh = locale === 'zh';
   const guidance = materialGuidance[material.profile];
   const equipment = getMaterialEquipment(material, locale);
-  const related = materials.filter((item) => item.slug !== slug && item.categoryIds.some((id) => material.categoryIds.includes(id))).slice(0, 5);
+  const related = getMaterialPreviews(locale).filter((item) => item.slug !== slug && item.categoryIds.some((id) => material.categoryIds.includes(id))).slice(0, 5);
+  const illustrationCaption = zh ? '物料图示；实际形貌以具体来料为准。' : 'Material illustration; actual morphology depends on the supplied feed.';
+  const gallery = material.images.map((src, index) => ({
+    src,
+    alt: zh ? `${material.name.zh}物料示意图 ${index + 1}` : `${material.name.en} material illustration ${index + 1}`,
+    caption: illustrationCaption,
+  }));
+  const equipmentFacts: InlineFact[] = equipment.map((item) => {
+    const product = getProductBySlug(item.href.split('/').pop() ?? '', locale);
+    return {
+      id: item.href, title: item.name, href: item.href,
+      description: product?.summary ?? guidance.selection[locale],
+      details: product ? [product.principle] : undefined,
+      image: product ? getProductListingImage(product) : undefined,
+      imageAlt: item.name,
+    };
+  });
+  const relatedFacts: InlineFact[] = related.map((item) => ({
+    id: item.slug, title: item.name, description: item.summary,
+    details: [item.focus, item.selection],
+    image: item.images[0],
+    imageAlt: zh ? `${item.name}物料示意图` : `${item.name} material illustration`,
+    href: `/applications/materials/${item.slug}`,
+  }));
   const technology = slug === 'sulfur' ? 'sulfur-pulverizer' : guidance.technology;
   return <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
     <div className="absolute inset-x-0 top-0 h-[88px] bg-[#0b1220]" aria-hidden="true" /><Navbar />
@@ -48,9 +74,9 @@ export default async function MaterialPage({ params }: Props) {
           </div>
         </header>
         {material.images.length > 0 && <figure className="max-w-[240px]">
-          <div className="relative aspect-square overflow-hidden border border-[#dbe3ee] bg-white"><Image src={material.images[0]} alt={zh ? `${material.name.zh}物料示意图` : `${material.name.en} material illustration`} fill sizes="240px" className="object-contain p-5" /></div>
-          {material.images.length > 1 && <div className="mt-2 grid grid-cols-2 gap-2">{material.images.slice(1).map((image) => <div className="relative aspect-square border border-[#dbe3ee] bg-white" key={image}><Image src={image} alt={zh ? `${material.name.zh}补充物料图示` : `Additional ${material.name.en} illustration`} fill sizes="110px" className="object-contain p-2" /></div>)}</div>}
-          <figcaption className="mt-2 text-[11px] leading-5 text-[#62748a]">{zh ? '物料图示；实际形貌以具体来料为准。' : 'Material illustration; actual morphology depends on the supplied feed.'}</figcaption>
+          <div className="relative aspect-square overflow-hidden border border-[#dbe3ee] bg-white"><InteractiveImage {...gallery[0]} images={gallery} initialIndex={0} fill sizes="240px" className="object-contain p-5" /></div>
+          {gallery.length > 1 && <div className="mt-2 grid grid-cols-2 gap-2">{gallery.slice(1).map((image, index) => <div className="relative aspect-square border border-[#dbe3ee] bg-white" key={image.src}><InteractiveImage {...image} images={gallery} initialIndex={index + 1} fill sizes="110px" className="object-contain p-2" /></div>)}</div>}
+          <figcaption className="mt-2 text-[11px] leading-5 text-[#62748a]">{illustrationCaption}</figcaption>
         </figure>}
       </div>
       <section className="mt-12 max-w-5xl border-t border-[#dbe3ee] pt-8">
@@ -64,7 +90,7 @@ export default async function MaterialPage({ params }: Props) {
       <div className="mt-10 max-w-5xl space-y-3">
         <ContentDisclosure title={zh ? '设备选择依据与相关设备' : 'Selection rationale and related equipment'} intro={zh ? '按材料状态选择作用方式，再比较设备配置。' : 'Choose the processing action for the feed before comparing configurations.'}>
           <p>{guidance.selection[locale]}</p>
-          <div className="mt-5 flex flex-wrap gap-2">{equipment.map((item) => <Link key={item.href} href={item.href} className="inline-flex items-center gap-2 rounded-sm border border-[#dbe3ee] bg-white px-3 py-2 text-xs text-[#314155] hover:border-[#174a7c] hover:text-[#174a7c]">{item.name}<ArrowRight size={13} /></Link>)}</div>
+          <div className="mt-5"><InlineFactList items={equipmentFacts} label={zh ? '相关设备预览' : 'Related equipment previews'} /></div>
           <Link href={`/products/technologies/${technology}`} className="mt-5 inline-flex items-center gap-2 text-xs font-semibold text-[#174a7c]">{zh ? '进一步了解工艺与系统选择' : 'Explore process and system choices'}<ArrowRight size={13} /></Link>
         </ContentDisclosure>
         <ContentDisclosure title={zh ? '送样前需要明确什么' : 'Information to prepare before a trial'}>
@@ -83,7 +109,7 @@ export default async function MaterialPage({ params }: Props) {
       </div>
       <aside className="mt-10 max-w-5xl border-t border-[#dbe3ee] pt-6">
         <h2 className="text-xs font-semibold text-[#62748a]">{zh ? '同领域材料' : 'More in this application group'}</h2>
-        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-3">{related.map((item) => <Link key={item.slug} href={`/applications/materials/${item.slug}`} className="text-xs text-[#536276] underline decoration-[#c7d5e4] underline-offset-4 hover:text-[#174a7c]">{item.name[locale]}</Link>)}</div>
+        <div className="mt-4"><InlineFactList items={relatedFacts} label={zh ? '同领域材料预览' : 'Related material previews'} /></div>
         <Link href="/applications/materials" className="mt-6 inline-flex items-center gap-2 text-xs text-[#62748a] hover:text-[#174a7c]"><ArrowLeft size={13} />{zh ? '浏览全部物料' : 'Browse all materials'}</Link>
       </aside>
     </div><Footer />

@@ -46,13 +46,13 @@ function ChatSession({ lang }: { lang: "en" | "zh" }) {
   }
 
   return <div className="relative z-10 flex h-full min-h-0 flex-col bg-transparent">
-    <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto px-5 py-5" role="log" aria-live="polite" aria-label={zh ? "资料检索记录" : "Reference search history"}>
+    <div className="custom-scrollbar min-h-0 min-w-0 flex-1 overflow-y-auto px-5 py-5 [overflow-wrap:anywhere]" role="log" aria-live="polite" aria-label={zh ? "资料检索记录" : "Reference search history"}>
       {messages.length === 0 && <div className="flex min-h-[220px] flex-col items-center justify-center text-center">
         <div className="mb-4 grid h-12 w-12 place-items-center border border-lnpe-border bg-lnpe-paper"><Image src="/images/00_brand/favicon_01.ico" alt={copy.imageAlt} width={24} height={24} /></div>
         <p className="max-w-[280px] text-sm leading-7 text-lnpe-muted">{zh ? "输入材料、设备或服务关键词，查阅网站中的双语技术资料。" : "Enter a material, equipment or service keyword to explore the website's technical references."}</p>
       </div>}
       <div className="space-y-5">{messages.map(message => <div key={message.id} className={message.role === "user" ? "flex justify-end" : "flex justify-start"}>
-        <div className={message.role === "user" ? "max-w-[85%] bg-lnpe-blue px-4 py-3 text-sm leading-6 text-white" : "w-full space-y-4 border border-lnpe-border bg-lnpe-paper p-4 text-sm leading-7 text-lnpe-muted"}>
+        <div className={message.role === "user" ? "min-w-0 max-w-[85%] bg-lnpe-blue px-4 py-3 text-sm leading-6 text-white" : "min-w-0 w-full space-y-4 border border-lnpe-border bg-lnpe-paper p-4 text-sm leading-7 text-lnpe-muted"}>
           <p>{message.text}</p>
           {message.results?.map(result => <Link key={result.href} href={localizeHref(result.href, lang)} className="block border-t border-lnpe-border pt-3 hover:text-lnpe-blue"><span className="block text-[11px] text-lnpe-steel">{result.kind}</span><span className="font-medium text-lnpe-blue">{result.title} →</span><span className="mt-1 block text-xs leading-6">{result.summary}</span></Link>)}
           {message.role === "assistant" && <div className="flex flex-wrap gap-4 border-t border-lnpe-border pt-3 text-xs text-lnpe-blue"><Link href={localizeHref("/applications/materials", lang)}>{zh ? "物料目录" : "Material directory"}</Link><Link href={localizeHref("/contact-us?service=selection", lang)}>{zh ? "联系工程师" : "Contact an engineer"}</Link></div>}
@@ -62,7 +62,7 @@ function ChatSession({ lang }: { lang: "en" | "zh" }) {
     <div className="space-y-3 border-t border-lnpe-border bg-lnpe-paper p-4">
       <div className="flex flex-wrap gap-2">{suggestions.map(suggestion => <button key={suggestion} disabled={busy} onClick={() => search(suggestion)} className="border border-lnpe-border px-3 py-1.5 text-xs text-lnpe-blue hover:border-lnpe-blue disabled:opacity-50">{suggestion}</button>)}</div>
       <form onSubmit={event => { event.preventDefault(); void search(); }} className="flex items-end border border-lnpe-border bg-lnpe-bg-light p-1 focus-within:border-lnpe-kinetic">
-        <textarea value={input} maxLength={300} onChange={event => setInput(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void search(); } }} placeholder={zh ? "材料、设备或服务关键词…" : "Material, equipment or service keywords…"} aria-label={zh ? "资料检索关键词" : "Reference search keywords"} rows={1} className="min-h-11 min-w-0 flex-1 resize-none bg-transparent px-3 py-3 text-sm outline-none" />
+        <textarea value={input} maxLength={300} onChange={event => setInput(event.target.value)} onKeyDown={event => { if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) { event.preventDefault(); void search(); } }} placeholder={zh ? "材料、设备或服务关键词…" : "Material, equipment or service keywords…"} aria-label={zh ? "资料检索关键词" : "Reference search keywords"} rows={2} className="h-[68px] min-h-11 min-w-0 flex-1 resize-none bg-transparent px-3 py-3 text-sm outline-none sm:h-11" />
         <button type="submit" disabled={busy || !validQuery(input.trim())} aria-label={copy.send} className="m-1 grid h-9 w-9 shrink-0 place-items-center bg-lnpe-dark text-white disabled:opacity-40"><Send size={16} /></button>
       </form>
       <p className="text-center text-[10px] leading-5 text-lnpe-steel">{zh ? "网站资料检索 · 工艺与报价请联系工程师确认" : "Website references · Confirm process and pricing with an engineer"}</p>

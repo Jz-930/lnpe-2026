@@ -58,7 +58,7 @@ export default async function NewsPage({ params }: PageProps) {
           <div className="container mx-auto max-w-6xl px-6">
             <Link href={`/news/${featured.slug}`} className="group grid grid-cols-1 border border-lnpe-border bg-lnpe-paper transition-colors hover:border-lnpe-kinetic lg:grid-cols-[1.05fr_0.95fr] clip-chamfer">
               <div className="relative min-h-[280px] bg-lnpe-bg-light lg:min-h-[420px]">
-                <Image src={featured.image} alt={featured.title} fill className="object-cover" priority />
+                <Image src={featured.image} alt={featured.title} fill sizes="(min-width: 1024px) 50vw, 90vw" className="object-cover" priority />
               </div>
               <div className="flex flex-col justify-between p-7 md:p-10">
                 <div>
@@ -85,7 +85,7 @@ export default async function NewsPage({ params }: PageProps) {
                   className="group grid grid-cols-1 border border-lnpe-border bg-lnpe-paper transition-colors hover:border-lnpe-kinetic md:grid-cols-[220px_1fr_auto] clip-chamfer"
                 >
                   <div className="relative min-h-[180px] bg-lnpe-bg-light md:min-h-0">
-                    <Image src={article.image} alt={article.title} fill className="object-cover" />
+                    <Image src={article.image} alt={article.title} fill sizes="(min-width: 768px) 220px, 90vw" className="object-cover" />
                   </div>
                   <div className="p-6">
                     <div className="mb-3 flex flex-wrap items-center gap-3">

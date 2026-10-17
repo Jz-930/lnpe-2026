@@ -5,6 +5,9 @@ import Image from 'next/image';
 import Link from '@/components/i18n/LocalizedLink';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { HOME_PARTICLE_OPTIONS, homeMessages } from '@/i18n/messages/home';
+import { getHomeInsights } from '@/content/home-insights';
+import { InlineMediaExplorer } from '@/components/content/InlineMediaExplorer';
+import { HomeInsightPanel } from './HomeInsightPanel';
 import { ArrowRight, Check, CheckCircle2, ClipboardCheck, Gauge, Layers3, Route as RouteIcon, SlidersHorizontal } from 'lucide-react';
 
 const ROUTES = [
@@ -25,6 +28,8 @@ const CAPABILITY_ICONS = [Gauge, Layers3, CheckCircle2];
 export function ResearchForm() {
   const locale = useLocale();
   const t = homeMessages[locale].research;
+  const interaction = homeMessages[locale].interactions;
+  const insights = useMemo(() => getHomeInsights(locale), [locale]);
   const [route, setRoute] = useState<RouteName>('Full Line');
   const [material, setMaterial] = useState('');
   const [particleSize, setParticleSize] = useState<ParticleOption>(PARTICLE_OPTIONS[0]);
@@ -32,6 +37,8 @@ export function ResearchForm() {
   const [industry, setIndustry] = useState<Industry>(INDUSTRIES[0]);
   const [submitted, setSubmitted] = useState(false);
   const [notes, setNotes] = useState('');
+  const [showRoute, setShowRoute] = useState(false);
+  const [showParameters, setShowParameters] = useState(false);
 
   const selectedRoute = useMemo(() => t.routes[route], [route, t]);
 
@@ -62,7 +69,7 @@ export function ResearchForm() {
 
         <div className="overflow-hidden border border-[#c8d2dc] bg-white shadow-[0_28px_86px_rgba(15,23,42,0.10)]">
           <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
-            <aside className="preserve-white relative overflow-hidden bg-[#111827] p-6 text-white md:p-8">
+            <aside className="preserve-white relative min-w-0 overflow-hidden bg-[#111827] p-6 text-white md:p-8">
               <Image
                 src="/images/backgrounds/LRadjusted-1.webp"
                 alt=""
@@ -99,6 +106,7 @@ export function ResearchForm() {
                           setRoute(item.name);
                           setSubmitted(false);
                         }}
+                        aria-pressed={active}
                         className={`relative flex w-full items-center justify-between overflow-hidden border px-4 py-3 text-left transition-colors ${
                           active
                             ? 'border-[#F26522] bg-[#F26522] text-white'
@@ -129,10 +137,12 @@ export function ResearchForm() {
                     ))}
                   </div>
                 </div>
+                <button type="button" onClick={() => setShowRoute(!showRoute)} aria-expanded={showRoute} aria-controls="research-route-detail" className="mt-4 flex w-full items-center justify-between gap-3 border border-white/20 px-4 py-3 text-left text-xs font-semibold transition-colors hover:border-[#F26522] hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">{showRoute ? interaction.closeDetails : interaction.routeDetails}<span aria-hidden="true">{showRoute ? '−' : '+'}</span></button>
+                {showRoute && <HomeInsightPanel key={route} id="research-route-detail" insight={insights.routes[route]} dark compact onClose={() => setShowRoute(false)} />}
               </div>
             </aside>
 
-            <div className="p-6 md:p-8">
+            <div className="min-w-0 p-6 md:p-8">
               <div className="mb-8 flex flex-col gap-4 border-b border-[#e0e7ee] pb-6 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-[#0f172a]">{t.parameterPanel}</h3>
@@ -143,8 +153,11 @@ export function ResearchForm() {
                 </div>
               </div>
 
+              <button type="button" onClick={() => setShowParameters(!showParameters)} aria-expanded={showParameters} aria-controls="research-parameter-detail" className="mb-6 flex w-full items-center justify-between gap-3 border border-[#d6dee6] bg-[#f3f6f8] px-4 py-3 text-left text-xs font-semibold text-[#52606f] transition-colors hover:border-[#F26522] hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">{showParameters ? interaction.closeDetails : interaction.parameterHelp}<span aria-hidden="true">{showParameters ? '−' : '+'}</span></button>
+              {showParameters && <div className="mb-6"><HomeInsightPanel id="research-parameter-detail" insight={insights.parameters} compact onClose={() => setShowParameters(false)} /></div>}
+
               <form
-                className="space-y-6"
+                className="min-w-0 space-y-6 [overflow-wrap:anywhere]"
                 onSubmit={(event) => {
                   event.preventDefault();
                   setSubmitted(true);
@@ -286,19 +299,21 @@ export function ResearchForm() {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-4 md:grid-cols-3">
-          {t.capabilities.map((item, index) => {
+        <div className="mt-8">
+          <InlineMediaExplorer label={interaction.capabilityDetails} layout="cards" items={t.capabilities.map((item, index) => {
             const Icon = CAPABILITY_ICONS[index];
-            return (
-              <div key={item.title} className="border border-[#d3dce5] bg-white/75 p-5">
-                <div className="mb-4 flex h-10 w-10 items-center justify-center bg-[#111827] text-[#F26522]">
-                  <Icon size={18} />
-                </div>
-                <h4 className="font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-[#111827]">{item.title}</h4>
-                <p className="mt-3 text-sm leading-6 text-[#64748b]">{item.text}</p>
-              </div>
-            );
-          })}
+            const insight = insights.research[index];
+            return {
+              id: insight.id,
+              title: item.title,
+              description: item.text,
+              icon: <Icon size={20} />,
+              image: insight.images[0].src,
+              imageAlt: insight.images[0].alt,
+              details: insight.details.map((detail) => `${detail.title} — ${detail.text}`),
+              content: <div className="space-y-3"><p className="text-xs leading-6 text-lnpe-muted">{insight.images[0].caption}</p><Link href={insight.href ?? '/research'} className="inline-flex items-center gap-2 text-sm font-semibold text-lnpe-blue underline underline-offset-4">{interaction.fullReference}<ArrowRight size={14} /></Link></div>,
+            };
+          })} />
         </div>
       </div>
     </section>

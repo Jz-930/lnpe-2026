@@ -1,14 +1,20 @@
 'use client';
 
+import { useMemo, useState } from 'react';
 import Link from '@/components/i18n/LocalizedLink';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { homeMessages } from '@/i18n/messages/home';
+import { getHomeInsights } from '@/content/home-insights';
+import { HomeInsightPanel } from './HomeInsightPanel';
 import Image from 'next/image';
 import { ArrowRight, ChevronRight, MoveDown, RadioTower } from 'lucide-react';
 
 export function HeroSection() {
   const locale = useLocale();
   const t = homeMessages[locale].hero;
+  const interaction = homeMessages[locale].interactions;
+  const insights = useMemo(() => getHomeInsights(locale).hero, [locale]);
+  const [openSpec, setOpenSpec] = useState<number | null>(null);
   return (
     <section className="preserve-white relative isolate min-h-[calc(100svh-88px)] overflow-hidden bg-[#0b0f14] text-white">
       <Image
@@ -174,20 +180,24 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="ml-auto mt-10 grid w-full max-w-[980px] grid-cols-2 border border-white/18 bg-[#0d1218]/72 text-right shadow-[0_28px_80px_rgba(0,0,0,0.28)] backdrop-blur-md sm:grid-cols-4 lg:w-[980px]">
+        <div className="ml-auto mt-10 w-full max-w-[980px] lg:w-[980px]">
+        <div className="grid grid-cols-2 border border-white/18 bg-[#0d1218]/72 text-right shadow-[0_28px_80px_rgba(0,0,0,0.28)] backdrop-blur-md sm:grid-cols-4">
           {t.specRail.map((item, index) => (
-            <div key={item.label} className="relative overflow-hidden px-4 py-4 sm:px-5 sm:py-5">
+            <button key={item.label} type="button" aria-expanded={openSpec === index} aria-controls="hero-spec-detail" onClick={() => setOpenSpec(openSpec === index ? null : index)} className={`group relative overflow-hidden px-4 py-4 text-right transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#F26522] sm:px-5 sm:py-5 ${openSpec === index ? 'bg-white/10' : ''}`}>
               {index > 0 && <div className="absolute left-0 top-1/2 hidden h-10 w-px -translate-y-1/2 bg-white/14 sm:block" />}
               <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/48">{item.label}</div>
               <div className="mt-2 text-sm font-bold uppercase tracking-[0.04em] text-white">{item.value}</div>
+              <div className="mt-2 text-[10px] text-white/60 group-hover:text-[#F26522]">{openSpec === index ? interaction.closeDetails : interaction.openDetails} <span aria-hidden="true">{openSpec === index ? '−' : '+'}</span></div>
               <span className="absolute inset-x-4 bottom-0 h-px overflow-hidden bg-white/8">
                 <span
                   className="absolute inset-y-0 right-0 w-1/2 bg-[#F26522] [animation:spec-signal_3.6s_linear_infinite] motion-reduce:animate-none"
                   style={{ animationDelay: `${index * 0.22}s` }}
                 />
               </span>
-            </div>
+            </button>
           ))}
+        </div>
+        {openSpec !== null && <HomeInsightPanel key={openSpec} id="hero-spec-detail" insight={insights[openSpec]} dark onClose={() => setOpenSpec(null)} />}
         </div>
       </div>
 

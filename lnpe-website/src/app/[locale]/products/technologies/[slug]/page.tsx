@@ -4,6 +4,8 @@ import { ArrowRight, ArrowUpRight, ChevronLeft } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContentDisclosure } from "@/components/content/ContentDisclosure";
+import InteractiveImage from "@/components/content/InteractiveImage";
+import { fieldScenes } from "@/content/field-scenes";
 import { technicalUi } from "@/components/products/ProductTechnicalContent";
 import { PRODUCT_TECHNOLOGIES, getProductTechnology, getProductTechnologies, productTechnologyPath } from "@/content/product-technology";
 import { productNames } from "@/i18n/messages/product-names";
@@ -33,6 +35,8 @@ export default async function ProductTechnologyPage({ params }: Props) {
   const ui = technicalUi[locale];
   const related = getProductTechnologies(locale, item.parents[0]).filter((entry) => entry.slug !== slug).slice(0, 4);
   const publicSources = item.sources.flatMap((entry) => entry.url ? [entry.url] : []);
+  const sceneByProduct = { "jet-mill": "equipment", "impact-mill": "machining", "jet-pulverizer": "powder", "air-classifier": "classification", "shaping-mill": "shaping", "laboratory-equipment": "laboratory", "turnkey-epc": "engineering" } as const;
+  const scene = fieldScenes[sceneByProduct[item.parents[0]]];
   return <main className="relative flex min-h-screen flex-col overflow-x-hidden bg-[#f6f8fb] pt-[88px] text-[#142033]">
     <div className="absolute inset-x-0 top-0 h-[88px] bg-[#0b1220]" aria-hidden="true" />
     <Navbar />
@@ -47,6 +51,12 @@ export default async function ProductTechnologyPage({ params }: Props) {
       </header>
       <div className="container mx-auto grid gap-10 px-6 py-10 md:py-14 lg:grid-cols-[minmax(0,1fr)_280px]">
         <article className="min-w-0 max-w-4xl">
+          <figure className="mb-9">
+            <div className="relative aspect-[16/9] overflow-hidden border border-[#dbe3ee] bg-[#e8edf2]">
+              <InteractiveImage src={scene.src} alt={scene.alt[locale]} caption={scene.caption[locale]} fill sizes="(min-width: 1024px) 65vw, 90vw" className="object-cover" />
+            </div>
+            <figcaption className="mt-3 text-xs leading-6 text-[#62748a]">{scene.caption[locale]}</figcaption>
+          </figure>
           <section>
             <h2 className="font-display text-xl font-semibold">{ui.principle}</h2>
             <p className="mt-4 text-sm leading-7 text-[#536276] md:text-base md:leading-8">{item.principle}</p>

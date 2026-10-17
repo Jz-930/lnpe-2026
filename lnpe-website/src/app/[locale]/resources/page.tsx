@@ -4,6 +4,9 @@ import ReferencePage from "@/components/content/ReferencePage";
 import ContentDisclosure from "@/components/content/ContentDisclosure";
 import Link from "@/components/i18n/LocalizedLink";
 import { resourceFaq, resourceVideos } from "@/content/resources";
+import { researchDetails, supportDetails } from "@/content/company";
+import { InlineMediaExplorer } from "@/components/content/InlineMediaExplorer";
+import { fieldScenes } from "@/content/field-scenes";
 
 const copy = {
   zh: { title: "资料与常见问题", description: "查阅材料、工艺与服务说明，准备试验或设备咨询所需的信息。" },
@@ -14,8 +17,15 @@ export async function generateMetadata({ params }: Props) { return createPageMet
 export default async function ResourcesPage({ params }: Props) {
   const { locale } = await params; const zh = locale === "zh";
   const entries = zh ? [["材料与加工", "/applications/materials", "按材料名称查阅用途、工艺考虑与试验准备。"], ["设备与配套", "/products", "7类设备及工艺、输送、收集和包装配置。"], ["实验与检测", "/research", "检测能力、来料试验与放大流程。"], ["服务与OEM", "/support", "安装、维护、备件和粉体代加工。"]] : [["Materials & processing", "/applications/materials", "Find material uses, process considerations and trial preparation."], ["Equipment & systems", "/products", "Seven equipment families, process configurations and auxiliary systems."], ["Trials & analysis", "/research", "Analytical capabilities, material trials and scale-up."], ["Services & OEM", "/support", "Installation, maintenance, spare parts and powder processing."]];
+  const scenes = [fieldScenes.powder, fieldScenes.equipment, fieldScenes.analysis, fieldScenes.training];
+  const entryDetails = [
+    [resourceFaq[locale][1][1], resourceFaq[locale][5][1]],
+    [resourceFaq[locale][2][1], resourceFaq[locale][7][1]],
+    researchDetails[locale].find((section) => section.id === "trial")!.items.map((item) => `${item.title}: ${item.text}`),
+    supportDetails[locale].find((section) => section.id === "oem")!.items.map((item) => `${item.title}: ${item.text}`),
+  ];
   return <ReferencePage title={copy[locale].title} intro={copy[locale].description} eyebrow={zh ? "技术资料" : "TECHNICAL REFERENCES"} back={{ href: "/products", label: zh ? "产品中心" : "Products" }}>
-    <div className="mb-10 grid gap-5 sm:grid-cols-2">{entries.map(([title, href, text]) => <Link key={href} href={href} className="border border-lnpe-border bg-lnpe-paper p-6 transition-colors hover:border-lnpe-blue"><h2 className="text-base font-medium text-lnpe-dark">{title} →</h2><p className="mt-3 text-sm leading-7 text-lnpe-muted">{text}</p></Link>)}</div>
+    <div className="mb-10"><InlineMediaExplorer label={zh ? "按主题浏览资料" : "Explore reference topics"} layout="cards" items={entries.map(([title, href, description], index) => ({ id: `resource-${index}`, title, description, image: scenes[index].src, imageAlt: scenes[index].alt[locale], details: entryDetails[index], content: <Link href={href} className="inline-flex text-sm font-semibold text-lnpe-blue hover:underline">{zh ? "阅读完整专题 →" : "Read the full topic →"}</Link> }))} /><p className="mt-3 text-xs text-lnpe-steel">{zh ? "场景示意图用于说明资料主题。" : "Illustrative scenes explain the reference topics."}</p></div>
     <ContentDisclosure id="checklists" title={zh ? "需求清单与技术资料申请" : "Enquiry checklists and document requests"}>
       <p className="mb-5">{zh ? "可下载空白需求清单，填写后与工程人员交流。具体型号参数、操作手册与证书按设备版本提供。" : "Download a blank enquiry checklist for discussion with the engineering team. Model data, manuals and certificates are supplied for the relevant equipment version."}</p>
       <div className="flex flex-wrap gap-x-8 gap-y-4">

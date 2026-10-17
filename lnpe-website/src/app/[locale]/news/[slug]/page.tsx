@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { notFound } from "next/navigation";
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { ArrowLeft } from "lucide-react";
 
@@ -34,6 +34,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
   const t = newsMessages[locale];
 
   if (!article) notFound();
+  const media = [...(article.image ? [{ src: article.image, alt: article.title, caption: article.title }] : []), ...article.gallery.map((src, index) => ({ src, alt: `${article.title} · ${index + 1}`, caption: article.title }))];
 
   return (
     <main className="min-h-screen flex flex-col pt-[88px] bg-lnpe-bg text-lnpe-text">
@@ -64,7 +65,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
         <article className="container mx-auto max-w-4xl px-6 py-14">
           {article.image && (
             <div className="relative mb-12 aspect-[16/9] overflow-hidden border border-lnpe-border bg-lnpe-bg-light clip-chamfer">
-              <Image src={article.image} alt={`${article.title} ${t.featuredImage}`} fill className="object-cover" priority />
+              <InteractiveImage images={media} src={article.image} alt={`${article.title} ${t.featuredImage}`} fill sizes="(min-width: 1024px) 900px, 90vw" className="object-cover" priority />
             </div>
           )}
 
@@ -74,7 +75,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
             </div>
           </div>
           {article.gallery.length > 0 && <ContentDisclosure title={t.gallery} id="photographs" className="mt-8">
-            <div className="grid gap-5 sm:grid-cols-2">{article.gallery.map((image, index) => <div key={image} className="relative aspect-[4/3] overflow-hidden border border-lnpe-border bg-white"><Image src={image} alt={`${article.title} · ${index + 1}`} fill sizes="(min-width: 640px) 40vw, 90vw" className="object-contain" /></div>)}</div>
+            <div className="grid gap-5 sm:grid-cols-2">{article.gallery.map((image, index) => <div key={image} className="relative aspect-[4/3] overflow-hidden border border-lnpe-border bg-white"><InteractiveImage images={media} initialIndex={index + (article.image ? 1 : 0)} src={image} alt={`${article.title} · ${index + 1}`} fill sizes="(min-width: 640px) 40vw, 90vw" className="object-contain" /></div>)}</div>
           </ContentDisclosure>}
           {article.related && <div className="mt-8 border-t border-lnpe-border pt-5 text-sm text-lnpe-muted"><p className="mb-3">{t.related}</p><div className="flex flex-wrap gap-x-5 gap-y-3">{article.related.map((slug) => <Link className="text-lnpe-blue hover:underline" key={slug} href={`/products/${slug}`}>{productCopy[locale][slug as ProductSlug]?.title ?? (slug === "technologies/steam-jet-mill" ? (locale === "zh" ? "蒸汽动能磨" : "Steam jet mill") : slug === "technologies/graphite-production-line" ? (locale === "zh" ? "石墨粉碎整形产线" : "Graphite processing line") : slug)}</Link>)}</div></div>}
           {article.sources.length > 0 && <ContentDisclosure title={t.sources} className="mt-6"><div className="flex flex-wrap gap-5">{article.sources.map((source, i) => <a key={source.url} href={source.url} target="_blank" rel="noreferrer" className="text-xs text-lnpe-blue underline underline-offset-4">{source.label} {article.sources.length > 1 ? i + 1 : ""}</a>)}</div></ContentDisclosure>}

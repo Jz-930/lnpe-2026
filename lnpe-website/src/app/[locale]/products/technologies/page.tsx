@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ContentDisclosure } from "@/components/content/ContentDisclosure";
 import { technicalUi } from "@/components/products/ProductTechnicalContent";
+import TechnologyPreview from "@/components/products/TechnologyPreview";
 import { getProductTechnologies, productTechnologyPath } from "@/content/product-technology";
 import { productNames } from "@/i18n/messages/product-names";
 import { createPageMetadata } from "@/i18n/metadata";
@@ -30,9 +31,7 @@ export default async function TechnologiesPage({ params }: Props) {
       <h1 className="max-w-4xl font-display text-3xl font-semibold tracking-tight md:text-4xl">{ui.directory}</h1>
       <p className="mt-4 max-w-3xl text-base leading-7 text-[#62748a]">{ui.directoryIntro}</p>
       <div className="mt-8 max-w-5xl">{parents.map((parent) => <ContentDisclosure key={parent} title={productNames[locale][parent]} id={parent}>
-        <div className="grid gap-x-8 md:grid-cols-2">{getProductTechnologies(locale, parent).filter((entry) => entry.slug !== "powder-terminology").map((entry) => <div key={entry.slug} className="border-t border-[#e1e7ef] py-4">
-          <Link href={productTechnologyPath(entry.slug)} className="inline-flex items-center gap-2 font-medium text-[#3b526c] hover:text-[#174a7c]">{entry.title}<ArrowRight size={14} className="shrink-0" /></Link><p className="mt-2 text-sm leading-6 text-[#62748a]">{entry.summary}</p>
-        </div>)}</div>
+        <div className="grid gap-4 md:grid-cols-2">{getProductTechnologies(locale, parent).filter((entry) => entry.slug !== "powder-terminology").map((entry) => <TechnologyPreview key={entry.slug} entry={entry} locale={locale} />)}</div>
       </ContentDisclosure>)}</div>
       <Link href={productTechnologyPath("powder-terminology")} className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[#3b526c] hover:text-[#174a7c]">{ui.terms}<ArrowRight size={15} /></Link>
     </div><Footer />

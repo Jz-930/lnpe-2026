@@ -6,6 +6,9 @@ ROOT = HERE.parents[3]
 source = json.loads((ROOT / '网站内容补充审阅_2026-10-15/evidence_local/现站133物料补齐矩阵.json').read_text(encoding='utf-8-sig'))
 category_ids = {'电池材料':'battery-materials','化工':'chemicals','矿物':'minerals','医药与食品':'pharma-food','磨料':'abrasives','金属':'metals','固体废弃物':'solid-waste','其他':'other'}
 corrections = {
+105:('贫矿','Low-grade ore','poor-ore'),
+108:('硅灰','Silica fume','silicon-ash'),
+112:('水渣','Water-quenched slag','water-slag'),
 2:('沥青（碳材料用）','Pitch / asphalt','pitch'),11:('镍钴铝酸锂（NCA）','Lithium nickel cobalt aluminium oxide (NCA)','nca'),12:('镍钴锰酸锂（NCM）','Lithium nickel cobalt manganese oxide (NCM)','ncm'),
 15:('硅碳复合（Si/C）','Silicon–carbon composite (Si/C)','silicon-carbon-composite'),16:('硅氧碳复合（SiO/C）','Silicon-oxide/carbon composite (SiO/C)','silicon-oxide-carbon-composite'),22:('炭黑','Carbon black','carbon-black'),41:('重质碳酸钙（GCC）','Ground calcium carbonate (GCC)','ground-calcium-carbonate'),43:('轻质碳酸钙（PCC）','Precipitated calcium carbonate (PCC)','precipitated-calcium-carbonate'),46:('石榴石','Garnet','garnet'),53:('刺五加','Eleuthero (Ciwujia)','eleuthero'),61:('香菇','Shiitake mushroom','shiitake'),63:('三七（田七）','Sanqi / Tianqi (Panax notoginseng)','sanqi'),109:('矿渣 / 炉渣','Slag','slag'),125:('云母钛珠光颜料','Mica–titania pearlescent pigment','mica-titania-pearlescent-pigment'),128:('银朱（成分需明确）','Vermilion (composition-specific)','vermilion')}
 extras = '''134|chemicals|阻燃剂|Flame retardants|flame-retardants|local:364–366
@@ -73,6 +76,7 @@ for i in range(1,170):
         15: ['硅碳（SiC）', 'Silicon carbon (SiC)'],
         16: ['硅氧（SiOC）', 'Silicon oxygen (SiOC)'],
         46: ['Pomegranate stone'], 109: ['Slug'],
+        105: ['Poor ore'], 108: ['Silicon ash'], 112: ['Water slag'],
         114: ['杉树皮'], 125: ['Mica Titanium Pearllustia Pigments'],
         127: ['垃圾'], 128: ['Silver vermilion'],
     }.get(i, [])

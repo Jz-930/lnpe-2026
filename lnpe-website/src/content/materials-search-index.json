@@ -1912,11 +1912,11 @@
     "slug": "poor-ore",
     "name": {
       "zh": "贫矿",
-      "en": "Poor ore"
+      "en": "Low-grade ore"
     },
     "aliases": [
       "贫矿",
-      "Poor ore"
+      "Low-grade ore"
     ],
     "summary": {
       "zh": "贫矿指有价组分含量较低的矿石，是资源品位描述而不是固定矿物名称。",
@@ -1966,11 +1966,11 @@
     "slug": "silicon-ash",
     "name": {
       "zh": "硅灰",
-      "en": "Silicon ash"
+      "en": "Silica fume"
     },
     "aliases": [
       "硅灰",
-      "Silicon ash"
+      "Silica fume"
     ],
     "summary": {
       "zh": "硅灰是硅或硅铁冶炼过程中形成的细颗粒硅质副产物，常以团聚状态供料。",
@@ -2040,11 +2040,11 @@
     "slug": "water-slag",
     "name": {
       "zh": "水渣",
-      "en": "Water slag"
+      "en": "Water-quenched slag"
     },
     "aliases": [
       "水渣",
-      "Water slag"
+      "Water-quenched slag"
     ],
     "summary": {
       "zh": "水渣通常指水淬高炉矿渣，与缓冷渣或钢渣的结构和活性不同。",

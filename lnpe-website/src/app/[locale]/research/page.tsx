@@ -4,6 +4,7 @@ import { researchDetails } from "@/content/company";
 import EditorialSections from "@/components/content/EditorialSections";
 import ReferencePage from "@/components/content/ReferencePage";
 import Link from "@/components/i18n/LocalizedLink";
+import EditorialExplorer from "@/components/content/EditorialExplorer";
 
 const copy = {
   zh: { title: "研究与实验中心", description: "从气固两相流研究、设备模拟到粒度与形貌检测，以来料试验连接加工目标与设备方案。" },
@@ -19,6 +20,7 @@ export default async function ResearchPage({ params }: Props) {
       <Link href="/products/laboratory-equipment">{zh ? "实验室设备 →" : "Laboratory equipment →"}</Link>
       <Link href="/applications">{zh ? "查阅材料与工艺 →" : "Explore materials and processes →"}</Link>
     </div>
+    <EditorialExplorer sections={researchDetails[locale]} scenes={["engineering", "analysis", "laboratory", "powder"]} locale={locale} label={zh ? "探索研究与试验" : "Explore research and trials"} />
     <EditorialSections sections={researchDetails[locale]} />
   </ReferencePage>;
 }

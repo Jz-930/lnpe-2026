@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import Link from '@/components/i18n/LocalizedLink';
 import { useLocale } from '@/i18n/LocaleProvider';
 import { homeMessages } from '@/i18n/messages/home';
+import { getHomeInsights } from '@/content/home-insights';
+import { HomeInsightPanel } from './HomeInsightPanel';
 import Image from 'next/image';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import { ArrowRight, ChevronRight, Pause, Play } from 'lucide-react';
 
 const CATEGORIES = ['All', 'Grinding', 'Classifying', 'Modification', 'Turnkey Line'] as const;
 
@@ -40,14 +42,22 @@ function SpecDrawer({ specs }: { specs: string[] }) {
 }
 
 export function ProductBentoBox() {
-  const t = homeMessages[useLocale()].products;
+  const locale = useLocale();
+  const t = homeMessages[locale].products;
+  const interaction = homeMessages[locale].interactions;
+  const insights = useMemo(() => getHomeInsights(locale).products, [locale]);
   const [category, setCategory] = useState<Category>('All');
+  const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) return;
+    if (reducedMotion || paused || hovered || focused || selectedProduct) return;
 
     const interval = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
       setCategory((current) => {
         const currentIndex = CATEGORIES.indexOf(current);
         return CATEGORIES[(currentIndex + 1) % CATEGORIES.length];
@@ -55,7 +65,7 @@ export function ProductBentoBox() {
     }, 5400);
 
     return () => window.clearInterval(interval);
-  }, []);
+  }, [paused, hovered, focused, selectedProduct]);
 
   const visibleProducts = useMemo(
     () => (category === 'All' ? PRODUCTS : PRODUCTS.filter((product) => product.category === category))
@@ -64,6 +74,14 @@ export function ProductBentoBox() {
   );
   const featured = visibleProducts[0] ?? { ...PRODUCTS[0], ...t.items[PRODUCTS[0].id] };
   const supportingProducts = visibleProducts.slice(1, 5);
+  const quickLook = (product: typeof featured) => (
+    <>
+      <button type="button" onClick={() => { setSelectedProduct(selectedProduct === product.id ? null : product.id); setPaused(true); }} aria-expanded={selectedProduct === product.id} aria-controls={`product-quick-${product.id}`} className="flex w-full items-center justify-between gap-3 border border-[#cbd5df] bg-white px-4 py-3 text-left text-xs font-semibold text-[#52606f] transition-colors hover:border-[#F26522] hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">
+        <span>{selectedProduct === product.id ? interaction.closeDetails : interaction.quickLook}</span><span aria-hidden="true">{selectedProduct === product.id ? '−' : '+'}</span>
+      </button>
+      {selectedProduct === product.id && <HomeInsightPanel id={`product-quick-${product.id}`} insight={{ ...insights[product.id], title: product.title, details: [{ title: interaction.specifications, text: product.specs.join(' · ') }, ...insights[product.id].details], images: [{ src: product.image, alt: product.title, caption: product.desc }, ...insights[product.id].images] }} compact onClose={() => setSelectedProduct(null)} />}
+    </>
+  );
 
   return (
     <section className="relative overflow-hidden bg-[#f1f4f6] py-24 text-[#111827]">
@@ -72,7 +90,7 @@ export function ProductBentoBox() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(17,24,39,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.035)_1px,transparent_1px)] bg-[length:52px_52px]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-6">
+      <div className="container relative z-10 mx-auto px-6" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} onFocusCapture={() => setFocused(true)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setFocused(false); }}>
         <div className="relative isolate mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div className="relative z-10">
             <h2 className="font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] sm:text-4xl md:text-6xl">
@@ -98,7 +116,8 @@ export function ProductBentoBox() {
               <button
                 key={item}
                 type="button"
-                onClick={() => setCategory(item)}
+                onClick={() => { setCategory(item); setPaused(true); setSelectedProduct(null); }}
+                aria-pressed={active}
                 className={`relative shrink-0 overflow-hidden border px-4 py-2.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] transition-colors ${
                   active
                     ? 'border-[#111827] bg-[#111827] text-white'
@@ -112,15 +131,17 @@ export function ProductBentoBox() {
               </button>
             );
           })}
+          <button type="button" onClick={() => { setPaused(!paused); if (paused) setSelectedProduct(null); }} aria-pressed={paused} className="ml-auto inline-flex shrink-0 items-center gap-2 border border-[#cbd5df] bg-white px-3 py-2 text-xs text-[#64748b] hover:text-[#F26522] focus-visible:outline-2 focus-visible:outline-[#F26522]">{paused ? <Play size={14} /> : <Pause size={14} />}{paused ? interaction.resume : interaction.pause}</button>
         </div>
 
-        <div className="grid gap-5 xl:grid-cols-[1.12fr_0.88fr]">
+        <div className="grid items-start gap-5 xl:grid-cols-[1.12fr_0.88fr]">
+          <div className="min-w-0 space-y-3">
           <Link
             href={featured.href}
-            className="group relative min-h-[560px] overflow-hidden border border-[#c9d3dd] bg-[#f8fafb] shadow-[0_26px_80px_rgba(15,23,42,0.10)] transition-colors hover:border-[#aebbc7] hover:bg-white"
+            className="group relative flex min-h-[560px] flex-col overflow-hidden border border-[#c9d3dd] bg-[#f8fafb] shadow-[0_26px_80px_rgba(15,23,42,0.10)] transition-colors hover:border-[#aebbc7] hover:bg-white md:block"
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.8),rgba(232,238,243,0.96))]" />
-            <div className="absolute left-6 right-6 top-6 z-10 flex items-center justify-between border-b border-[#d7e0e8] pb-4">
+            <div className="relative z-10 mx-6 mt-6 flex items-center justify-between border-b border-[#d7e0e8] pb-4 md:absolute md:inset-x-6 md:top-6 md:m-0">
               <div>
                 <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[#64748b]">{t.featured}</div>
                 <h3 className="mt-3 font-display text-3xl font-bold uppercase tracking-normal text-[#0f172a] md:text-5xl">
@@ -132,7 +153,7 @@ export function ProductBentoBox() {
               </span>
             </div>
 
-            <div className="absolute inset-x-8 bottom-[150px] top-[142px] md:bottom-[138px]">
+            <div className="relative mx-8 my-6 h-[240px] shrink-0 md:absolute md:inset-x-8 md:bottom-[138px] md:top-[142px] md:m-0 md:h-auto">
               <div className="absolute inset-x-[9%] bottom-8 h-14 rounded-[50%] bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.28),transparent_72%)] blur-lg" />
               <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(15,23,42,0.09))]" />
               <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(17,24,39,0.055)_1px,transparent_1px),linear-gradient(to_bottom,rgba(17,24,39,0.04)_1px,transparent_1px)] bg-[length:40px_40px]" />
@@ -153,7 +174,7 @@ export function ProductBentoBox() {
               </div>
             </div>
 
-            <div className="absolute bottom-6 left-6 right-6 z-10 grid gap-5 md:grid-cols-[0.94fr_1.06fr] md:items-end">
+            <div className="relative z-10 mx-6 mb-6 grid gap-5 md:absolute md:inset-x-6 md:bottom-6 md:m-0 md:grid-cols-[0.94fr_1.06fr] md:items-end">
               <p className="max-w-xl text-sm leading-7 text-[#586474] md:text-base">{featured.desc}</p>
               <div>
                 <SpecDrawer specs={featured.specs} />
@@ -166,6 +187,8 @@ export function ProductBentoBox() {
               </div>
             </div>
           </Link>
+          {quickLook(featured)}
+          </div>
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-1">
             {supportingProducts.length === 0 ? (
@@ -174,8 +197,8 @@ export function ProductBentoBox() {
               </div>
             ) : (
               supportingProducts.map((product, index) => (
+                <div key={product.id} className="min-w-0 space-y-3">
                 <Link
-                  key={product.id}
                   href={product.href}
                   className="group grid min-h-[220px] overflow-hidden border border-[#d1dae3] bg-white/78 shadow-[0_14px_38px_rgba(15,23,42,0.06)] transition-colors hover:border-[#aebbc7] hover:bg-white sm:grid-cols-[0.92fr_1.08fr]"
                 >
@@ -214,6 +237,8 @@ export function ProductBentoBox() {
                     </div>
                   </div>
                 </Link>
+                {quickLook(product)}
+                </div>
               ))
             )}
           </div>

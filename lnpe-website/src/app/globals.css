@@ -530,6 +530,11 @@ html[lang="zh-CN"] .spec-label {
 }
 
 @layer base {
+  @keyframes lnpe-content-reveal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
   html {
     background: var(--color-lnpe-bg);
   }

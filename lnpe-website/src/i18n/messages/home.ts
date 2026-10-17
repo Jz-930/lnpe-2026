@@ -14,6 +14,14 @@ type RecommendationInput = {
 };
 
 const en = {
+  interactions: {
+    inDepth: 'Explore the process', openDetails: 'View details', closeDetails: 'Close details',
+    enlarge: 'View larger image', previousPhoto: 'Previous photo', nextPhoto: 'Next photo',
+    previous: 'Previous item', next: 'Next item', pause: 'Pause rotation', resume: 'Resume rotation',
+    fullReference: 'Read the full reference', quickLook: 'Quick look & specifications', specifications: 'Equipment highlights',
+    previewHint: 'Preview on hover · select to explore', routeDetails: 'Explore this route',
+    parameterHelp: 'Understand particle size and process targets', capabilityDetails: 'Explore this capability',
+  },
   hero: {
     imageAlt: 'LNPE factory exterior and company signage',
     titleLines: ['Powder', 'Systems', 'Engineered', 'for Scale'],
@@ -202,6 +210,14 @@ const en = {
 };
 
 const zh: typeof en = {
+  interactions: {
+    inDepth: '深入了解工艺', openDetails: '展开详情', closeDetails: '收起详情',
+    enlarge: '查看大图', previousPhoto: '上一张图片', nextPhoto: '下一张图片',
+    previous: '上一项', next: '下一项', pause: '暂停轮播', resume: '继续轮播',
+    fullReference: '阅读完整资料', quickLook: '快速查看与规格说明', specifications: '设备特点',
+    previewHint: '悬停预览 · 点击深入了解', routeDetails: '了解这条工艺',
+    parameterHelp: '了解粒度与工艺指标', capabilityDetails: '查看能力详情',
+  },
   hero: {
     imageAlt: 'LNPE 工厂外景与公司标识',
     titleLines: ['粉体系统', '为规模生产', '而设计'],

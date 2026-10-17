@@ -1,4 +1,4 @@
-import Image from "next/image";
+import InteractiveImage from "@/components/content/InteractiveImage";
 import Link from "@/components/i18n/LocalizedLink";
 import { ArrowRight, Building2, ClipboardCheck, Factory } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { getProjectCases } from "./project-data";
 import type { Locale } from "@/i18n/config";
 import { createPageMetadata } from "@/i18n/metadata";
-import { catalogMetadata, catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
+import { catalogUi, formatCatalogMessage } from "@/i18n/messages/catalog";
 import { ProjectsWallClient } from "./ProjectsWallClient";
 import { TechnicalNotes } from "./TechnicalNotes";
 
@@ -15,7 +15,7 @@ type ProjectsPageProps = { params: Promise<{ locale: Locale }> };
 export async function generateMetadata({ params }: ProjectsPageProps) {
   const { locale } = await params;
   return createPageMetadata(locale, "/projects", {
-    en: catalogMetadata.en,
+    en: { title: catalogUi.en.projectsTitle + " | LNPE", description: catalogUi.en.projectsIntro },
     zh: { title: catalogUi.zh.projectsTitle + " | LNPE", description: catalogUi.zh.projectsIntro },
   });
 }
@@ -59,18 +59,17 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
               </div>
             </div>
 
-            <Link
-              href={`/projects/${featuredProject.slug}`}
-              className="group overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_24px_70px_rgba(15,23,42,0.14)]"
+            <article
+              className="overflow-hidden border border-[#dbe3ee] bg-white shadow-[0_24px_70px_rgba(15,23,42,0.14)]"
             >
               <div className="relative aspect-[16/10] bg-[#edf3f9]">
-                <Image
+                <InteractiveImage
                   src={featuredProject.image}
                   alt={formatCatalogMessage(ui.featuredProjectAlt, { title: featuredProject.title })}
                   fill
                   priority
                   sizes="(min-width: 1024px) 45vw, 90vw"
-                  className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                  className="object-cover transition duration-500 motion-safe:group-hover/zoom:scale-[1.04]"
                 />
               </div>
               <div className="p-6">
@@ -84,12 +83,12 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
                 </div>
                 <h2 className="font-display text-2xl font-semibold text-[#142033]">{featuredProject.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-[#536276]">{featuredProject.description}</p>
-                <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] group-hover:text-[#f26522]">
+                <Link href={`/projects/${featuredProject.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#174a7c] hover:text-[#f26522]">
                   {ui.viewFeaturedCase}
                   <ArrowRight size={16} />
-                </div>
+                </Link>
               </div>
-            </Link>
+            </article>
           </div>
         </section>
 

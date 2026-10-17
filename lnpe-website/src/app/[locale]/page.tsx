@@ -6,14 +6,11 @@ import { ProductBentoBox } from "@/components/home/ProductBentoBox";
 import { FactoryCapability } from "@/components/home/FactoryCapability";
 import { ProcessFlow } from "@/components/home/ProcessFlow";
 import { ResearchForm } from "@/components/home/ResearchForm";
-import { createPageMetadata } from "@/i18n/metadata";
+import { createPageMetadata, siteMetadata } from "@/i18n/metadata";
 import type { Locale } from "@/i18n/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: Locale }> }) {
-  return createPageMetadata((await params).locale, '/', {
-    en: { title: 'LNPE | Advanced Powder Technology', description: 'A globally recognized powder equipment expert, specializing in grinding, conveying, and particle modification.' },
-    zh: { title: 'LNPE | 先进粉体技术', description: '专注粉碎、输送与颗粒改性，为不同物料与生产需求提供粉体装备和工艺解决方案。' },
-  });
+  return createPageMetadata((await params).locale, '/', siteMetadata);
 }
 
 export default function Home() {
